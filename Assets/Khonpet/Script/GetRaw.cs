@@ -36,10 +36,10 @@ public class GetRaw : MonoBehaviour
             if (www.error == null)
             {
                
-                Model.OpenSea opensea = JsonConvert.DeserializeObject<Model.OpenSea>(www.text);
-                Debug.Log(opensea.name);
-                Debug.Log(opensea.description);
-                Debug.Log(opensea.image_thumbnail_url);
+                //Model.OpenSea opensea = JsonConvert.DeserializeObject<Model.OpenSea>(www.text);
+               // Debug.Log(opensea.name);
+               // Debug.Log(opensea.description);
+               // Debug.Log(opensea.image_thumbnail_url);
             }
             else
             {
