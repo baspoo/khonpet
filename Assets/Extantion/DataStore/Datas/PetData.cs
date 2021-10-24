@@ -28,13 +28,17 @@ public class PetData
     public string Url_Bundle;
     public Dictionary<Food.FoodType, Feeling> Foods = new Dictionary<Food.FoodType, Feeling>();
     public Dictionary<string, object> Config = new Dictionary<string, object>();
-    public string ContractAddress ;
+    public string ContractAddress;
     public string TokenId;
+
+    public long Like => FirebaseService.instance.Preset.Like;
+    public long Star => FirebaseService.instance.Preset.Star;
+
 
     public PetData(GameData raw)
     {
         Enable = System.Convert.ToBoolean(raw.GetValue("Enable"));
-        ID = raw.GetValue("Enable");
+        ID = raw.GetValue("ID");
         Name = raw.GetValue("Name");
         Description = raw.GetValue("Description");
         Kind = raw.GetValue("Kind");
@@ -57,15 +61,53 @@ public class PetData
     }
 
 
+    public static PetData FInd(string petID) => PetDatas.Find(x => x.ID == petID);
+    public static PetData FInd(string ContractAddress, string TokenId) => PetDatas.Find(x => x.ContractAddress == ContractAddress && x.TokenId == TokenId);
+    public static PetData FInd(URLParameters.Parameters parameters) {
+        var id = parameters.SearchParams.Get("id");
+        if (id.notnull())
+        {
+            var address = parameters.SearchParams.Get("id").Split('/');
+            return FInd(address[0], address[1]);
+        }
+        else 
+        {
+            return null;
+        }
+    } 
+   
 
 
+    public static PetData Current=> m_Current;
+    static PetData m_Current;
+    public static void SetCurrent(string ContractAddress, string TokenId) 
+    {
+        m_Current = FInd(ContractAddress, TokenId);
+        if(m_Current == null)
+            Debug.LogError($"SetCurrent Find Not Found {ContractAddress} {TokenId}");
 
+
+    }
 
     public static bool Done => PetDatas.Count!=0;
     public static List<PetData> PetDatas = new List<PetData>();
     public static void Init(System.Action done)
     {
-        LoaderService.instance.OnLoadTsv("0",(data) =>
+        if (Setting.instance.tsv.getTsv == Setting.Tsv.GetTsv.bySetting)
+        {
+            //GetBy Setting Editor
+            CreatedData(Setting.instance.tsv.PetTsv);
+        }
+        else 
+        {
+            //GetBy Internet
+            LoaderService.instance.OnLoadTsv(LoaderService.GoogleSpreadsheetsID.pet, (data) =>
+            {
+                CreatedData(data);
+            });
+        }
+       
+        void CreatedData(string data) 
         {
             var table = GameDataTable.ReadData(data);
             foreach (var d in table.GetTable())
@@ -74,7 +116,8 @@ public class PetData
             }
             Debug.Log("ContentDatas:" + PetDatas.Count);
             done();
-        });
+        }
+
     }
 
 

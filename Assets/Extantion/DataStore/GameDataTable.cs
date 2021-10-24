@@ -6,6 +6,12 @@ public class GameData {
 	private string Key;
 	private string Value;
 	List<GameData> DataLists = new List<GameData>();
+	public string GetIndex(int index)
+	{
+		if (index < DataLists.Count)
+			return DataLists[index].Value;
+		return string.Empty;
+	}
 	public void SetValue(string key,string value){
 		GameData GameData = new GameData ();
 		GameData.Key = key;

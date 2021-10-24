@@ -1,0 +1,136 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: icons
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 3
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 1
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 2
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 2c6b285556afae8428066ecd70e2eb12, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 4f5aaf900d0da074ea147bc0980ce789, type: 3}
+  - {fileID: 21300000, guid: 99e8e5e03add0be4bbc2f2c37efb8307, type: 3}
+  - {fileID: 21300000, guid: 70bd011187f86094eba0bf02f6b27797, type: 3}
+  - {fileID: 21300000, guid: 0df50a420de88fd43aa637f028c5099f, type: 3}
+  - {fileID: 21300000, guid: 684d9f820eb26b54ab27d99fd94cce20, type: 3}
+  - {fileID: 21300000, guid: 0023a64376fd88b42b7a508c5db4f540, type: 3}
+  - {fileID: 21300000, guid: 818a9953460e6f34783d08c18f2346cb, type: 3}
+  - {fileID: 21300000, guid: 6d02c2c3f1ca3be41a900837eae393a0, type: 3}
+  - {fileID: 21300000, guid: 2a4085f3c3327fb48937525f5f5720ff, type: 3}
+  - {fileID: 21300000, guid: ad364a44bbe612c4bb47e605af993212, type: 3}
+  - {fileID: 21300000, guid: aaeefe94ab9da264f9d0f3a5278dd9d1, type: 3}
+  - {fileID: 21300000, guid: 689d3115a6a420d4f824edfd9df3eb01, type: 3}
+  - {fileID: 21300000, guid: 5a22f915a620ed54cb8a2e5786c46015, type: 3}
+  - {fileID: 21300000, guid: a912cfd5888ef6e4aabb1f1979f187d7, type: 3}
+  - {fileID: 21300000, guid: c5a185061f70ec74c9c16f401eeb0b92, type: 3}
+  - {fileID: 21300000, guid: e735be26c3afa5f4b891509c12fedcca, type: 3}
+  - {fileID: 21300000, guid: dbb75b76805380a4998a01b7fb9c41d2, type: 3}
+  - {fileID: 21300000, guid: c5b22bb659ab1924c9d56f743285e99f, type: 3}
+  - {fileID: 21300000, guid: 889376e6c5efd1c44ac1c2bc6e5c12a6, type: 3}
+  - {fileID: 21300000, guid: 4f3914472181c664695b6b8eec1ec7e2, type: 3}
+  - {fileID: 21300000, guid: 3ba9cea8beacf9e4ab4d5dcd1e09207f, type: 3}
+  - {fileID: 21300000, guid: d61fce19b85139e41ac8db3d03cc05a8, type: 3}
+  - {fileID: 21300000, guid: a76cfd5949df3aa4a9ffe5f48f453bc8, type: 3}
+  - {fileID: 21300000, guid: 8496363a1fc2cbe48a6f6dcef77a0557, type: 3}
+  - {fileID: 21300000, guid: 54c5535a7b5954f4194d0d32cf54d8e7, type: 3}
+  - {fileID: 21300000, guid: 5cdee2ca2f5f16e4e9cad4ec31947d1f, type: 3}
+  - {fileID: 21300000, guid: 7bdb153b7956495429dd18f1a7024551, type: 3}
+  - {fileID: 21300000, guid: e42e838b66b7df84186a2ffaa8b3f7bd, type: 3}
+  - {fileID: 21300000, guid: ff344ecb1f1b2c646b46b2d8619ab7f3, type: 3}
+  - {fileID: 21300000, guid: 09a5717cbdc7fae49962f8145d842630, type: 3}
+  - {fileID: 21300000, guid: 90a08eece89097f4b9b37eedd799f7f9, type: 3}
+  - {fileID: 21300000, guid: aac5f41dec017ea428e254c440a82286, type: 3}
+  - {fileID: 21300000, guid: cbfe056d2c16d5344880d44bdb22f14f, type: 3}
+  - {fileID: 21300000, guid: 5731d9ad6336fb346b97489c1ecf83e0, type: 3}
+  - {fileID: 21300000, guid: 7c4bdbbd6bb995142b32022f2c3c1ff3, type: 3}
+  - {fileID: 21300000, guid: 3db3ea1e2f957724db74126d1a97ee09, type: 3}
+  - {fileID: 21300000, guid: b425ef3e2688c4546bf26943f138eb2f, type: 3}
+  - {fileID: 21300000, guid: 358c908e1a2235a448933ffd127fbb18, type: 3}
+  - {fileID: 21300000, guid: 55f2e81f8be17634fbf8ddb7fef42ac7, type: 3}
+  - {fileID: 21300000, guid: 75afad4f22f8b21418ba90b46b6d1c52, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - icon_rain
+  - icon_feeling_bad
+  - icon_z
+  - icon_hot
+  - icon_play_quick
+  - icon_check
+  - icon_like
+  - icon_pet2
+  - icon_pet
+  - icon_achievement
+  - icon_consolebtn_z
+  - icon_starbg
+  - icon_cloud
+  - icon_nft
+  - icon_snow
+  - icon_feeling_normal
+  - icon_consolebtn_food
+  - icon_sun
+  - icon_feeling_super
+  - icon_copy
+  - icon_play_mem
+  - icon_star
+  - icon_message
+  - icon_consolebtn_play
+  - icon_fb
+  - icon_setting
+  - icon_night
+  - icon_balloon
+  - icon_play_ball
+  - icon_feeling_happy
+  - icon_play_dance
+  - icon_opesea
+  - icon_home
+  - icon_openurl
+  - icon_!
+  - icon_close
+  - icon_stars
+  - icon__
+  - icon_consolebtn_clean
+  - icon_air_termo
+  m_RenderDataMap: {}
+  m_Tag: icons
+  m_IsVariant: 0

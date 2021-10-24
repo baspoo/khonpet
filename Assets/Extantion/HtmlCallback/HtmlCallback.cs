@@ -60,4 +60,26 @@ public class HtmlCallback : MonoBehaviour
 
 
 
+
+
+
+
+
+
+
+
+
+    static System.Action<bool> onmobilecallback;
+    public static void IsMobile(System.Action<bool> mobilecallback)
+    {
+        onmobilecallback = mobilecallback;
+        OnHtmlMessage(0, "ismobile");
+    }
+    public void IsMobileCallback(string str)
+    {
+        onmobilecallback?.Invoke(str=="1");
+    }
+
+
+
 }

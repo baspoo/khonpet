@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: foods
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 0
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 2048
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 1
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 1
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 2
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 0
+      enableAlphaDilation: 1
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 49aec8e2d13f5a046a8d36302c262748, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 08b2885531e2b334c9550d42d5102f16, type: 3}
+  - {fileID: 21300000, guid: 54cb6d7562887d94896ffadec54b2f87, type: 3}
+  - {fileID: 21300000, guid: 9f474ec5c2bc4cb479f76b5cde4590dc, type: 3}
+  - {fileID: 21300000, guid: b5fe4d0637d90a14f903accbf969c420, type: 3}
+  - {fileID: 21300000, guid: b8444fb60ac54644cab6fc3472ad2a9e, type: 3}
+  - {fileID: 21300000, guid: a230ea5a59276314a9a6ccbac295bcd7, type: 3}
+  - {fileID: 21300000, guid: 21b997ecb176eb94ab6bde749511c024, type: 3}
+  - {fileID: 21300000, guid: 85a3ffbe7508d9e4d86ba39e5e2c3e63, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - icon_food_vegetable
+  - icon_food_cookies
+  - icon_food_meat
+  - icon_food_chocolate
+  - icon_food_honey
+  - icon_food_milk
+  - icon_food_fish
+  - icon_food_corn
+  m_RenderDataMap: {}
+  m_Tag: foods
+  m_IsVariant: 0

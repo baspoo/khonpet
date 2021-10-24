@@ -6,6 +6,14 @@ using UnityEngine;
 using Newtonsoft.Json;
 using System.Linq;
 
+[System.Serializable]
+public class ValueData
+{
+	public string Key;
+	public string Value;
+}
+
+
 public static class VariableService 
 {
 
@@ -83,6 +91,27 @@ public static class VariableService
 	public static int Max(this int i, int max) => (i > max) ? max : i;
 	public static double Max(this double i, double max) => (i > max) ? max : i;
 	public static float Max(this float i, float max) => (i > max) ? max : i;
+
+	public static int Random(this int i) => UnityEngine.Random.RandomRange(0, i);
+	public static float Random(this float i) => UnityEngine.Random.RandomRange(0, i);
+
+	public static string KiloFormat(this int num) => KiloFormat((long)num);
+	public static string KiloFormat(this long num)
+	{
+		if (num >= 100000000)
+			return (num / 1000000).ToString("#,0M");
+
+		if (num >= 10000000)
+			return (num / 1000000).ToString("0.#") + "M";
+
+		if (num >= 100000)
+			return (num / 1000).ToString("#,0K");
+
+		if (num >= 10000)
+			return (num / 1000).ToString("0.#") + "K";
+
+		return num.ToString("#,0");
+	}
 	#endregion
 
 
@@ -91,8 +120,21 @@ public static class VariableService
 
 
 
-
-
+	public static ValueData Add(this List<ValueData> objs , string key , string value)
+	{
+		var data = new ValueData() { Key = key, Value = value};
+		objs.Add(data);
+		return data;
+	}
+	public static string Get(this List<ValueData> objs, string key)
+	{
+		var val = objs.Find(x => x.Key == key);
+		return (val != null) ? val.Value : null;
+	}
+	public static bool ContainKey(this List<ValueData> objs, string key)
+	{
+		return objs.Find(x=>x.Key == key) != null;
+	}
 
 
 
