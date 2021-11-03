@@ -20,14 +20,17 @@ public class NFTService : MonoBehaviour
         public string OwnerName;
         public string OwnerAddress;
         public string OwnerProfileImgUrl;
-        
+        public string PetImageUrl;
     }
     public void SetupPreset()
     {
         Preset = new PresetData();
+        Preset.ContractAddress = ContractAddress;
+        Preset.Token = Token;
         Preset.OwnerName = MainAsset.owner.user.username;
         Preset.OwnerAddress = MainAsset.owner.address;
         Preset.OwnerProfileImgUrl = MainAsset.owner.profile_img_url;
+        Preset.PetImageUrl = MainAsset.image_url;
     }
 
 

@@ -13,12 +13,13 @@ public class World : MonoBehaviour
 
 
 
-
-
+    public Transform Background;
+    public Transform PetPosition;
 
     public void Init()
     {
-       
+        Background.gameObject.SetActive(true);
+        PetPosition.gameObject.SetActive(true);
     }
 
 

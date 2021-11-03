@@ -7,12 +7,18 @@ public class PetAnim : MonoBehaviour
 	public enum AnimState
 	{
 		none = -1,
-		Idle, SubIdle_0, SubIdle_1, SubIdle_2, Eat, Sleep, BallKick, Dance, GoodJob, LikeLove, Bad, Need, Petting, Hello
+		Idle, SubIdle , Eat, Sleep, BallKick, Dance, GoodJob, LikeLove, Bad, Need, Petting
 	}
+
+	
 	public Animator Animator;
-    public AnimationClip Idle;
+	[Space]
+
+	public AnimationClip Idle;
     public AnimationClip[] SubIdle;
-    public AnimationClip Eat, Sleep, BallKick, Dance, GoodJob, LikeLove, Bad, Need, Petting, Hello;
+	[SerializeField]
+	float[] IdelTimes = new float[2] { 3, 7 };
+	public AnimationClip Eat, Sleep, BallKick, Dance, GoodJob, LikeLove, Bad, Need, Petting;
 	public AnimCallback Animcallback => m_animcallback;
 	AnimCallback m_animcallback;
 
@@ -25,41 +31,79 @@ public class PetAnim : MonoBehaviour
 
 	}
 
-    //Setup
-    bool IsReady;
-    public void Setup() 
+	//Setup
+	public bool IsReady;
+	AnimatorOverrideController animatorOverrideController;
+	public void Setup() 
     {
-		var animatorOverrideController = new AnimatorOverrideController(Store.instance.Pet.animatorController);
-		animatorOverrideController["Idle"] = Idle;
-		animatorOverrideController["Eat"] = Eat;
-		animatorOverrideController["Sleep"] = Sleep;
-		animatorOverrideController["BallKick"] = BallKick;
-		animatorOverrideController["Dance"] = Dance;
-		animatorOverrideController["GoodJob"] = GoodJob;
-		animatorOverrideController["LikeLove"] = LikeLove;
-		animatorOverrideController["Bad"] = Bad;
-		animatorOverrideController["Need"] = Need;
-		animatorOverrideController["Petting"] = Petting;
-		animatorOverrideController["Hello"] = Hello;
-		if (SubIdle.Length > 0) animatorOverrideController["SubIdle_0"] = SubIdle[0];
-		if (SubIdle.Length > 1) animatorOverrideController["SubIdle_1"] = SubIdle[1];
-		if (SubIdle.Length > 2) animatorOverrideController["SubIdle_2"] = SubIdle[2];
+		animatorOverrideController = new AnimatorOverrideController(Store.instance.Pet.animatorController);
+		animatorOverrideController["Idle"] = FindClip( AnimState.Idle);
 		Animator.runtimeAnimatorController = animatorOverrideController;
 		m_animcallback = Animator.GetComponent<AnimCallback>();
 		IsReady = true;
 	}
-
-
-
-
-
-
-
-
-    //Play
-    public void OnAnimForce(AnimState act)
+	AnimationClip FindClip(AnimState state)
 	{
-		Animator.Play(act.ToString().ToLower(), -1, 0.0f);
+        switch (state)
+        {
+            case AnimState.none: return null;
+                break;
+            case AnimState.Idle: 
+				return Idle;
+				break;
+            case AnimState.SubIdle:
+				return SubIdle[SubIdle.Length.Random()];
+				break;
+            case AnimState.Eat:
+				return Eat;
+				break;
+            case AnimState.Sleep:
+				return Sleep;
+				break;
+            case AnimState.BallKick:
+				return BallKick;
+				break;
+            case AnimState.Dance:
+				return Dance;
+				break;
+            case AnimState.GoodJob:
+				return GoodJob;
+				break;
+            case AnimState.LikeLove:
+				return LikeLove;
+				break;
+            case AnimState.Bad:
+				return Bad;
+				break;
+            case AnimState.Need:
+				return Need;
+				break;
+            case AnimState.Petting:
+				return Petting;
+				break;
+            default:
+                break;
+        }
+		return null;
+    }
+
+
+
+
+
+
+
+	//Play
+	public void OnAnimForce(AnimState act)
+	{
+		StartCoroutine(IEOnAnimForce(act));
+	}
+	IEnumerator IEOnAnimForce(AnimState act)
+	{
+		Animator.Play("Idle", -1, 0.0f);
+		yield return new WaitForEndOfFrame();
+		animatorOverrideController["AnimForce"] = FindClip(act);
+		Animator.Play("AnimForce", -1, 0.0f);
 	}
 	public void OnAnimState(int act)
 	{
@@ -73,16 +117,14 @@ public class PetAnim : MonoBehaviour
 		Animator.SetInteger("animstate", 0);
 	}
 
-
-
-
-
+	public void OnReset()
+	{
+		Animcallback.OnReset();
+	}
 
 
 
 	//Idle Handle
-	[SerializeField]
-	float[] IdelTimes;
 	float IdelAnimRuntime = 0.0f;
 	float IdelAnimMaxtime = 5.0f;
 	void IdelAnim()
@@ -96,10 +138,8 @@ public class PetAnim : MonoBehaviour
 		{
 			IdelAnimRuntime = 0.0f;
 			IdelAnimMaxtime = Random.Range(IdelTimes[0], IdelTimes[1]);
-			int index = Random.Range(0, SubIdle.Length);
-			if (index == 0) OnAnimState(1);
-			if (index == 1) OnAnimState(2);
-			if (index == 2) OnAnimState(3);
+			animatorOverrideController["SubIdle"] = FindClip( AnimState.SubIdle );
+			OnAnimState(1);
 		}
 	}
 

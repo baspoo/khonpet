@@ -10,13 +10,20 @@ public class Rarity
     public const string Uncommond = "Uncommond";
     public const string Commond = "Commond";
 }
-
-public class PetData
+[System.Serializable]
+public class Feeling
 {
-    public enum Feeling
+    public enum FeelingType
     {
         Super, Happy, Normal, Bad
     }
+    public string Name;
+    public FeelingType Type;
+    public Sprite Icon;
+}
+public class PetData
+{
+
 
     public bool Enable;
     public string ID;
@@ -26,7 +33,7 @@ public class PetData
     public string Rarity;
     public string Url_Image;
     public string Url_Bundle;
-    public Dictionary<Food.FoodType, Feeling> Foods = new Dictionary<Food.FoodType, Feeling>();
+    public Dictionary<Food.FoodType, Feeling.FeelingType> Foods = new Dictionary<Food.FoodType, Feeling.FeelingType>();
     public Dictionary<string, object> Config = new Dictionary<string, object>();
     public string ContractAddress;
     public string TokenId;
@@ -57,7 +64,10 @@ public class PetData
         AddFood(Food.FoodType.Chocolate);
         AddFood(Food.FoodType.Honey);
         AddFood(Food.FoodType.Vegetable);
-        void AddFood(Food.FoodType food) { Foods.Add(food, (Feeling)raw.GetValue(food.ToString()).ToEnum(Feeling.Normal)); }
+        void AddFood(Food.FoodType food) 
+        { 
+            Foods.Add(food, (Feeling.FeelingType)raw.GetValue(food.ToString()).ToEnum(Feeling.FeelingType.Normal)); 
+        }
     }
 
 

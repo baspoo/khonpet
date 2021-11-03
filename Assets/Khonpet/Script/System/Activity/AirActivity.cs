@@ -33,6 +33,10 @@ public class AirActivity
             Debug.LogError("m_AirData == null");
         else
             Debug.Log("Air:"+ m_AirData.airName);
+
+        if(m_AirData.prefab!=null)
+            m_AirData.prefab.Create(World.instance.transform);
+
     }
 
     public static AirData GetAirData()

@@ -14,6 +14,10 @@ public class TweenPosition : UITweener
 {
 	public Vector3 from;
 	public Vector3 to;
+	public Style m_style;
+	public float m_duration;
+	public AnimationCurve m_animationCurve;
+
 
 	[HideInInspector]
 	public bool worldSpace = false;
@@ -62,6 +66,9 @@ public class TweenPosition : UITweener
 		TweenPosition comp = UITweener.Begin<TweenPosition>(go, duration);
 		comp.from = comp.value;
 		comp.to = pos;
+		comp.animationCurve = comp.m_animationCurve;
+		comp.duration = comp.m_duration;
+		comp.style = comp.m_style;
 
 		if (duration <= 0f)
 		{
@@ -81,6 +88,10 @@ public class TweenPosition : UITweener
 		comp.worldSpace = worldSpace;
 		comp.from = comp.value;
 		comp.to = pos;
+		comp.animationCurve = comp.m_animationCurve;
+		comp.duration = comp.m_duration;
+		comp.style = comp.m_style;
+
 
 		if (duration <= 0f)
 		{

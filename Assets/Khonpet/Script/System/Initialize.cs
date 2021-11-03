@@ -37,10 +37,11 @@ public class Initialize : MonoBehaviour
         // [Instance Game Client]
         //----------------------------------------------------------------------------------------------------
 
-       
-        World.instance.Init();
+
+        Playing.instance.Load();
         PetActivity.Init();
         while (!PetActivity.IsReady) yield return new WaitForEndOfFrame();
+        World.instance.Init();
         ConsoleActivity.Init();
         AirActivity.Init();
         ChatActivity.Init();

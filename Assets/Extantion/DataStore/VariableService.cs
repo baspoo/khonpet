@@ -137,7 +137,12 @@ public static class VariableService
 	}
 
 
-
+	#region AudioClip
+	public static void Play(this AudioClip audioClip)
+	{
+		Sound.Play(audioClip);
+	}
+	#endregion
 
 
 

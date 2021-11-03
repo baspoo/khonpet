@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class MainmenuPage : MonoBehaviour
 {
@@ -115,6 +116,83 @@ public class MainmenuPage : MonoBehaviour
     }
 
 
+    public StarZone starZone;
+    [System.Serializable]
+    public class StarZone
+    {
+        public Transform tRoot;
+        public Transform tPath;
+        public SplineWalker[] walkStars;
+        public Text txtExp;
+        public Text txtLv;
+        public Image imgExpPilot;
+        public Image imgExpRun;
+        public Awake effect;
+        public float SpeedBar;
+        public void OnUpdate()
+        {
+            if(corotine!=null) InterfaceRoot.instance.mainmenu.StopCoroutine(corotine);
+            corotine = InterfaceRoot.instance.mainmenu.StartCoroutine(update());
+        }
+        bool first = true;
+        float current = 0.0f;
+        Coroutine corotine;
+        IEnumerator update() 
+        {
+            var level = new Utility.Level(PetData.Current.Star);
+            txtLv.text = $"Lv.{level.CurrentLevel}";
+            txtExp.text = $"{level.XP} / {level.xpNextlevel}";
+            imgExpPilot.fillAmount = level.Percent;
+            if (!first)
+            {
+                yield return new WaitForEndOfFrame();
+                while (current < imgExpPilot.fillAmount)
+                {
+                    current += Time.deltaTime * SpeedBar;
+                    imgExpRun.fillAmount = current;
+                    yield return new WaitForEndOfFrame();
+                }
+            }
+            current = imgExpPilot.fillAmount;
+            imgExpRun.fillAmount = current;
+            first = true;
+        }
+        public void OnAddStar(int star)
+        {
+            if (corotine != null) InterfaceRoot.instance.mainmenu.StopCoroutine(corotine);
+            corotine = InterfaceRoot.instance.mainmenu.StartCoroutine(addStar(star));
+        }
+        IEnumerator addStar(int star)
+        {
+            foreach (var w in walkStars)
+            {
+                w.gameObject.SetActive(false);
+            }
+            int index = 0;
+            var paths = tPath.GetComponents<BezierCurve>();
+            InterfaceRoot.instance.mainmenu.StartCoroutine(update());
+            foreach (var w in walkStars) 
+            {
+                yield return new WaitForEndOfFrame();
+                if (index < star) 
+                {
+                    w.curve = paths[paths.Length.Random()];
+                    w.progress = 0.0f;
+                    w.gameObject.SetActive(true);
+                    w.ondone = (walk) => { 
+                        effect.OnAwake();
+                    };
+                    index++;
+                    yield return new WaitForSeconds(0.15f);
+                }
+            }
+            yield return new WaitForSeconds(2);
+            foreach (var w in walkStars)
+            {
+                w.gameObject.SetActive(false);
+            }
+        }
+    }
 
 
 
@@ -131,7 +209,10 @@ public class MainmenuPage : MonoBehaviour
 
 
 
+    private void Update()
+    {
 
+    }
 
 
 
@@ -152,6 +233,7 @@ public class MainmenuPage : MonoBehaviour
         socialZone.OnUpdate();
         airZone.OnUpdate();
         ownerZone.OnUpdate();
+        starZone.OnUpdate();
     }
 
 
@@ -178,7 +260,7 @@ public class MainmenuPage : MonoBehaviour
 
     public void OnPetInfo( )
     {
-
+        PopupPage.instance.petInfo.Open();
     }
     public void OnAchievement()
     {

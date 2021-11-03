@@ -74,6 +74,62 @@ public class Utility
 
 
 
+    public class Level 
+    {
+        double sqrt = 0.4;
+        double volume = 6.28;
+        public long XP;
+        public int CurrentLevel => m_currentLevel +1;
+        int m_currentLevel;
+        public int xpNextlevel;
+        public float Percent;
+        public Level (long xp)
+        {
+            XP = xp;
+            m_currentLevel = (int)(sqrt * Mathf.Sqrt(XP));
+            //add sone cool text to show you reached a nev level
+            xpNextlevel = (int)(volume * (m_currentLevel + 1) * (m_currentLevel + 1));
+            var xpstartlevel = (int)(volume * (m_currentLevel) * (m_currentLevel));
+            var remain_start = (XP - xpstartlevel);
+            var remain_end = (xpNextlevel - xpstartlevel);
+            Percent = (float)(remain_start) / (float)(remain_end);
+
+        }
+    }
+
+
+
+    public class GameObj : MonoBehaviour
+    {
+        public static GameObject Created(GameObject _page, Transform _parent)
+        {
+            GameObject p = Instantiate(_page) as GameObject;
+            p.transform.parent = _parent;
+            p.transform.localPosition = Vector3.zero;
+            p.transform.localScale = Vector3.one;
+            return p;
+        }
+        public static List<GameObject> GetAllNode(Transform _tran)
+        {
+            List<GameObject> m_objs = new List<GameObject>();
+            int count = _tran.childCount;
+            for (int n = 0; n < count; n++)
+            {
+
+                m_objs.Add(_tran.GetChild(n).gameObject);
+                m_objs.AddRange(GetAllNode(_tran.GetChild(n)));
+            }
+            return m_objs;
+        }
+        public static List<GameObject> GetAllParent(Transform _tran)
+        {
+            List<GameObject> m_objs = new List<GameObject>();
+            int count = _tran.childCount;
+            for (int n = 0; n < count; n++)
+                m_objs.Add(_tran.GetChild(n).gameObject);
+            return m_objs;
+        }
+    }
 
 
 }

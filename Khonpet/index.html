@@ -138,6 +138,12 @@
         function HtmlMessage(code, str) {
             console.log(code);
             console.log(str);
+
+            if (str == "ismobile")
+            {
+                m_unityInstance.SendMessage('HtmlCallback', 'IsMobileCallback',(mobile)?"1":"0" );
+            }
+
         }
 
         //Sent To Unity

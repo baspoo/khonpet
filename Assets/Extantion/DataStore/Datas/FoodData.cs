@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class Food
 {
     public enum FoodType
@@ -11,6 +12,8 @@ public class Food
 
     public string Name;
     public FoodType Type;
+    public Sprite Icon;
+
 
 
     public static void Init( )

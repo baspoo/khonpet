@@ -15,7 +15,9 @@ public class PetActivity
         ResourcesHandle.Load(PetData.Current.ID,"pet", ResourcesHandle.FileType.prefab, (obj) => {
             if (obj != null) 
             {
-                m_petObj = GameObject.Instantiate((GameObject)obj,World.instance.transform).GetComponent<PetObj>();
+                m_petObj = GameObject.Instantiate((GameObject)obj,World.instance.PetPosition).GetComponent<PetObj>();
+                m_petObj.transform.localPosition = Vector3.zero;
+                m_petObj.transform.localScale = Vector3.one;
             }
             else Debug.LogError($"petobj = null!");
         });

@@ -17,7 +17,25 @@ public class Store : MonoBehaviour
         public RuntimeAnimatorController animatorController;
     }
 
+
+    //AIR
     public List<AirActivity.AirData> AirDatas;
+    public AirActivity.AirData FindAirData(string name) => AirDatas.Find(x=>x.airName == name);
+    public AirActivity.AirData FindAirData(AirActivity.AirType type) => AirDatas.Find(x => x.airType == type);
+
+
+
+    //FOOD
+    public List<Food> Foods;
+    public Food FindFood(string name) => Foods.Find(x => x.Name == name);
+    public Food FindFood(Food.FoodType type) => Foods.Find(x => x.Type == type);
+
+
+
+    //FEELING
+    public List<Feeling> Feelings;
+    public Feeling FindFeeling(string name) => Feelings.Find(x => x.Name == name);
+    public Feeling FindFeeling(Feeling.FeelingType type) => Feelings.Find(x => x.Type == type);
 
 
 
