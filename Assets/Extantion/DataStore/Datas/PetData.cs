@@ -40,7 +40,7 @@ public class PetData
 
     public long Like => FirebaseService.instance.Preset.Like;
     public long Star => FirebaseService.instance.Preset.Star;
-
+    public Utility.Level Lv =>  new Utility.Level(Star);
 
     public PetData(GameData raw)
     {
@@ -93,9 +93,11 @@ public class PetData
     public static void SetCurrent(string ContractAddress, string TokenId) 
     {
         m_Current = FInd(ContractAddress, TokenId);
-        if(m_Current == null)
+        if(m_Current == null) 
+        { 
             Debug.LogError($"SetCurrent Find Not Found {ContractAddress} {TokenId}");
-
+            PopupPage.instance.message.Open("Find Not Found!", $"Please Check ContractAddress Or TokenId Again.").HideBtnClose();
+        }
 
     }
 

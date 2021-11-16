@@ -5,12 +5,13 @@ using UnityEngine;
 public class PetObj : MonoBehaviour
 {
 
-
+    public static PetObj Current => m_Current;
+    static PetObj m_Current;
 
     public PetAnim anim { get { if (m_anim == null) m_anim = GetComponent<PetAnim>(); return m_anim; } }
     PetAnim m_anim;
 
-
+    public Talking talking => Talking.instance;
 
 
     public PetInfo info;
@@ -27,11 +28,12 @@ public class PetObj : MonoBehaviour
     {
         public Transform root;
         public Transform head;
+        public Transform talk;
         public Transform glasses;
         public Transform[] eyes = new Transform[2];
         public Transform mouth;
-        public Transform body;
-        public Transform food;
+        public Transform bodycenter;
+        public Transform foot;
     }
 
 
@@ -56,6 +58,19 @@ public class PetObj : MonoBehaviour
     }
 
 
+
+
+
+
+
+
+
+
+
+    public void Init()
+    {
+        m_Current = this;
+    }
 
 
 

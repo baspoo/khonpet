@@ -12,14 +12,21 @@ public class World : MonoBehaviour
 
 
 
-
+    public Transform Root;
     public Transform Background;
     public Transform PetPosition;
 
+
+
+
+
+        public void Awake()
+    {
+        Root.gameObject.SetActive(false);
+    }
     public void Init()
     {
-        Background.gameObject.SetActive(true);
-        PetPosition.gameObject.SetActive(true);
+        Root.gameObject.SetActive(true);
     }
 
 

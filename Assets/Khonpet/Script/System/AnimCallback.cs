@@ -20,7 +20,10 @@ public class AnimCallback : MonoBehaviour
             m_action.Add(take, action);
         }
     }
-
+    public void ClearAction()
+    {
+        m_action = new Dictionary<string, System.Action>();
+    }
     float loop=0.0f;
     public void LoopStart()
     {
@@ -47,5 +50,11 @@ public class AnimCallback : MonoBehaviour
         {
             m_action[take]?.Invoke();
         }
+    }
+
+    public UnityEngine.Events.UnityEvent EventSimple;
+    public void Simple( )
+    {
+        EventSimple?.Invoke();
     }
 }

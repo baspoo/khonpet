@@ -52,6 +52,7 @@ SpriteAtlas:
   m_PackedSprites:
   - {fileID: 21300000, guid: df9fdd4064999ac4f88df08536cb5f6c, type: 3}
   - {fileID: 21300000, guid: ac0b1911f2722e64db6ce03a419a1b93, type: 3}
+  - {fileID: 21300000, guid: ca3777418044e10488841ef24db7ccfa, type: 3}
   - {fileID: 21300000, guid: 105b75513e11a624fab7e5781e467190, type: 3}
   - {fileID: 21300000, guid: 20125b719509a3e44b56b51bf5771d7a, type: 3}
   - {fileID: 21300000, guid: 365e8222695d309459656c5b4127f0f2, type: 3}
@@ -91,6 +92,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: baf5698bd242fe3478001d7015d2c596, type: 3}
   - {fileID: 21300000, guid: 1786cb9b4be7ca44c9b0dea771bc627b, type: 3}
   - {fileID: 21300000, guid: 14c7d2cbde7222c48858ad497c166e51, type: 3}
+  - {fileID: 21300000, guid: e727c16c9f05f0240842e02bf123b62b, type: 3}
   - {fileID: 21300000, guid: 2395dd6ccf2537c4d906f6480d591208, type: 3}
   - {fileID: 21300000, guid: d3270b6d33f57f64da208593eab1f8f2, type: 3}
   - {fileID: 21300000, guid: 3a2651cd734e0184bb127a356a13f673, type: 3}
@@ -100,6 +102,7 @@ SpriteAtlas:
   m_PackedSpriteNamesToIndex:
   - ui_base-cirline
   - ui_playball_max
+  - ui_bar_mission
   - ui_playball_runfull
   - ui_bar shadow
   - ui_play_bar
@@ -139,6 +142,7 @@ SpriteAtlas:
   - ui_light_hard
   - ui_playball_gate
   - ui_line
+  - ui_bar_status
   - ui_bar_balloon
   - ui_sq_shadow
   - ui_dance_arrow

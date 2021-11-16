@@ -10,13 +10,23 @@ public class InterfaceRoot : MonoBehaviour
 
     public MainmenuPage mainmenu;
     public ScreenCanvas screenCanvas;
+    public PopupPage popup;
+
+
+
+
+
 
 
 
     public void Init()
     {
         mainmenu.Init();
+        popup.Init();
     }
+
+
+
 
 
 

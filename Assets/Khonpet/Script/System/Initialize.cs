@@ -19,6 +19,8 @@ public class Initialize : MonoBehaviour
 
         // Pet SetCurrent
         PetData.SetCurrent(Information.instance.ContractAddress, Information.instance.TokenId);
+        while (PetData.Current == null) yield return new WaitForEndOfFrame();
+
         // FirebaseService Init
         FirebaseService.instance.Init(PetData.Current.ID, () => { });
         // NFTService Init

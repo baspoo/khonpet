@@ -19,6 +19,7 @@ public class Awake : MonoBehaviour
 
     public void OnAwake() 
     {
+        gameObject.SetActive(true);
         var ParticleSystem = GetComponent<ParticleSystem>();
         if (ParticleSystem != null)
         {

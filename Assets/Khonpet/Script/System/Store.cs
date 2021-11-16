@@ -39,4 +39,14 @@ public class Store : MonoBehaviour
 
 
 
+    public List<PlayAsset> Plays;
+    [System.Serializable]
+    public class PlayAsset
+    {
+        public Play.PlayType Type;
+        public GameObject Root;
+        public int Lv;
+    }
+    public PlayAsset FindPlay(Play.PlayType type) => Plays.Find(x => x.Type == type);
+
 }

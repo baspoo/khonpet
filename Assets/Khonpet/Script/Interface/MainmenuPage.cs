@@ -6,6 +6,8 @@ using System.Linq;
 
 public class MainmenuPage : MonoBehaviour
 {
+    public static MainmenuPage instance { get { if (m_instance == null) m_instance = FindObjectOfType<MainmenuPage>(); return m_instance; } }
+    static MainmenuPage m_instance;
 
     public Main main;
     [System.Serializable]
@@ -16,6 +18,15 @@ public class MainmenuPage : MonoBehaviour
         public void OnVisible(bool visible)
         {
             tRoot.gameObject.SetActive(visible);
+        }
+        bool active = true;
+        public void OnActive(bool active)
+        {
+            if(this.active != active) 
+            { 
+                this.active = active;
+                animation.Play(active? "mainmenu awake": "mainmenu out");
+            }
         }
     }
 
@@ -122,6 +133,8 @@ public class MainmenuPage : MonoBehaviour
     {
         public Transform tRoot;
         public Transform tPath;
+        public Transform tStarIcon;
+        public Transform tFocus;
         public SplineWalker[] walkStars;
         public Text txtExp;
         public Text txtLv;
@@ -129,9 +142,23 @@ public class MainmenuPage : MonoBehaviour
         public Image imgExpRun;
         public Awake effect;
         public float SpeedBar;
+        BezierCurve[] paths;
+        Vector2 sizeDelta = Vector2.zero;
+        public void Init()
+        {
+            sizeDelta = imgExpPilot.rectTransform.sizeDelta;
+            OnUpdate();
+        }
+        void Resetposition() 
+        {
+            tFocus.position = tStarIcon.position;
+            paths = tPath.GetComponents<BezierCurve>();
+            foreach (var p in paths)
+                p.points[p.points.Length - 1] = tFocus.localPosition;
+        }
         public void OnUpdate()
         {
-            if(corotine!=null) InterfaceRoot.instance.mainmenu.StopCoroutine(corotine);
+            if (corotine!=null) InterfaceRoot.instance.mainmenu.StopCoroutine(corotine);
             corotine = InterfaceRoot.instance.mainmenu.StartCoroutine(update());
         }
         bool first = true;
@@ -139,22 +166,23 @@ public class MainmenuPage : MonoBehaviour
         Coroutine corotine;
         IEnumerator update() 
         {
-            var level = new Utility.Level(PetData.Current.Star);
+            var level = PetData.Current.Lv;
+            var width = sizeDelta.x * level.Percent;
             txtLv.text = $"Lv.{level.CurrentLevel}";
             txtExp.text = $"{level.XP} / {level.xpNextlevel}";
-            imgExpPilot.fillAmount = level.Percent;
+            imgExpPilot.rectTransform.sizeDelta = new Vector2(width, sizeDelta.y);
             if (!first)
             {
                 yield return new WaitForEndOfFrame();
-                while (current < imgExpPilot.fillAmount)
+                while (current < width)
                 {
                     current += Time.deltaTime * SpeedBar;
-                    imgExpRun.fillAmount = current;
+                    imgExpRun.rectTransform.sizeDelta = new Vector2(current, sizeDelta.y);
                     yield return new WaitForEndOfFrame();
                 }
             }
-            current = imgExpPilot.fillAmount;
-            imgExpRun.fillAmount = current;
+            current = width;
+            imgExpRun.rectTransform.sizeDelta = new Vector2(width, sizeDelta.y);
             first = true;
         }
         public void OnAddStar(int star)
@@ -164,12 +192,12 @@ public class MainmenuPage : MonoBehaviour
         }
         IEnumerator addStar(int star)
         {
+            Resetposition();
             foreach (var w in walkStars)
             {
                 w.gameObject.SetActive(false);
             }
             int index = 0;
-            var paths = tPath.GetComponents<BezierCurve>();
             InterfaceRoot.instance.mainmenu.StartCoroutine(update());
             foreach (var w in walkStars) 
             {
@@ -181,6 +209,8 @@ public class MainmenuPage : MonoBehaviour
                     w.gameObject.SetActive(true);
                     w.ondone = (walk) => { 
                         effect.OnAwake();
+                        tStarIcon.gameObject.transform.localScale = Vector3.one;
+                        iTween.ShakeScale(tStarIcon.gameObject, Vector3.one * 0.35f, 0.25f);
                     };
                     index++;
                     yield return new WaitForSeconds(0.15f);
@@ -226,6 +256,7 @@ public class MainmenuPage : MonoBehaviour
     }
     public void Init()
     {
+        m_instance = this;
         main.OnVisible(true);
 
         likeZone.OnUpdate();
@@ -233,10 +264,15 @@ public class MainmenuPage : MonoBehaviour
         socialZone.OnUpdate();
         airZone.OnUpdate();
         ownerZone.OnUpdate();
-        starZone.OnUpdate();
+        starZone.Init();
     }
 
-
+    public void OnPetting()
+    {
+        //ConsoleActivity.OnBegin(ConsoleActivity.Activity.Food);
+        if(!ConsoleActivity.IsActing)
+            PetObj.Current.anim.OnAnimForce(PetAnim.AnimState.Petting);
+    }
 
     public void OnConsoleFood()
     {
@@ -285,8 +321,14 @@ public class MainmenuPage : MonoBehaviour
 
 
 
+    public void OnQuest()
+    {
 
+    }
+    public void OnStatus()
+    {
 
+    }
 
 
 

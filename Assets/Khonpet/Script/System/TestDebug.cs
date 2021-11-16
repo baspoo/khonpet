@@ -18,7 +18,7 @@ public class TestDebug : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.D))
             InterfaceRoot.instance.mainmenu.starZone.OnUpdate();
         if (Input.GetKeyDown(KeyCode.A))
-            InterfaceRoot.instance.mainmenu.starZone.OnAddStar(3);
+            InterfaceRoot.instance.mainmenu.starZone.OnAddStar(6.Random());
 
         if (Input.GetKeyDown(KeyCode.S))
             Playing.instance.Save();
