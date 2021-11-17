@@ -8,7 +8,7 @@ public class QuickRandomPage : MonoBehaviour
     public Transform coin;
     public Transform canvas;
     public Transform[] cups;
-
+    public AnimCallback animcallback;
     int m_choise;
     System.Action<bool> m_done;
     public void Init(System.Action<bool> done)
@@ -20,7 +20,14 @@ public class QuickRandomPage : MonoBehaviour
         coin.gameObject.SetActive(true);
         anim.Stop();
         anim.Play("quickrandom");
-
+        animcallback.AddAction("start", () =>
+        {
+            coin.gameObject.SetActive(false);
+        });
+        animcallback.AddAction("done", () =>
+        {
+            OnDone();
+        });
         cups[0].gameObject.SetActive(true);
         cups[1].gameObject.SetActive(true);
         cups[2].gameObject.SetActive(true);

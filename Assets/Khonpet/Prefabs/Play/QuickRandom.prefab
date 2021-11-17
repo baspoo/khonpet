@@ -25029,19 +25029,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EventSimple:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8363111446753795385}
-        m_TargetAssemblyTypeName: QuickRandomPage, Assembly-CSharp
-        m_MethodName: OnDone
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &6671090600994572076
 GameObject:
   m_ObjectHideFlags: 0
@@ -25304,3 +25292,4 @@ MonoBehaviour:
   - {fileID: 8656206040903681770}
   - {fileID: 1951148493836350568}
   - {fileID: 9020970021796378278}
+  animcallback: {fileID: 6306549230883950125}

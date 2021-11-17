@@ -78,7 +78,7 @@ public class Play : MonoBehaviour
             switch (type) 
             {
                 case "Ball": Ball(); break;
-                case "Memory": break;
+                case "Memory": Memory(); break;
                 case "Guess": Guess(); break;
                 case "Dance": break;
             }
@@ -100,9 +100,18 @@ public class Play : MonoBehaviour
             m_action?.Invoke(pass? PlayAction.Win : PlayAction.Lose);
         });
     }
+
+    MemoryPage mem;
     void Memory()
     {
-
+        if (mem == null)
+        {
+            var data = Store.instance.FindPlay(PlayType.Memory);
+            mem = data.Root.Create(Root).GetComponent<MemoryPage>();
+        }
+        mem.Init((pass) => {
+            m_action?.Invoke(pass ? PlayAction.Win : PlayAction.Lose);
+        });
     }
 
     QuickRandomPage quickRandomPage;
