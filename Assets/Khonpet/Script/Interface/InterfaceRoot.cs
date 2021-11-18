@@ -7,7 +7,7 @@ public class InterfaceRoot : MonoBehaviour
     public static InterfaceRoot instance { get { if (m_instance == null) m_instance = FindObjectOfType<InterfaceRoot>(); return m_instance; } }
     static InterfaceRoot m_instance;
 
-
+    public Transform loading;
     public MainmenuPage mainmenu;
     public ScreenCanvas screenCanvas;
     public PopupPage popup;
@@ -25,7 +25,10 @@ public class InterfaceRoot : MonoBehaviour
         popup.Init();
     }
 
-
+    public void Loading(bool active)
+    {
+        loading.gameObject.SetActive(active);
+    }
 
 
 

@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class Awake : MonoBehaviour
 {
-   
 
 
+    public bool StopOnAwake;
 
 
     void OnEnable()
     {
-
-        OnAwake();
+        if (!StopOnAwake)
+            OnAwake();
+        else 
+        {
+            var ParticleSystem = GetComponent<ParticleSystem>();
+            if (ParticleSystem != null)
+            {
+                ParticleSystem.Stop();
+            }
+        }
 
     }
 

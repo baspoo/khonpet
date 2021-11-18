@@ -45,16 +45,19 @@ SpriteAtlas:
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: f79a939ad3a47a044bad45241c6bbcc4, type: 3}
+    - {fileID: 102900000, guid: 7cc83d4770dfc894ba4dda1755aa47a2, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: 21300000, guid: 69bf2040549b5fe4b9091db9414e9c97, type: 3}
   - {fileID: 21300000, guid: df9fdd4064999ac4f88df08536cb5f6c, type: 3}
   - {fileID: 21300000, guid: ac0b1911f2722e64db6ce03a419a1b93, type: 3}
   - {fileID: 21300000, guid: ca3777418044e10488841ef24db7ccfa, type: 3}
   - {fileID: 21300000, guid: 105b75513e11a624fab7e5781e467190, type: 3}
   - {fileID: 21300000, guid: 20125b719509a3e44b56b51bf5771d7a, type: 3}
+  - {fileID: 21300000, guid: c9acd0f12ec9ec84a805bf84cd26012d, type: 3}
   - {fileID: 21300000, guid: 365e8222695d309459656c5b4127f0f2, type: 3}
   - {fileID: 21300000, guid: aa2cf2221c24ff54ba9c39748853e669, type: 3}
   - {fileID: 21300000, guid: 6026b6329fdaae447a4985732a79e808, type: 3}
@@ -71,6 +74,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: bba1e535c1478214f97196fe74e1d883, type: 3}
   - {fileID: 21300000, guid: 940bc7455a6094b4ea93b9320e66117e, type: 3}
   - {fileID: 21300000, guid: 13eb0b95183a0874cbe9a67c7a8d5d7b, type: 3}
+  - {fileID: 21300000, guid: 69ee6fc583c4a654095b945f7e1a370d, type: 3}
   - {fileID: 21300000, guid: c62872e62e1233d479b1edfff1ed629c, type: 3}
   - {fileID: 21300000, guid: f4d7c1f60eb0c0e4ab577d419c6514ee, type: 3}
   - {fileID: 21300000, guid: e95a7817310dc7045abd86d797ff7f5e, type: 3}
@@ -80,6 +84,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 1f7d46a7eab8da648a53e4fb8a5af842, type: 3}
   - {fileID: 21300000, guid: 88e737a78c9611b419c22bd8bdb20d86, type: 3}
   - {fileID: 21300000, guid: d8ced0e753f266146ae688c0805a4a84, type: 3}
+  - {fileID: 21300000, guid: a2d66bb87bda5824693b2687e1005763, type: 3}
   - {fileID: 21300000, guid: 5527cae82bb14d4438459a0b9831ca4d, type: 3}
   - {fileID: 21300000, guid: 48fda23937c4a6b47a7a8bef7a6321b1, type: 3}
   - {fileID: 21300000, guid: dbd55d495a20f5b41a9220b73f5d841c, type: 3}
@@ -87,24 +92,29 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 1c0d166ab00c6894e973da0112faac4d, type: 3}
   - {fileID: 21300000, guid: a7f0cf7af70d03a47abbb89dd1cf8e25, type: 3}
   - {fileID: 21300000, guid: 7aec4bcab067c66439a194c7eab69c1f, type: 3}
+  - {fileID: 21300000, guid: b2ade33b112c57f4a99be8c523d894b3, type: 3}
   - {fileID: 21300000, guid: fbedea3b9d62a4144b1a18ef58c965c6, type: 3}
   - {fileID: 21300000, guid: 90bd808b112b1c147bab5d492f8fc1ab, type: 3}
   - {fileID: 21300000, guid: baf5698bd242fe3478001d7015d2c596, type: 3}
   - {fileID: 21300000, guid: 1786cb9b4be7ca44c9b0dea771bc627b, type: 3}
+  - {fileID: 21300000, guid: 840907bbaac1ec6469b9e18460c95a87, type: 3}
   - {fileID: 21300000, guid: 14c7d2cbde7222c48858ad497c166e51, type: 3}
   - {fileID: 21300000, guid: e727c16c9f05f0240842e02bf123b62b, type: 3}
   - {fileID: 21300000, guid: 2395dd6ccf2537c4d906f6480d591208, type: 3}
   - {fileID: 21300000, guid: d3270b6d33f57f64da208593eab1f8f2, type: 3}
   - {fileID: 21300000, guid: 3a2651cd734e0184bb127a356a13f673, type: 3}
+  - {fileID: 21300000, guid: c5546dcd2529078478f3d2f47b7c42d0, type: 3}
   - {fileID: 21300000, guid: dd7838ee0e1371741b19adf719818594, type: 3}
   - {fileID: 21300000, guid: 5c4bbc7f1a96ba44d9f12bd1bc3b97c0, type: 3}
   - {fileID: 21300000, guid: 4ddb60ff9055b1747ade1097f5a4ddb7, type: 3}
   m_PackedSpriteNamesToIndex:
+  - loading_rotate_line
   - ui_base-cirline
   - ui_playball_max
   - ui_bar_mission
   - ui_playball_runfull
   - ui_bar shadow
+  - loading_rotate_2
   - ui_play_bar
   - ui_playball_thum
   - ui_dot
@@ -121,6 +131,7 @@ SpriteAtlas:
   - ui_base-sq
   - ui_play_btn
   - ui_noise
+  - loading_template
   - ui_arrow1
   - ui_bar_down_shadow
   - ui_petmode_single
@@ -130,6 +141,7 @@ SpriteAtlas:
   - ui_bar_side_shadow
   - ui_lighthelf
   - ui_bar_shadow
+  - loading_rotate_1
   - ui_star_bar_run
   - ui_dance_obj
   - ui_playball_bar
@@ -137,15 +149,18 @@ SpriteAtlas:
   - ui_star_bg
   - ui_cir
   - ui_light
+  - loading_name
   - ui_line_sq
   - ui_profilebar
   - ui_light_hard
   - ui_playball_gate
+  - loading_rotate_base
   - ui_line
   - ui_bar_status
   - ui_bar_balloon
   - ui_sq_shadow
   - ui_dance_arrow
+  - loading_icon
   - ui_text_great
   - ui_dance_btn
   - ui_btn

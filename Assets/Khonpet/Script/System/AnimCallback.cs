@@ -42,7 +42,12 @@ public class AnimCallback : MonoBehaviour
     {
         loop = 0.0f;
     }
-
+    public void ContiuneClip(string clipname)
+    {
+        var a = GetComponent<Animation>();
+        a.Stop();
+        a.Play(clipname);
+    }
 
     public void Take(string take) 
     {

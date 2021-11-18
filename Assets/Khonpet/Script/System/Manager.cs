@@ -30,6 +30,8 @@ public class Manager : MonoBehaviour
     IEnumerator Start()
     {
         yield return new WaitForEndOfFrame();
-        StartCoroutine(init.Init());
+        InterfaceRoot.instance.Loading(true);
+        yield return StartCoroutine(init.Init());
+        InterfaceRoot.instance.Loading(false);
     }
 }

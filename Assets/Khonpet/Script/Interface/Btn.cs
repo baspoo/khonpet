@@ -15,6 +15,7 @@ public class Btn : MonoBehaviour
     public UnityEngine.UI.Image cooldown;
     public UnityEngine.UI.Text text;
 
+
     public enum SoundClick 
     {
         none,click,select,close

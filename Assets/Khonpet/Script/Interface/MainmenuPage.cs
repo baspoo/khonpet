@@ -210,7 +210,7 @@ public class MainmenuPage : MonoBehaviour
                     w.ondone = (walk) => { 
                         effect.OnAwake();
                         tStarIcon.gameObject.transform.localScale = Vector3.one;
-                        iTween.ShakeScale(tStarIcon.gameObject, Vector3.one * 0.35f, 0.25f);
+                        iTween.ShakeScale(tStarIcon.gameObject, Vector3.one * 0.65f, 0.35f);
                     };
                     index++;
                     yield return new WaitForSeconds(0.15f);

@@ -80,7 +80,7 @@ public class Play : MonoBehaviour
                 case "Ball": Ball(); break;
                 case "Memory": Memory(); break;
                 case "Guess": Guess(); break;
-                case "Dance": break;
+                case "Dance": Dance(); break;
             }
         }
     }
@@ -126,9 +126,18 @@ public class Play : MonoBehaviour
             m_action?.Invoke(pass ? PlayAction.Win : PlayAction.Lose);
         });
     }
+
+    DancePage dancePage;
     void Dance()
     {
-
+        if (dancePage == null)
+        {
+            var data = Store.instance.FindPlay(PlayType.Dance);
+            dancePage = data.Root.Create(Root).GetComponent<DancePage>();
+        }
+        dancePage.Init((pass) => {
+            m_action?.Invoke(pass ? PlayAction.Win : PlayAction.Lose);
+        });
     }
 
 

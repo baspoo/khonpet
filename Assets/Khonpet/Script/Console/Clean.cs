@@ -23,11 +23,9 @@ public class Clean : MonoBehaviour
         m_instance = this;
         OnClose();
     }
-    bool isDone = false;
     Coroutine corotine;
     public void OnPlay(System.Action callback)
     {
-        isDone = false;
         Root.gameObject.SetActive(true);
         if (corotine != null)
             StopCoroutine(corotine);
@@ -43,22 +41,20 @@ public class Clean : MonoBehaviour
 
         });
         AnimCallback.AddAction("full", () => {
-            PetObj.Current.anim.OnAnimForce(PetAnim.AnimState.GoodJob);
-        });
-        AnimCallback.AddAction("end", () => {
+            PetObj.Current.anim.OnAnimForce(PetAnim.AnimState.LikeLove);
             isAnimDone = true;
-            OnClose();
         });
+
 
 
         //** wait
         while (!isAnimDone) yield return new WaitForEndOfFrame();
-        yield return new WaitForSeconds(0.35f);
-
+        yield return new WaitForSeconds(1.00f);
+       
 
         //** End
         callback?.Invoke();
-
+        OnClose();
     }
     public void OnClose()
     {
