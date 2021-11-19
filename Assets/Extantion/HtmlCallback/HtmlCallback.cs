@@ -66,9 +66,7 @@ public class HtmlCallback : MonoBehaviour
 
 
 
-
-
-
+    //Check Mobile
     static System.Action<bool> onmobilecallback;
     public static void IsMobile(System.Action<bool> mobilecallback)
     {
@@ -81,5 +79,35 @@ public class HtmlCallback : MonoBehaviour
     }
 
 
+
+
+
+
+
+
+
+    //Goto Url
+    public static void GotoUrl(string url)
+    {
+        OnHtmlMessage(1, url);
+    }
+
+
+
+
+
+
+
+    //Check Mobile
+    static System.Action<string> onPopupInputMessage;
+    public static void PopupInputMessage(string header , System.Action<string> callback )
+    {
+        onPopupInputMessage = callback;
+        OnHtmlMessage(2, header );
+    }
+    public void PopupInputMessageCallback(string str)
+    {
+        onPopupInputMessage?.Invoke(str);
+    }
 
 }

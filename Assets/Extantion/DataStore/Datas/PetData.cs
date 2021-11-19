@@ -96,7 +96,7 @@ public class PetData
         if(m_Current == null) 
         { 
             Debug.LogError($"SetCurrent Find Not Found {ContractAddress} {TokenId}");
-            PopupPage.instance.message.Open("Find Not Found!", $"Please Check ContractAddress Or TokenId Again.").HideBtnClose();
+            PopupPage.instance.message.Open("Find Not Found!", $"Please Check ContractAddress Or TokenId Again.",false).HideBtnClose();
         }
 
     }

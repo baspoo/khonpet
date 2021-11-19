@@ -71,7 +71,17 @@ public class Utility
     }
 
 
-
+    public class Web 
+    {
+        public static void GotoUrl(string url) 
+        {
+            #if UNITY_EDITOR
+                Application.OpenURL(url);
+            #else
+                HtmlCallback.GotoUrl(url);
+            #endif
+        }
+    }
 
 
     public class Level 

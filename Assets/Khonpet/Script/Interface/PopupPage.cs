@@ -35,6 +35,8 @@ public class PopupPage : MonoBehaviour
         root.gameObject.SetActive(true);
         if (position != null)
             this.popup.gameObject.transform.position = position.position;
+        else
+            this.popup.gameObject.transform.position = Vector3.zero;
     }
     void Bg(BgStyle style)
     {
@@ -50,6 +52,7 @@ public class PopupPage : MonoBehaviour
     {
         root.gameObject.SetActive(false);
         petInfo.root.gameObject.SetActive(false);
+        message.root.gameObject.SetActive(false);
     }
 
     System.Action<string> btns;
@@ -82,10 +85,11 @@ public class PopupPage : MonoBehaviour
     public class MessagePage
     {
         public Transform root;
+        public Transform position;
         public Text txtHeader;
         public Text txtDescription;
         public Transform tClose;
-        public MessagePage Open(string header , string message , System.Action onclose = null)
+        public MessagePage Open(string header , string message , bool ismarkclose = true, System.Action onclose = null)
         {
             instance.Bg( BgStyle.center );
             txtHeader.text = header;
@@ -96,7 +100,7 @@ public class PopupPage : MonoBehaviour
                 {
                     instance.OnClose(); onclose?.Invoke();
                 }
-            }, false);
+            }, ismarkclose, position);
             return this;
         }
         public void HideBtnClose( ) => tClose.gameObject.SetActive(false);
@@ -148,7 +152,7 @@ public class PopupPage : MonoBehaviour
                 if (state == "gotourl") 
                 {
                     Debug.Log(gotoUrl);
-                    Application.OpenURL(gotoUrl);
+                    Utility.Web.GotoUrl(gotoUrl);
                 } 
             },true, position );
         }

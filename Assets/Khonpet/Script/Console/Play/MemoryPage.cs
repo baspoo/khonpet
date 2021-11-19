@@ -77,6 +77,15 @@ public class MemoryPage : MonoBehaviour
     {
         OnDeactive();
         yield return new WaitForSeconds(0.75f);
+        //foreach (var b in Btns)
+        //{
+        //    var colors = b.colors;
+        //    colors.highlightedColor = ((Information.instance.IsMobile) ? b.colors.normalColor : Color.white);
+        //    b.colors = colors;
+        //}
+
+
+
         StartCoroutine(Wave());
 
     }
@@ -136,7 +145,10 @@ public class MemoryPage : MonoBehaviour
 
     IEnumerator End(bool win)
     {
-        yield return new WaitForSeconds(0.75f);
+        yield return new WaitForSeconds(0.5f);
+        foreach (var b in Btns)
+            b.interactable = true;
+        yield return new WaitForSeconds(1.0f);
         OnDeactive();
         m_done?.Invoke(win);
         Close();

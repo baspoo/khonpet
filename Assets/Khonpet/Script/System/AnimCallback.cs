@@ -28,14 +28,12 @@ public class AnimCallback : MonoBehaviour
     public void LoopStart()
     {
         loop= anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
-        Debug.Log(loop);
     }
     public void LoopEnd( )
     {
         if(loop != 0.0f) 
         { 
             anim.Play("AnimForce", -1, loop);
-            Debug.Log("end");
         }
     }
     public void OnReset()

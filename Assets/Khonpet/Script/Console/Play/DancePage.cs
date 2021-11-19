@@ -88,9 +88,13 @@ public class DancePage : MonoBehaviour
     {
         foreach (var obj in Objs) 
         {
-            if (obj.IsRuning && btn.name == obj.Index.ToString()) 
+            if (obj.IsRuning) 
             {
-                obj.OnCheck();
+                Debug.Log($"   {btn.name}  {obj.Index}");
+                if (btn.name == obj.Index.ToString()) 
+                { 
+                    obj.OnCheck();
+                }
             }
         }
     }

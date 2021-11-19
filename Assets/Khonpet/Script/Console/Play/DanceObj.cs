@@ -36,6 +36,7 @@ public class DanceObj : MonoBehaviour
         if (IsRuning) 
         { 
             transform.Translate( Vector3.down* m_page.setting.Speed * Time.deltaTime );
+            // (N == 95) < (100 -  20) = 80
             if (transform.localPosition.y < (m_data.EndPoint.localPosition.y - m_page.setting.PaddingRange)) 
             {
                 OnMissing();
@@ -52,7 +53,15 @@ public class DanceObj : MonoBehaviour
     }
     public void OnCheck() 
     {
-        if ( transform.localPosition.y < (m_data.EndPoint.localPosition.y+m_page.setting.MatchRanges[0]) && transform.localPosition.y > (m_data.EndPoint.localPosition.y+m_page.setting.MatchRanges[1]))
+
+
+        // (N == 95) < (100 +  20) = 120
+        // (N == 95) > (100 + -20) = 80
+
+
+        if (
+            transform.localPosition.y < (m_data.EndPoint.localPosition.y + m_page.setting.MatchRanges[0]) &&
+            transform.localPosition.y > (m_data.EndPoint.localPosition.y + m_page.setting.MatchRanges[1]))
         {
             Debug.Log("Match!");
 
@@ -61,6 +70,12 @@ public class DanceObj : MonoBehaviour
             m_data.Eff.OnAwake();
             m_page.OnMatched();
             Dispose();
+        }
+        else 
+        {
+
+            Debug.Log($"{transform.localPosition.y}  <  {m_data.EndPoint.localPosition.y + m_page.setting.MatchRanges[0]}  &&  >  {m_data.EndPoint.localPosition.y + m_page.setting.MatchRanges[1]}");
+        
         }
     }
 

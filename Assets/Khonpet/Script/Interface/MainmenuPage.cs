@@ -300,7 +300,7 @@ public class MainmenuPage : MonoBehaviour
     }
     public void OnAchievement()
     {
-
+        PopupPage.instance.message.Open("Achievement !", $"This functionality is coming soon. You can send feedback to developer about this function for improvement.").HideBtnClose();
     }
     public void OnSetting()
     {

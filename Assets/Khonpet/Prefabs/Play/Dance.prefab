@@ -286,18 +286,18 @@ MonoBehaviour:
     Eff: {fileID: 5477825060289183909}
   - Index: 3
     Color: {r: 0.83137256, g: 0.2784314, b: 0.4509804, a: 1}
-    Rotate: {x: 0, y: 0, z: 180}
+    Rotate: {x: 0, y: 0, z: 270}
     EndPoint: {fileID: 5477825060222433197}
     Eff: {fileID: 5477825059931794221}
   - Index: 4
     Color: {r: 0.09803922, g: 0.63529414, b: 0.7647059, a: 1}
-    Rotate: {x: 0, y: 0, z: 270}
+    Rotate: {x: 0, y: 0, z: 180}
     EndPoint: {fileID: 5477825061283994583}
     Eff: {fileID: 5477825061543964295}
   setting:
-    PaddingRange: 10
+    PaddingRange: 30
     MatchRanges:
-    - 60
+    - 70
     - -60
     GenarationsTime:
     - 0.5
@@ -10305,6 +10305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 819dab4168ace8b489994f64583f6879, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StopOnAwake: 0
 --- !u!1 &5477825059950891002
 GameObject:
   m_ObjectHideFlags: 0
@@ -10330,13 +10331,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5477825059950891002}
-  m_LocalRotation: {x: 0, y: -0, z: 0.7071068, w: -0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5477825059962770331}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 270}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -25485,6 +25486,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 819dab4168ace8b489994f64583f6879, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StopOnAwake: 0
 --- !u!1 &5477825060306024995
 GameObject:
   m_ObjectHideFlags: 0
@@ -60773,6 +60775,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 819dab4168ace8b489994f64583f6879, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StopOnAwake: 0
 --- !u!1 &5477825061606389669
 GameObject:
   m_ObjectHideFlags: 0
@@ -80167,6 +80170,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 819dab4168ace8b489994f64583f6879, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  StopOnAwake: 0
 --- !u!1 &6658428200675091171
 GameObject:
   m_ObjectHideFlags: 0

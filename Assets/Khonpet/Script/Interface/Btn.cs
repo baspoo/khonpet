@@ -59,12 +59,12 @@ public class Btn : MonoBehaviour
     public void OpenURL(string path)
     {
         Handle();
-        Application.OpenURL(path);
+        Utility.Web.GotoUrl(path);
     }
     public void OpenURL(GameObject path)
     {
         Handle();
-        Application.OpenURL(path.name);
+        Utility.Web.GotoUrl(path.name);
     }
 
 

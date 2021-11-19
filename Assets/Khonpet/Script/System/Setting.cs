@@ -1,6 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
+
 
 public class Setting : MonoBehaviour
 {
@@ -83,3 +88,38 @@ public class Setting : MonoBehaviour
 
 
 }
+
+
+
+
+
+
+
+
+
+#if UNITY_EDITOR
+[CanEditMultipleObjects]
+[CustomEditor(typeof(Setting))]
+[System.Serializable]
+public class SettingUI : Editor
+{
+
+
+    Setting m_page => (Setting)target;
+
+    public override void OnInspectorGUI()
+    {
+        base.OnInspectorGUI();
+        if (GUILayout.Button("Adjuest Setting"))
+        {
+            m_page.debug.isDebugBundle = false;
+            m_page.bundle.LoadType = ResourcesHandle.LoadType.CloudFile;
+            m_page.device.isForceMobile = false;
+            m_page.device.screen = Setting.Device.ScreenType.auto;
+            m_page.tsv.getTsv = Setting.Tsv.GetTsv.Realtime;
+
+
+        }
+    }
+}
+#endif

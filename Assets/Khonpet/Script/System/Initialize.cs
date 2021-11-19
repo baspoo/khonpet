@@ -40,7 +40,7 @@ public class Initialize : MonoBehaviour
         //----------------------------------------------------------------------------------------------------
 
 
-        Playing.instance.Load();
+        Playing.instance.Init();
         PetActivity.Init();
         while (!PetActivity.IsReady) yield return new WaitForEndOfFrame();
         World.instance.Init();
