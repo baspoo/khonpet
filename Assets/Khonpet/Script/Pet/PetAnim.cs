@@ -7,7 +7,7 @@ public class PetAnim : MonoBehaviour
 	public enum AnimState
 	{
 		none = -1,
-		Idle, SubIdle , Eat, Sleep, BallKick, Dance, GoodJob, LikeLove, Bad, Need, Petting
+		Idle, SubIdle , Eat, Sleep, BallKick, Dance, GoodJob, LikeLove, Bad, Need, Petting, Walk
 	}
 
 	
@@ -15,10 +15,10 @@ public class PetAnim : MonoBehaviour
 	[Space]
 
 	public AnimationClip Idle;
-    public AnimationClip[] SubIdle;
+    public List<AnimationClip> SubIdle;
 	[SerializeField]
 	float[] IdelTimes = new float[2] { 3, 7 };
-	public AnimationClip Eat, Sleep, BallKick, Dance, GoodJob, LikeLove, Bad, Need, Petting;
+	public AnimationClip Eat, Sleep, BallKick, Dance, GoodJob, LikeLove, Bad, Need, Petting, Walk;
 	public AnimCallback Animcallback => m_animcallback;
 	AnimCallback m_animcallback;
 
@@ -52,7 +52,7 @@ public class PetAnim : MonoBehaviour
 				return Idle;
 				break;
             case AnimState.SubIdle:
-				return SubIdle[SubIdle.Length.Random()];
+				return SubIdle[SubIdle.Count.Random()];
 				break;
             case AnimState.Eat:
 				return Eat;
@@ -81,7 +81,10 @@ public class PetAnim : MonoBehaviour
             case AnimState.Petting:
 				return Petting;
 				break;
-            default:
+			case AnimState.Walk:
+				return Walk;
+				break;
+			default:
                 break;
         }
 		return null;
@@ -89,20 +92,26 @@ public class PetAnim : MonoBehaviour
 
 
 
-
-
+	public AnimState animState => m_animState;
+	AnimState m_animState;
 
 
 	//Play
 	public void OnAnimForce(AnimState act)
 	{
-		StartCoroutine(IEOnAnimForce(act));
+		m_animState = act;
+		var clip = FindClip(act);
+		StartCoroutine(IEOnAnimForce(clip));
 	}
-	IEnumerator IEOnAnimForce(AnimState act)
+	public void OnAnimForce(AnimationClip clip)
+	{
+		StartCoroutine(IEOnAnimForce(clip));
+	}
+	IEnumerator IEOnAnimForce(AnimationClip clip)
 	{
 		Animator.Play("Idle", -1, 0.0f);
 		yield return new WaitForEndOfFrame();
-		animatorOverrideController["AnimForce"] = FindClip(act);
+		animatorOverrideController["AnimForce"] = clip;
 		Animator.Play("AnimForce", -1, 0.0f);
 	}
 	public void OnAnimState(int act)
@@ -122,17 +131,23 @@ public class PetAnim : MonoBehaviour
 		Animcallback.OnReset();
 	}
 
-
+	bool IsIdle => Animator.GetCurrentAnimatorStateInfo(0).IsName(AnimState.Idle.ToString());
 
 	//Idle Handle
 	float IdelAnimRuntime = 0.0f;
 	float IdelAnimMaxtime = 5.0f;
 	void IdelAnim()
 	{
-		if (Animator.GetCurrentAnimatorStateInfo(0).IsName(AnimState.Idle.ToString()))
+		if (IsIdle)
+		{
 			IdelAnimRuntime += Time.deltaTime;
+		}
 		else
 			IdelAnimRuntime = 0.0f;
+
+
+		if(IdelAnimRuntime>1.0f)
+			m_animState = AnimState.Idle;
 
 		if (IdelAnimRuntime >= IdelAnimMaxtime)
 		{

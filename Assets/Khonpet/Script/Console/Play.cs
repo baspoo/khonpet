@@ -22,10 +22,10 @@ public class Play : MonoBehaviour
     {
         public Transform tRoot;
         public Transform tPosition;
-        public Btn btnBall;
-        public Btn btnMemory;
-        public Btn btnGuess;
-        public Btn btnDance;
+        public BarObject btnBall;
+        public BarObject btnMemory;
+        public BarObject btnGuess;
+        public BarObject btnDance;
 
         public void Open(bool open) 
         {
@@ -33,19 +33,21 @@ public class Play : MonoBehaviour
             if (open)
             {
 
-                var level = PetData.Current.Lv;
-                void Updatebtn(Btn btn , PlayType type) 
+                var level = PetData.PetInspector.Lv;
+                void Updatebtn(BarObject btn , PlayType type) 
                 {
                     var data = Store.instance.FindPlay(type);
-                    btn.button.interactable = (level.CurrentLevel >= data.Lv);
-                    if (btn.button.interactable)
-                    {
-                        btn.text.text = "";
-                    }
-                    else 
-                    {
-                        btn.text.text = $"Lv.{data.Lv}";
-                    }
+                    btn.Btn.interactable = data.IsActive(level.CurrentLevel);// (level.CurrentLevel >= data.Lv);
+
+                    btn.Name.gameObject.SetActive(!btn.Btn.interactable);
+                    btn.Count.gameObject.SetActive(btn.Btn.interactable);
+
+                    btn.Name.text = $"Lv.{data.Lv}";
+                    btn.Count.text = $"{Mathf.Abs(data.Energy)}";
+
+                    if(btn.Btn.interactable)
+                        btn.Btn.interactable = PetData.PetInspector.GetStat(Pet.StatType.Energy) >= data.Energy;
+
                 }
                 tPosition.position = MainmenuPage.instance.consoleZone.btnPlay.transform.position;
                 Updatebtn(btnBall, PlayType.Ball);
@@ -58,9 +60,9 @@ public class Play : MonoBehaviour
     }
 
 
-
-    System.Action<PlayAction> m_action;
-    public void OnPlay(System.Action<PlayAction> action)
+    PlayType currentPlayType;
+    System.Action<PlayType,PlayAction> m_action;
+    public void OnPlay(System.Action<PlayType,PlayAction> action)
     {
         m_action = action;
         seletePopup.Open(true);
@@ -70,11 +72,11 @@ public class Play : MonoBehaviour
         seletePopup.Open(false);
         if (string.IsNullOrEmpty(type))
         {
-            m_action?.Invoke(PlayAction.None);
+            m_action?.Invoke(currentPlayType,PlayAction.None);
         }
         else 
         {
-            m_action?.Invoke( PlayAction.Playing );
+            m_action?.Invoke(currentPlayType, PlayAction.Playing );
             switch (type) 
             {
                 case "Ball": Ball(); break;
@@ -97,7 +99,7 @@ public class Play : MonoBehaviour
             ballpage = data.Root.Create(Root).GetComponent<BallPage>();
         }
         ballpage.Init((pass)=> {
-            m_action?.Invoke(pass? PlayAction.Win : PlayAction.Lose);
+            m_action?.Invoke(PlayType.Ball, pass ? PlayAction.Win : PlayAction.Lose);
         });
     }
 
@@ -110,7 +112,7 @@ public class Play : MonoBehaviour
             mem = data.Root.Create(Root).GetComponent<MemoryPage>();
         }
         mem.Init((pass) => {
-            m_action?.Invoke(pass ? PlayAction.Win : PlayAction.Lose);
+            m_action?.Invoke( PlayType.Memory , pass ? PlayAction.Win : PlayAction.Lose);
         });
     }
 
@@ -123,7 +125,7 @@ public class Play : MonoBehaviour
             quickRandomPage = data.Root.Create(Root).GetComponent<QuickRandomPage>();
         }
         quickRandomPage.Init((pass) => {
-            m_action?.Invoke(pass ? PlayAction.Win : PlayAction.Lose);
+            m_action?.Invoke(PlayType.Guess, pass ? PlayAction.Win : PlayAction.Lose);
         });
     }
 
@@ -136,7 +138,7 @@ public class Play : MonoBehaviour
             dancePage = data.Root.Create(Root).GetComponent<DancePage>();
         }
         dancePage.Init((pass) => {
-            m_action?.Invoke(pass ? PlayAction.Win : PlayAction.Lose);
+            m_action?.Invoke(PlayType.Dance, pass ? PlayAction.Win : PlayAction.Lose);
         });
     }
 

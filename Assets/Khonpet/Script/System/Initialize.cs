@@ -10,10 +10,15 @@ public class Initialize : MonoBehaviour
 
         // PetData
         PetData.Init(()=> { });
+        Language.Init(() => { });
+        ConfigData.Init(() => { });
+
         // Information
         StartCoroutine(Information.instance.Init());
 
-        while (!PetData.Done || !Information.instance.isDone) yield return new WaitForEndOfFrame();
+        while (!PetData.Done || !Language.Done || !ConfigData.Done || !Information.instance.isDone) yield return new WaitForEndOfFrame();
+
+
 
 
 
@@ -44,10 +49,10 @@ public class Initialize : MonoBehaviour
         PetActivity.Init();
         while (!PetActivity.IsReady) yield return new WaitForEndOfFrame();
         World.instance.Init();
-        ConsoleActivity.Init();
         AirActivity.Init();
         ChatActivity.Init();
         InterfaceRoot.instance.Init();
+        ConsoleActivity.Init();
     }
 
 

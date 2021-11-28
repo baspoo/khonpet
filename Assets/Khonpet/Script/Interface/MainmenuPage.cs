@@ -63,7 +63,7 @@ public class MainmenuPage : MonoBehaviour
             var air = AirActivity.GetAirData();
             imgAirIcon.sprite = air.icon;
             txtAirType.text = air.airName;
-            txtAirValue.text = air.getTemperature.ToString();
+            txtAirValue.text = $"{air.getTemperature} C";
         }
     }
 
@@ -77,7 +77,9 @@ public class MainmenuPage : MonoBehaviour
         public Text txtLikeCount;
         public void OnUpdate()
         {
-            txtLikeCount.text = PetData.Current.Like.KiloFormat();
+            btnLike.icon.color = btnLike.color[PetData.PetInspector.Liked?1:0];
+            btnLike.button.interactable = !PetData.PetInspector.Liked;
+            txtLikeCount.text = PetData.PetInspector.Like.KiloFormat();
         }
     }
 
@@ -111,6 +113,13 @@ public class MainmenuPage : MonoBehaviour
         public Btn btnPetInfo;
         public Btn btnAchievement;
         public Btn btnSetting;
+        public Btn btnStatus;
+        public Btn btnQuest;
+
+        public void UpdateNotif() 
+        {
+            btnQuest.cooldown.enabled = PetData.PetInspector.IsHaveQuestCanClaim();
+        }
     }
 
 
@@ -144,8 +153,10 @@ public class MainmenuPage : MonoBehaviour
         public float SpeedBar;
         BezierCurve[] paths;
         Vector2 sizeDelta = Vector2.zero;
+        int currentLv;
         public void Init()
         {
+            currentLv = PetData.PetInspector.Lv.CurrentLevel;
             sizeDelta = imgExpPilot.rectTransform.sizeDelta;
             OnUpdate();
         }
@@ -166,7 +177,7 @@ public class MainmenuPage : MonoBehaviour
         Coroutine corotine;
         IEnumerator update() 
         {
-            var level = PetData.Current.Lv;
+            var level = PetData.PetInspector.Lv;
             var width = sizeDelta.x * level.Percent;
             txtLv.text = $"Lv.{level.CurrentLevel}";
             txtExp.text = $"{level.XP} / {level.xpNextlevel}";
@@ -179,6 +190,12 @@ public class MainmenuPage : MonoBehaviour
                     current += Time.deltaTime * SpeedBar;
                     imgExpRun.rectTransform.sizeDelta = new Vector2(current, sizeDelta.y);
                     yield return new WaitForEndOfFrame();
+                }
+
+                if (currentLv != level.CurrentLevel) 
+                {
+                    // Level Up
+                    PetObj.Current.OnUpdatePetObj();
                 }
             }
             current = width;
@@ -264,15 +281,16 @@ public class MainmenuPage : MonoBehaviour
         socialZone.OnUpdate();
         airZone.OnUpdate();
         ownerZone.OnUpdate();
+        submenuZone.UpdateNotif();
         starZone.Init();
+      
     }
 
     public void OnPetting()
     {
-        //ConsoleActivity.OnBegin(ConsoleActivity.Activity.Food);
-        if(!ConsoleActivity.IsActing)
-            PetObj.Current.anim.OnAnimForce(PetAnim.AnimState.Petting);
+        ConsoleActivity.OnPetting();
     }
+
 
     public void OnConsoleFood()
     {
@@ -300,15 +318,27 @@ public class MainmenuPage : MonoBehaviour
     }
     public void OnAchievement()
     {
-        PopupPage.instance.message.Open("Achievement !", $"This functionality is coming soon. You can send feedback to developer about this function for improvement.").HideBtnClose();
+        //PopupPage.instance.message.Open("Achievement !", $"This functionality is coming soon. You can send feedback to developer about this function for improvement.").HideBtnClose();
+        PopupPage.instance.achievement.Open();
     }
     public void OnSetting()
     {
 
     }
+
+
+    public void OnStarOpen()
+    {
+        ConsoleActivity.OnPetting();
+    }
+    public void OnAir()
+    {
+        PopupPage.instance.airPage.Open();
+    }
     public void OnLike()
     {
-
+        PetData.PetInspector.AddLike();
+        likeZone.OnUpdate();
     }
     public void OnHome()
     {
@@ -323,11 +353,11 @@ public class MainmenuPage : MonoBehaviour
 
     public void OnQuest()
     {
-
+        PopupPage.instance.questPage.Open();
     }
     public void OnStatus()
     {
-
+        PopupPage.instance.statusPage.Open();
     }
 
 

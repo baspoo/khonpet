@@ -74,6 +74,14 @@ public static class VariableService
 		});
 		return str;
 	}
+	public static void SaveToLocal(this string str , string key )
+	{
+		PlayerPrefs.SetString(key, str);
+	}
+	public static string GetByLocal(this string key)
+	{
+		return PlayerPrefs.GetString(key);
+	}
 	#endregion
 
 
@@ -88,10 +96,11 @@ public static class VariableService
 			round?.Invoke(i);
 		}
 	}
+	public static int Min(this int i, int min) => (i < min) ? min : i;
 	public static int Max(this int i, int max) => (i > max) ? max : i;
 	public static double Max(this double i, double max) => (i > max) ? max : i;
 	public static float Max(this float i, float max) => (i > max) ? max : i;
-
+	public static System.DateTime ToDateTime(this long unix) => Utility.TimeServer.TimeStampToDateTime(unix);
 	public static int Random(this int i) => UnityEngine.Random.RandomRange(0, i);
 	public static float Random(this float i) => UnityEngine.Random.RandomRange(0, i);
 

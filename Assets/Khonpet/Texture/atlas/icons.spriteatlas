@@ -54,6 +54,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 99e8e5e03add0be4bbc2f2c37efb8307, type: 3}
   - {fileID: 21300000, guid: 70bd011187f86094eba0bf02f6b27797, type: 3}
   - {fileID: 21300000, guid: 343200b1581a140438eea6294ed13689, type: 3}
+  - {fileID: 21300000, guid: c2831402b5ce9d64a9317b6d55a39916, type: 3}
   - {fileID: 21300000, guid: 0df50a420de88fd43aa637f028c5099f, type: 3}
   - {fileID: 21300000, guid: 684d9f820eb26b54ab27d99fd94cce20, type: 3}
   - {fileID: 21300000, guid: 0023a64376fd88b42b7a508c5db4f540, type: 3}
@@ -72,18 +73,22 @@ SpriteAtlas:
   - {fileID: 21300000, guid: d42c4fc659157334aa37f46c20a55927, type: 3}
   - {fileID: 21300000, guid: 889376e6c5efd1c44ac1c2bc6e5c12a6, type: 3}
   - {fileID: 21300000, guid: 4f3914472181c664695b6b8eec1ec7e2, type: 3}
+  - {fileID: 21300000, guid: d79bde871b2b4fe46b7113c27e328fbf, type: 3}
   - {fileID: 21300000, guid: 3ba9cea8beacf9e4ab4d5dcd1e09207f, type: 3}
   - {fileID: 21300000, guid: d61fce19b85139e41ac8db3d03cc05a8, type: 3}
   - {fileID: 21300000, guid: a76cfd5949df3aa4a9ffe5f48f453bc8, type: 3}
   - {fileID: 21300000, guid: f3d247b9df3f0dd4088143d2f0fe3659, type: 3}
+  - {fileID: 21300000, guid: 0550ebf9ba59eb04684fa8aabc6ba234, type: 3}
   - {fileID: 21300000, guid: 8496363a1fc2cbe48a6f6dcef77a0557, type: 3}
   - {fileID: 21300000, guid: 54c5535a7b5954f4194d0d32cf54d8e7, type: 3}
   - {fileID: 21300000, guid: 65cf9c5aebe2b484d8721cd552f45d34, type: 3}
   - {fileID: 21300000, guid: 5cdee2ca2f5f16e4e9cad4ec31947d1f, type: 3}
   - {fileID: 21300000, guid: 7bdb153b7956495429dd18f1a7024551, type: 3}
   - {fileID: 21300000, guid: e42e838b66b7df84186a2ffaa8b3f7bd, type: 3}
+  - {fileID: 21300000, guid: 27ffba9bef16e0748b7e26518914f89c, type: 3}
   - {fileID: 21300000, guid: ff344ecb1f1b2c646b46b2d8619ab7f3, type: 3}
   - {fileID: 21300000, guid: 09a5717cbdc7fae49962f8145d842630, type: 3}
+  - {fileID: 21300000, guid: 8e1b8e9cc41631643a8d8d1ceb66443d, type: 3}
   - {fileID: 21300000, guid: 90a08eece89097f4b9b37eedd799f7f9, type: 3}
   - {fileID: 21300000, guid: 39a145fc30dc82f488eb1e8da8d9e173, type: 3}
   - {fileID: 21300000, guid: aac5f41dec017ea428e254c440a82286, type: 3}
@@ -103,6 +108,7 @@ SpriteAtlas:
   - icon_feeling_bad
   - icon_z
   - icon_status_power
+  - icon_animplay
   - icon_hot
   - icon_play_quick
   - icon_check
@@ -121,18 +127,22 @@ SpriteAtlas:
   - icon_notif
   - icon_feeling_super
   - icon_copy
+  - icon_stat
   - icon_play_mem
   - icon_star
   - icon_message
   - icon_status_clean
+  - icon_full
   - icon_consolebtn_play
   - icon_fb
   - icon_status
   - icon_setting
   - icon_night
   - icon_balloon
+  - icon_3dot
   - icon_play_ball
   - icon_feeling_happy
+  - icon_lock
   - icon_play_dance
   - icon_status_food
   - icon_opesea

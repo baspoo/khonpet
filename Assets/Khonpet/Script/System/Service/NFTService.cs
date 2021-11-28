@@ -50,6 +50,16 @@ public class NFTService : MonoBehaviour
         ContractAddress = contractAddress;
         Token = token;
 
+
+        if (Setting.instance.nft.IsDummy) 
+        {
+            IsDone = true;
+            MainAsset = "NFT-MainAsset".GetByLocal().DeserializeObject<Model.OpenSeaAsset>();
+            OwnerData = "NFT-OwnerData".GetByLocal().DeserializeObject<Model.OpenSeaOwner>();
+            SetupPreset();
+            yield break;
+        }
+
         var url = $"https://api.opensea.io/api/v1/asset/{ContractAddress}/{Token}/";
         Debug.Log(url);
         UnityWebRequest uwr =  UnityWebRequest.Get(url);
@@ -63,7 +73,9 @@ public class NFTService : MonoBehaviour
         {
             var json = uwr.downloadHandler.text;
             MainAsset = json.DeserializeObject<Model.OpenSeaAsset>();
-
+            #if UNITY_EDITOR
+            json.SaveToLocal("NFT-MainAsset");
+            #endif
             StartCoroutine(Owner(MainAsset.owner.address, ContractAddress));
         }
 
@@ -88,6 +100,9 @@ public class NFTService : MonoBehaviour
         {
             var json = uwr.downloadHandler.text;
             OwnerData = json.DeserializeObject<Model.OpenSeaOwner>();
+            #if UNITY_EDITOR
+            json.SaveToLocal("NFT-OwnerData");
+            #endif
         }
         SetupPreset();
         IsDone = true;

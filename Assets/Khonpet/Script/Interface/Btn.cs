@@ -12,10 +12,11 @@ public class Btn : MonoBehaviour
     Animation m_animation;
 
     public SoundClick soundClick;
+    public UnityEngine.UI.Image icon;
     public UnityEngine.UI.Image cooldown;
     public UnityEngine.UI.Text text;
-
-
+    public Color[] color;
+    public bool isToggle;
     public enum SoundClick 
     {
         none,click,select,close
@@ -41,12 +42,24 @@ public class Btn : MonoBehaviour
             m_animation.Play(m_animation.clip.name);
         }
     }
-  
 
 
 
 
-
+    System.Action<bool> onToggle;
+    public void InitToggle(System.Action<bool> onToggle , bool start = false)
+    {
+        this.onToggle = onToggle;
+        this.isToggle = start;
+        icon.enabled = this.isToggle;
+    }
+    public bool OnToggle()
+    {
+        this.isToggle = !this.isToggle;
+        icon.enabled = this.isToggle;
+        onToggle?.Invoke(this.isToggle);
+        return this.isToggle;
+    }
 
 
 

@@ -11,8 +11,12 @@ public class PetObj : MonoBehaviour
     public PetAnim anim { get { if (m_anim == null) m_anim = GetComponent<PetAnim>(); return m_anim; } }
     PetAnim m_anim;
 
+    public PetBehaviour behaviour => PetBehaviour.instance;
+
     public Talking talking => Talking.instance;
 
+    public PetData petData => m_petData;
+    PetData m_petData;
 
     public PetInfo info;
     [System.Serializable]
@@ -57,21 +61,25 @@ public class PetObj : MonoBehaviour
 
     }
 
+    public List<Achievement.AchievementData> achievements;
 
 
+  
 
 
-
-
-
-
-
-
-    public void Init()
+    public void Init(PetData petData)
     {
         m_Current = this;
+        m_petData = petData;
+        behaviour.Init(this);
+        OnUpdatePetObj();
     }
-
+    public void OnUpdatePetObj()
+    {
+        m_Current = this;
+        this.AdjuestAnimation();
+        this.AdjuestCostume();
+    }
 
 
 

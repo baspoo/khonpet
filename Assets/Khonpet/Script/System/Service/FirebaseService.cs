@@ -17,7 +17,7 @@ public class FirebaseService : MonoBehaviour
     [System.Serializable]
     public class Pet
     {
-        public Status status;
+        public Status status = new Status();
         public long time;
         [System.Serializable]
         public class Status
@@ -45,9 +45,17 @@ public class FirebaseService : MonoBehaviour
     [System.Serializable]
     public class PresetData
     {
-        public long Like => instance.pet.status.like.Sum(x => x.Value);
-        public long Star => instance.pet.status.star.Sum(x => x.Value);
+        public long Like => ((instance.pet.status.like!=null) ? instance.pet.status.like.Sum(x => x.Value) : 0) + ClientLike;
+        public long ClientLike;
+        
+
+        public long Star => ((instance.pet.status.star != null) ? instance.pet.status.star.Sum(x => x.Value) : 0) + ClientStar;
+        public long ClientStar;
+
         public Dictionary<string, Pet.Chat> chats => instance.pet.chats;
+
+
+
     }
 
 
@@ -58,7 +66,7 @@ public class FirebaseService : MonoBehaviour
     long time;
     public string userID => SystemInfo.deviceUniqueIdentifier;
     public bool IsDone { get; private set; }
-    public System.Action onChatUpdate;
+    public System.Action<Dictionary<string, Pet.Chat>> onChatUpdate;
 
     Firebase firebase;
     FirebaseQueue firebaseQueue;
@@ -106,7 +114,7 @@ public class FirebaseService : MonoBehaviour
         {
             Debug.Log($"[OBSERVER] Raw Json: " + snapshot.RawJson);
             pet.chats = JsonConvert.DeserializeObject<Dictionary<string, Pet.Chat>>(snapshot.RawJson);
-            onChatUpdate?.Invoke();
+            onChatUpdate?.Invoke(pet.chats);
         };
         observer.Start();
 
@@ -206,26 +214,58 @@ public class FirebaseService : MonoBehaviour
 
 
 
-    public class ValueKey
+    public enum ValueKey
     {
-        public const string star = "star";
-        public const string like = "like";
+        star,
+        like
     }
 
-    public void AddValue(string key, int plus, int split = 100)
+
+    public List<stock> stocks = new List<stock>();
+    public class stock {
+        public ValueKey key;
+        public int plus;
+    }
+
+    public void AddValue(ValueKey key, int plus )
     {
+        var send = new stock()
+        {
+            key = key,
+            plus = plus,
+        };
+
+        if (stocks.Count == 0)
+        {
+            Debug.Log("SendValue");
+            SendValue(send);
+        }
+        else 
+        {
+           
+            stocks.Add(send);
+            Debug.Log($"Stocks {stocks.Count}");
+        }
+    }
+    void SendValue(stock send) {
+
         //** Add Value **
-        var index = Random.RandomRange(0, split);
-        Firebase add = firebase.Child($"status/{key}/{index}", true);
+        var index = Random.RandomRange(1, 100);
+        Firebase add = firebase.Child($"status/{send.key.ToString()}/k-{index}", false);
         add.OnGetSuccess = (sender, snap) =>
         {
             var val = snap.Value<long>();
-            val = val + plus;
+            val = val + send.plus;
             add.SetValue(val, FirebaseParam.Empty.AccesToken(snap.Value<long>().ToString()));
+
+            if (stocks.Count != 0)
+            {
+                SendValue(stocks[0]);
+                stocks.RemoveAt(0);
+            }
         };
         add.GetValue();
     }
-
 
     public enum ChatCode
     {
@@ -287,17 +327,18 @@ public class FirebaseService : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Z))
         {
-            AddValue("like", 1);
+            Debug.Log("AddValue");
+            AddValue(ValueKey.star, 1);
         }
 
         if (Input.GetKeyDown(KeyCode.X))
         {
-            AddValue("like", -1);
+            AddValue( ValueKey.star, 5);
         }
 
         if (Input.GetKeyDown(KeyCode.C))
         {
-            AddValue("like", 100);
+            AddValue(ValueKey.star, 20);
         }
 
     }

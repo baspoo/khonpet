@@ -84,7 +84,7 @@ public class FoodPage : MonoBehaviour
         });
         tFoodAnim.AddAction("eat", () => {
             PetObj.Current.anim.OnAnimForce(PetAnim.AnimState.Eat);
-            PetObj.Current.talking.bubble.OnEatting();
+            Talking.instance.bubble.OnEmo(Talking.Bubble.EmoType.Eating);
         });
         tFoodAnim.AddAction("end", () => {
             PetObj.Current.talking.bubble.Hide();
@@ -101,10 +101,22 @@ public class FoodPage : MonoBehaviour
         yield return new WaitForSeconds(0.35f);
 
         //** done
-        Feeling.FeelingType feeling = PetData.Current.Foods[Food];
-        if(feeling == Feeling.FeelingType.Super) PetObj.Current.anim.OnAnimForce(PetAnim.AnimState.LikeLove);
-        else if (feeling == Feeling.FeelingType.Bad) PetObj.Current.anim.OnAnimForce(PetAnim.AnimState.Bad);
-        else PetObj.Current.anim.OnAnimForce(PetAnim.AnimState.GoodJob);
+        if (PetData.PetInspector.IsNeedFood)
+        {
+            var feeling = PetData.Current.Foods[Food];
+            if (feeling == Feeling.FeelingType.Super) PetObj.Current.anim.OnAnimForce(PetAnim.AnimState.LikeLove);
+            else if (feeling == Feeling.FeelingType.Bad) PetObj.Current.anim.OnAnimForce(PetAnim.AnimState.Bad);
+            else PetObj.Current.anim.OnAnimForce(PetAnim.AnimState.GoodJob);
+            //PetObj.Current.talking.bubble.OnEmo(Store.instance.FindFeeling(feeling).Icon, 1.5f, 2.0f);
+            PetObj.Current.talking.bubble.OnEmo( (Talking.Bubble.EmoType)feeling, 2.0f);
+        }
+        else 
+        {
+            //** full
+            PetObj.Current.anim.OnAnimForce(PetAnim.AnimState.Bad);
+        }
+
+       
 
 
         //** End

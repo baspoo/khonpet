@@ -30,9 +30,9 @@ public class Setting : MonoBehaviour
         [Header("AssetBundle")]
         public bool isDebugBundle;
         public AssetBundle PetBundle;
-        
 
-
+        public bool isStarDebug;
+        public int StarCountDebug;
 
     }
 
@@ -43,7 +43,13 @@ public class Setting : MonoBehaviour
         public ResourcesHandle.LoadType LoadType;
     }
 
-   
+    public Timing timing;
+    [System.Serializable]
+    public class Timing
+    {
+        public double BoringTime;
+    }
+
 
     public Link link;
     [System.Serializable]
@@ -70,6 +76,17 @@ public class Setting : MonoBehaviour
     }
 
 
+    public NFT nft;
+    [System.Serializable]
+    public class NFT
+    {
+        public bool IsDummy;
+        [TextArea]
+        public string MainAsset;
+        [TextArea]
+        public string OwnerData;
+    }
+
     public Tsv tsv;
     [System.Serializable]
     public class Tsv
@@ -80,6 +97,8 @@ public class Setting : MonoBehaviour
         public string ConfigTsv;
         [TextArea]
         public string PetTsv;
+        [TextArea]
+        public string Language;
     }
 
 

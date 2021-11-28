@@ -23,6 +23,14 @@ public class InterfaceRoot : MonoBehaviour
     {
         mainmenu.Init();
         popup.Init();
+
+        if (string.IsNullOrEmpty(Playing.instance.playingData.NickName)) 
+        {
+            popup.displayName.Open((displayName)=> {
+                Playing.instance.UpdateDisplayName(displayName);
+            });
+        }
+
     }
 
     public void Loading(bool active)

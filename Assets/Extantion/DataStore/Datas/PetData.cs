@@ -33,14 +33,33 @@ public class PetData
     public string Rarity;
     public string Url_Image;
     public string Url_Bundle;
+    public int[] LvUnlocks;
     public Dictionary<Food.FoodType, Feeling.FeelingType> Foods = new Dictionary<Food.FoodType, Feeling.FeelingType>();
-    public Dictionary<string, object> Config = new Dictionary<string, object>();
+    public Dictionary<string, object> Meta = new Dictionary<string, object>();
     public string ContractAddress;
     public string TokenId;
 
-    public long Like => FirebaseService.instance.Preset.Like;
-    public long Star => FirebaseService.instance.Preset.Star;
-    public Utility.Level Lv =>  new Utility.Level(Star);
+
+
+
+    public static PetActivity.PetInspector PetInspector => Current.petInspector;
+    public PetActivity.PetInspector petInspector
+    {
+        get
+        {
+            if (m_Inspector == null)
+            {
+                m_Inspector = new PetActivity.PetInspector(this);
+                QuestActivity.InitQuest(m_Inspector);
+            }
+            return m_Inspector;
+        }
+    }
+    PetActivity.PetInspector m_Inspector;
+
+
+
+
 
     public PetData(GameData raw)
     {
@@ -54,7 +73,8 @@ public class PetData
         Url_Bundle = raw.GetValue("Url_Bundle");
         ContractAddress = raw.GetValue("ContractAddress");
         TokenId = raw.GetValue("TokenId");
-        Config = raw.GetValue("Config").DeserializeObject<Dictionary<string, object>>();
+        Meta = raw.GetValue("Meta").DeserializeObject<Dictionary<string, object>>();
+        LvUnlocks = raw.GetValue("LvUnlocks").DeserializeObject<int[]>();
 
         AddFood(Food.FoodType.Fish);
         AddFood(Food.FoodType.Meat);

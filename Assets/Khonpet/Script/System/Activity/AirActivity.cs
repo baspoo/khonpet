@@ -15,6 +15,8 @@ public class AirActivity
     public class AirData
     {
         public string airName;
+        [TextArea]
+        public string airDescription;
         public AirType airType;
         public int[] temperature;
         public Sprite icon;

@@ -110,6 +110,7 @@ public class PetEditor : Editor
 		if (GUILayout.Button("LikeLove")) { pet.anim.OnAnimForce(PetAnim.AnimState.LikeLove); }
 		if (GUILayout.Button("Need")) { pet.anim.OnAnimForce(PetAnim.AnimState.Need); }
 		if (GUILayout.Button("Petting")) { pet.anim.OnAnimForce(PetAnim.AnimState.Petting); }
+		if (GUILayout.Button("Walk")) { pet.anim.OnAnimForce(PetAnim.AnimState.Walk); }
 		if (GUILayout.Button("Sleep")) { pet.anim.OnAnimForce(PetAnim.AnimState.Sleep); }
 
 
@@ -117,7 +118,73 @@ public class PetEditor : Editor
 		EditorGUILayout.Space(10);
 		if (GUILayout.Button("Reset")) { pet.anim.OnReset(); }
 	}
-	void Costume() { }
+	void Costume() {
+
+
+		// Init first time achievements == null
+		if (pet.achievements == null || pet.achievements.Count == 0) {
+			pet.achievements = new List<Achievement.AchievementData>();
+			5.Loop((i) =>
+			{
+				pet.achievements.Add(new Achievement.AchievementData()
+				{
+					Index = i
+				});
+			});
+		}
+
+
+		EditorGUILayout.Space();
+		EditorGUILayout.LabelField("Achievements");
+		foreach (var ahv in pet.achievements) 
+		{
+			EditorGUILayout.BeginHorizontal();
+			EditorGUILayout.IntField(ahv.Index,GUILayout.Width(40));
+			ahv.Name = EditorGUILayout.TextField(ahv.Name, GUILayout.Width(90));
+			ahv.RewardType = (Achievement.RewardType)EditorGUILayout.EnumPopup(ahv.RewardType, GUILayout.Width(80));
+			if (ahv.RewardType == Achievement.RewardType.Animation) 
+			{
+				ahv.Clip = (AnimationClip)EditorGUILayout.ObjectField(ahv.Clip , typeof(AnimationClip));
+			}
+			if (ahv.RewardType == Achievement.RewardType.Costume)
+			{
+				ahv.Icon = (Sprite)EditorGUILayout.ObjectField(ahv.Icon, typeof(Sprite));
+				ahv.Costume = (Transform)EditorGUILayout.ObjectField(ahv.Costume, typeof(Transform));
+			}
+			EditorGUILayout.EndHorizontal();
+		}
+
+
+		void show(bool ishow) 
+		{
+			foreach (var ahv in pet.achievements)
+			{
+				if (ahv.RewardType == Achievement.RewardType.Costume) 
+				{
+					ahv.Costume.gameObject.SetActive(ishow);
+				}
+			}
+		}
+
+
+		EditorGUILayout.Space(10);
+		EditorGUILayout.BeginHorizontal();
+		if (GUILayout.Button("ShowAll"))
+		{
+			show(true);
+		}
+		if (GUILayout.Button("HideAll"))
+		{
+			show(false);
+		}
+		EditorGUILayout.EndHorizontal();
+		EditorGUILayout.Space(20);
+
+
+
+
+
+	}
 
 
 

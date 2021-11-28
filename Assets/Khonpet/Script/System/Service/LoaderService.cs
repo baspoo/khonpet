@@ -27,6 +27,7 @@ public class LoaderService : MonoBehaviour
 	public class GoogleSpreadsheetsID {
 		public const string pet = "0";
 		public const string config = "1934218596";
+		public const string language = "1107123226";
 	}
 	Dictionary<string, string> m_tsvstock = new Dictionary<string, string>();
 	public void OnLoadTsv(string gid, System.Action<string> onfinish) => StartCoroutine(LoadTsv(gid, onfinish));

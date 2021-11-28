@@ -9,44 +9,118 @@ public class Talking : MonoBehaviour
 
 
 
+    void StartWait(float time, System.Action done) { coro=StartCoroutine(Wait(time,done)); }
+    void StopWait( ) { if (coro != null) StopCoroutine(coro); }
+    Coroutine coro;
+    IEnumerator Wait(float time, System.Action done)
+    {
+        yield return new WaitForSeconds(time);
+        done();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public Bubble bubble;
     [System.Serializable]
     public class Bubble 
     {
+        public bool IsTalking => m_IsTalking;
+        bool m_IsTalking;
+
+        public EmoType emoType => m_emoType;
+        EmoType m_emoType;
+
+
+        public enum EmoType { FeelingSuper, FeelingHappy, FeelingNormal, FeelingBad ,Eating, Sleep, Love, Full , Boring }
+        [System.Serializable]
+        public class EmoData
+        {
+            public EmoType Type;
+            public Transform Trans;
+            public Sprite Sprite;
+            public float Scale;
+        }
+
         public Transform Talk;
-        public Transform TalkEating;
-        public Transform TalkSleep;
+        public List<EmoData> EmoDatas;
+        //public Transform TalkEating;
+        //public Transform TalkSleep;
         public SpriteRenderer TalkIcon;
         void Show()
         {
             Hide();
             Talk.position = PetObj.Current.body.talk.position;
             Talk.gameObject.SetActive(true);
+            m_IsTalking = true;
         }
-        public void Hide()
+        public void Hide(float wait = 0.0f)
         {
-            Talk.gameObject.SetActive(false);
-            TalkEating.gameObject.SetActive(false);
-            TalkSleep.gameObject.SetActive(false);
-            TalkIcon.gameObject.SetActive(false);
+            void action() 
+            {
+                instance.StopWait();
+                Talk.gameObject.SetActive(false);
+                TalkIcon.gameObject.SetActive(false);
+                EmoDatas.ForEach(x => {
+                    if(x.Trans!=null)
+                        x.Trans.gameObject.SetActive(false);
+                });
+                m_IsTalking = false;
+            }
+            if (wait == 0.0f)
+            {
+                action();
+            }
+            else 
+            {
+                instance.StartWait(wait,()=> { action(); });
+            }
         }
-        public void OnIcon(Sprite spr)
+        public void OnEmo(EmoType emo, float duration = 0.0f)
         {
+
+            if (IsTalking)
+                if (m_emoType == emo)
+                    return;
+
             Show();
-            TalkIcon.sprite = spr;
-            TalkIcon.gameObject.SetActive(true);
-        }
-        public void OnEatting()
-        {
-            Show();
-            TalkEating.gameObject.SetActive(true);
-        }
-        public void OnSleep()
-        {
-            Show();
-            TalkSleep.gameObject.SetActive(true);
+            m_emoType = emo;
+            var data = EmoDatas.Find(x => x.Type == emo);
+            if (data.Trans != null)
+            {
+                data.Trans.gameObject.SetActive(true);
+            }
+            else 
+            {
+                TalkIcon.gameObject.SetActive(true);
+                TalkIcon.transform.localScale = Vector3.one * data.Scale;
+                TalkIcon.sprite = data.Sprite;
+            }
+            if (duration != 0.0f)
+                Hide(duration);
         }
     }
+
+
+
+
+
+
+
+
+
 
 
 
@@ -83,6 +157,7 @@ public class Talking : MonoBehaviour
         }
         public void Hide()
         {
+            instance.StopWait();
             Talk.gameObject.SetActive(false);
         }
     }

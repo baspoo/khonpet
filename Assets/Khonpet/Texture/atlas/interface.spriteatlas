@@ -70,11 +70,13 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 8d348414e38f10f44bc19d07bc906196, type: 3}
   - {fileID: 21300000, guid: a2c26814980dd1c4280e1484d34c7de0, type: 3}
   - {fileID: 21300000, guid: 946e2474c035f574ba2431798c5171c2, type: 3}
+  - {fileID: 21300000, guid: 90463c1568d27b749a7e5afbdab263c2, type: 3}
   - {fileID: 21300000, guid: 9d4d15350e2daf4498794322d541070b, type: 3}
   - {fileID: 21300000, guid: bba1e535c1478214f97196fe74e1d883, type: 3}
   - {fileID: 21300000, guid: 940bc7455a6094b4ea93b9320e66117e, type: 3}
   - {fileID: 21300000, guid: 13eb0b95183a0874cbe9a67c7a8d5d7b, type: 3}
   - {fileID: 21300000, guid: 69ee6fc583c4a654095b945f7e1a370d, type: 3}
+  - {fileID: 21300000, guid: 5e0f730670e5a1346b573b3f0f356501, type: 3}
   - {fileID: 21300000, guid: c62872e62e1233d479b1edfff1ed629c, type: 3}
   - {fileID: 21300000, guid: f4d7c1f60eb0c0e4ab577d419c6514ee, type: 3}
   - {fileID: 21300000, guid: e95a7817310dc7045abd86d797ff7f5e, type: 3}
@@ -127,11 +129,13 @@ SpriteAtlas:
   - ui_star_bar
   - ui_sq
   - ui_petmode_group
+  - ui_what
   - ui_checkbox
   - ui_base-sq
   - ui_play_btn
   - ui_noise
   - loading_template
+  - ui_linelong
   - ui_arrow1
   - ui_bar_down_shadow
   - ui_petmode_single

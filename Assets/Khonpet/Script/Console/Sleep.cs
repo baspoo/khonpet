@@ -10,34 +10,77 @@ public class Sleep : MonoBehaviour
 
 
 
-
-
+    public Transform Root;
+    public UnityEngine.UI.Text txtTime;
     public void Init()
     {
         m_instance = this;
+        if (PetData.PetInspector.IsSleeping)
+        {
+            OnPlay();
+        }
+        else 
+        {
+            Root.gameObject.SetActive(false);
+        }
     }
     Coroutine corotine;
-    public void OnPlay(System.Action callback)
+    //System.Action callback;
+    public void OnPlay( )
     {
         if (corotine != null)
             StopCoroutine(corotine);
-        corotine = StartCoroutine(Play(callback));
+        corotine = StartCoroutine(Play( ));
     }
-    IEnumerator Play(System.Action callback)
+    IEnumerator Play( )
     {
-        float remaining = 8.0f;
+        //this.callback = callback;
+
         PetObj.Current.anim.OnAnimForce(PetAnim.AnimState.Sleep);
-        Talking.instance.bubble.OnSleep();
+        Talking.instance.bubble.OnEmo( Talking.Bubble.EmoType.Sleep );
         InterfaceRoot.instance.mainmenu.main.OnActive(false);
-        yield return new WaitForSeconds(remaining);
+
+        yield return new WaitForSeconds(0.75f);
+        Root.gameObject.SetActive(true);
+
+        var act = PetData.PetInspector.GetActivity(Pet.Activity.StartSleep);
+        var last = Utility.TimeServer.TimeStampToDateTime(act.UnixLastActive);
+
+        var remain = Pet.Static.MaxStat - act.Value;
+        var timeout = last.AddMinutes(remain);
+
+        while (timeout > System.DateTime.Now) 
+        {
+            var now = System.DateTime.Now;
+            //var t = now - last;
+            var t = timeout - now;
+            //var duration = 0;
+            //var t = System.TimeSpan.FromSeconds(duration);
+            string answer = string.Format("{0:D2}:{1:D2}:{2:D2}",
+                            t.Hours,
+                            t.Minutes,
+                            t.Seconds);
+            txtTime.text = answer;
+            yield return new WaitForSeconds(1.0f);
+        }
+
+        yield return new WaitForEndOfFrame();
+        txtTime.text = "Full Energy";
+    }
+    public void OnStop( )
+    {
+        if (corotine != null)
+            StopCoroutine(corotine);
+
+        Root.gameObject.SetActive(false);
         InterfaceRoot.instance.mainmenu.main.OnActive(true);
         PetObj.Current.anim.OnReset();
         Talking.instance.bubble.Hide();
 
         //** End
-        callback?.Invoke();
-
+        PetData.PetInspector.OnSleepComplete();
+        ConsoleActivity.OnEnding();
+        //callback?.Invoke();
     }
-
 
 }

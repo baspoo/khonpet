@@ -16,6 +16,23 @@ public class ConsoleActivity
         Sleep.instance.Init();
     }
 
+
+
+
+
+    public static void OnPetting( )
+    {
+        if (!IsActing)
+        {
+            PetObj.Current.talking.bubble.OnEmo( Talking.Bubble.EmoType.Love,2.0f );
+            PetObj.Current.anim.OnAnimForce(PetAnim.AnimState.Petting);
+            PetData.PetInspector.OnPetting();
+        }
+    }
+
+
+
+
     public static void OnBegin(Activity activity) 
     {
         if (activity == Activity.Food) OnFood();
@@ -23,7 +40,11 @@ public class ConsoleActivity
         if (activity == Activity.Clean) OnClean();
         if (activity == Activity.Sleep) OnSleep();
     }
-
+    public static void OnEnding( )
+    {
+        MainmenuPage.instance.main.OnActive(true);
+        IsActing = false;
+    }
 
 
 
@@ -34,9 +55,8 @@ public class ConsoleActivity
         MainmenuPage.instance.main.OnActive(false);
         MainmenuPage.instance.consoleZone.btnFood.StartCooldown();
         FoodPage.instance.OnPlay((food) => {
-            MainmenuPage.instance.main.OnActive(true);
-            MainmenuPage.instance.starZone.OnAddStar(3);
-            IsActing = false;
+            PetData.PetInspector.OnFoodComplete(food);
+            OnEnding();
         });
     }
     static void OnClean()
@@ -45,9 +65,8 @@ public class ConsoleActivity
         MainmenuPage.instance.main.OnActive(false);
         MainmenuPage.instance.consoleZone.btnClean.StartCooldown();
         Clean.instance.OnPlay(() => {
-            MainmenuPage.instance.main.OnActive(true);
-            MainmenuPage.instance.starZone.OnAddStar(2);
-            IsActing = false;
+            PetData.PetInspector.OnCleanComplete();
+            OnEnding();
         });
     }
 
@@ -56,15 +75,13 @@ public class ConsoleActivity
         IsActing = true;
         MainmenuPage.instance.main.OnActive(false);
         MainmenuPage.instance.consoleZone.btnSleep.StartCooldown();
-        Sleep.instance.OnPlay(() => {
-            MainmenuPage.instance.main.OnActive(true);
-            MainmenuPage.instance.starZone.OnAddStar(5);
-            IsActing = false;
-        });
+
+        PetData.PetInspector.OnSleepStart();
+        Sleep.instance.OnPlay();
     }
     static void OnPlay()
     {
-        Play.instance.OnPlay((action)=> {
+        Play.instance.OnPlay((playType,action)=> {
             if (action == Play.PlayAction.None)
             {
 
@@ -76,16 +93,8 @@ public class ConsoleActivity
             }
             else
             {
-                MainmenuPage.instance.main.OnActive(true);
-                if (action == Play.PlayAction.Win)
-                {
-                    MainmenuPage.instance.starZone.OnAddStar(5);
-                }
-                if (action == Play.PlayAction.Lose)
-                {
-
-                }
-                IsActing = false;
+                PetData.PetInspector.OnPlayComplete(playType,action == Play.PlayAction.Win);
+                OnEnding();
             }
         });
     }

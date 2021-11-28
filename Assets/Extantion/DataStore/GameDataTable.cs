@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class GameData {
 	private string Key;
 	private string Value;
-	List<GameData> DataLists = new List<GameData>();
+	public List<GameData> DataLists = new List<GameData>();
 	public string GetIndex(int index)
 	{
 		if (index < DataLists.Count)

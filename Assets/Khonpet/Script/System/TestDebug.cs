@@ -21,13 +21,13 @@ public class TestDebug : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.D))
-            InterfaceRoot.instance.mainmenu.starZone.OnUpdate();
-        if (Input.GetKeyDown(KeyCode.A))
-            InterfaceRoot.instance.mainmenu.starZone.OnAddStar(6.Random());
+        //if (Input.GetKeyDown(KeyCode.D))
+            //InterfaceRoot.instance.mainmenu.starZone.OnUpdate();
+        //if (Input.GetKeyDown(KeyCode.A))
+            //InterfaceRoot.instance.mainmenu.starZone.OnAddStar(6.Random());
 
-        if (Input.GetKeyDown(KeyCode.S))
-            Playing.instance.Save();
+        //if (Input.GetKeyDown(KeyCode.S))
+            //Playing.instance.Save();
 
     }
 }
@@ -64,6 +64,19 @@ public class TestDebugUI : Editor
 
             m_page.objectsHide.ForEach(x => x.SetActive(false));
             m_page.objectsShow.ForEach(x => x.SetActive(true));
+        }
+        if (GUILayout.Button("Test"))
+        {
+
+
+            Debug.Log(100/20);
+            Debug.Log(100 / 20);
+            Debug.Log(87 / 20);
+            Debug.Log(52 / 20);
+            Debug.Log(23 / 20);
+            Debug.Log(19 / 20);
+            Debug.Log(9 / 20);
+            //StatUtility.CalStat(0,0);
         }
     }
 }

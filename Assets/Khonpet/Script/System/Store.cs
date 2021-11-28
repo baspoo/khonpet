@@ -38,7 +38,7 @@ public class Store : MonoBehaviour
     public Feeling FindFeeling(Feeling.FeelingType type) => Feelings.Find(x => x.Type == type);
 
 
-
+    //PLAY
     public List<PlayAsset> Plays;
     [System.Serializable]
     public class PlayAsset
@@ -46,7 +46,22 @@ public class Store : MonoBehaviour
         public Play.PlayType Type;
         public GameObject Root;
         public int Lv;
+        public int Energy;
+        public int Cleanliness;
+        public int Star;
+        public bool IsActive (int lv) => (lv >= this.Lv);
     }
     public PlayAsset FindPlay(Play.PlayType type) => Plays.Find(x => x.Type == type);
 
+
+
+
+    //STAT
+    public List<StatUtility.StatData> Stats;
+    public StatUtility.StatData FindStat(Pet.StatType stat) => Stats.Find(x => x.stat == stat);
+
+
+    //QUEST
+    public List<QuestActivity.QuestData> Quests;
+    public QuestActivity.QuestData FindQuest(string QuestID) => Quests.Find(x => x.QuestID == QuestID);
 }
