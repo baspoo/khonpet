@@ -422,6 +422,17 @@ public class PopupPage : MonoBehaviour
                 b.onselete = (str) => {
                     description(stat);
                 };
+
+
+                if (stat == Pet.StatType.Relationship) 
+                {
+                    var reletion = PetData.PetInspector.Relationship;
+                    b.Name.text = reletion.Name;
+                    b.Icon.sprite = reletion.Icon;
+                }
+
+
+
             });
         }
     }

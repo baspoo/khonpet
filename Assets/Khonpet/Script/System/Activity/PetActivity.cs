@@ -77,7 +77,27 @@ public static class PetActivity
         public bool IsSleeping => this.GetActivity(Pet.Activity.StartSleep) != null;
 
 
-       
+        public Store.Relationship Relationship 
+        {
+            get {
+                /*
+                20
+                40
+                60
+                80
+                100
+                 */
+                var stat = this.GetStat(Pet.StatType.Relationship);
+                foreach (var r in Store.instance.Relationships) 
+                {
+                    if (stat < r.Value) 
+                    {
+                        return r;
+                    }
+                }
+                return Store.instance.Relationships[0];
+            }
+        }
 
     }
 
@@ -111,6 +131,13 @@ public static class PetActivity
         pet.PetPlaying.Liked();
     }
 
+
+
+    public static void AddRelationship(this PetInspector pet)
+    {
+        pet.AddStat( Pet.StatType.Relationship , 1);
+
+    }
 
 
     public static void OnFoodComplete(this PetInspector pet, Food.FoodType type)

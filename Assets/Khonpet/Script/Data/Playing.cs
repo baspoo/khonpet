@@ -15,7 +15,14 @@ namespace Pet
     {
         Relationship, Hungry, Energy, Cleanliness
     }
-
+    public enum Relationship
+    {
+        Annoying,
+        Amiable,
+        Friend,
+        SoulMate,
+        Love
+    }
     public class Activity
     {
         public const string EatFood = "EatFood";

@@ -54,7 +54,17 @@ public class Store : MonoBehaviour
     public PlayAsset FindPlay(Play.PlayType type) => Plays.Find(x => x.Type == type);
 
 
-
+    //PLAY
+    public List<Relationship> Relationships;
+    [System.Serializable]
+    public class Relationship
+    {
+        public Pet.Relationship Type;
+        public string Name => Language.Get($"{Type}");
+        public Sprite Icon;
+        public int Value;
+    }
+    public Relationship FindRelationship(Pet.Relationship type) => Relationships.Find(x => x.Type == type);
 
     //STAT
     public List<StatUtility.StatData> Stats;
