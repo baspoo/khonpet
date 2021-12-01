@@ -323,7 +323,7 @@ public class MainmenuPage : MonoBehaviour
     }
     public void OnSetting()
     {
-
+        PopupPage.instance.settingPage.Open();
     }
 
 

@@ -21,7 +21,20 @@ public class NFTService : MonoBehaviour
         public string OwnerAddress;
         public string OwnerProfileImgUrl;
         public string PetImageUrl;
+        public string ImageUrl;
     }
+    [System.Serializable]
+    public class CollectionData
+    {
+        public string Name;
+        public string Description;
+        public string ContractAddress;
+        public string Token;
+        public string ImageUrl;
+    }
+    public List<CollectionData> KhonpetOwner;
+    public List<CollectionData> OtherOwner;
+
     public void SetupPreset()
     {
         Preset = new PresetData();
@@ -31,6 +44,26 @@ public class NFTService : MonoBehaviour
         Preset.OwnerAddress = MainAsset.owner.address;
         Preset.OwnerProfileImgUrl = MainAsset.owner.profile_img_url;
         Preset.PetImageUrl = MainAsset.image_url;
+
+        foreach (var assest in OwnerData.assets) 
+        {
+            NFTService.CollectionData collection = new CollectionData();
+            collection.ContractAddress = assest.creator.address;
+            collection.Token = assest.token_id;
+            collection.ImageUrl = assest.image_preview_url;
+            collection.Name = assest.name;
+            collection.Description = assest.description;
+            if (collection.ContractAddress == ContractAddress)
+            {
+                KhonpetOwner.Add(collection);
+            }
+            else 
+            {
+                OtherOwner.Add(collection);
+            }
+        }
+        Debug.Log($"KhonpetOwner : {KhonpetOwner.Count}");
+        Debug.Log($"OtherOwner : {OtherOwner.Count}");
     }
 
 
@@ -101,6 +134,7 @@ public class NFTService : MonoBehaviour
             var json = uwr.downloadHandler.text;
             OwnerData = json.DeserializeObject<Model.OpenSeaOwner>();
             #if UNITY_EDITOR
+            Debug.Log(json);
             json.SaveToLocal("NFT-OwnerData");
             #endif
         }

@@ -45,11 +45,21 @@ public class Store : MonoBehaviour
     {
         public Play.PlayType Type;
         public GameObject Root;
-        public int Lv;
-        public int Energy;
-        public int Cleanliness;
-        public int Star;
+        public int Lv=> playData.Lv;
+        public int Energy => playData.Energy;
+        public int Cleanliness => playData.Cleanliness;
+        public int Star => playData.Star;
         public bool IsActive (int lv) => (lv >= this.Lv);
+        Config.ConfigData.PlayData playData
+        {
+            get
+            {
+                if (m_playData == null)
+                    m_playData = Config.Data.PlayDatas.Find(x => x.PlayType == Type.ToString());
+                return m_playData;
+            }
+        }
+        Config.ConfigData.PlayData m_playData;
     }
     public PlayAsset FindPlay(Play.PlayType type) => Plays.Find(x => x.Type == type);
 
@@ -62,7 +72,7 @@ public class Store : MonoBehaviour
         public Pet.Relationship Type;
         public string Name => Language.Get($"{Type}");
         public Sprite Icon;
-        public int Value;
+        public int Value => Config.Data.Relationships.Find(x=>x.Type == Name).Value;
     }
     public Relationship FindRelationship(Pet.Relationship type) => Relationships.Find(x => x.Type == type);
 

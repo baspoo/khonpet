@@ -70,6 +70,28 @@ public class LoaderService : MonoBehaviour
 
 
 
+	#region Config.Sson
+	public void OnGetDatabase( string file ,System.Action<string> done) => StartCoroutine(GetDatabase(file,done));
+	IEnumerator GetDatabase(string file, System.Action<string> callback)
+	{
+		string pathSeparator = "/";
+		var url = $"{Application.streamingAssetsPath}{pathSeparator}AssetBundle{pathSeparator}Database{pathSeparator}{file}";
+		WWW www = new WWW(url);
+		yield return www;
+		if (www.error == null)
+		{
+			Debug.Log($"DownloadConfig done is > {  www.text }");
+			callback?.Invoke(www.text);
+		}
+		else
+		{
+			Debug.LogError($"{url} : {www.error}");
+			callback?.Invoke(null);
+			yield break;
+		}
+	}
+	#endregion
+
 
 
 
@@ -92,7 +114,7 @@ public class LoaderService : MonoBehaviour
 			{
 				Debug.Log("<color=green> Load Image Done => </color>" + www.text);
 				if (!m_imgstock.ContainsKey(url)) 
-					m_imgstock.Add(url, www.texture);
+					m_imgstock.Add(url, www.texture); 
 				onfinish(www.texture);
 			}
 			else

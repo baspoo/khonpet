@@ -2,10 +2,62 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ConfigData 
+
+
+
+
+public class Config
 {
+
+    [System.Serializable]
+    public class ConfigData
+    {
+        public TimeData Time;
+        [System.Serializable]
+        public class TimeData
+        {
+            public int BoringTime_Min;
+            public float[] BalloonTime_Sec;
+        }
+        public List<StatReduceData> StatReduce;
+        [System.Serializable]
+        public class StatReduceData
+        {
+            public string Stat;
+            public int Reduce_Min;
+        }
+        public List<RelationshipData> Relationships;
+        [System.Serializable]
+        public class RelationshipData
+        {
+            public string Type;
+            public int Value;
+        }
+        public List<PlayData> PlayDatas;
+        [System.Serializable]
+        public class PlayData
+        {
+            public string PlayType;
+            public int Lv;
+            public int Energy;
+            public int Cleanliness;
+            public int Star;
+        }
+        public List<Quest> Quests;
+        [System.Serializable]
+        public class Quest
+        {
+            public string QuestID;
+            public int Count;
+            public int QuestStarReward;
+        }
+    }
+
+
+
+
+    public static ConfigData Data;
     public static bool Done = false;
-    public static Dictionary<string, string> Configs = new Dictionary<string, string>();
     public static void Init(System.Action done)
     {
         if (Done)
@@ -13,38 +65,22 @@ public class ConfigData
             done();
             return;
         }
-
-
-        if (Setting.instance.tsv.getTsv == Setting.Tsv.GetTsv.bySetting)
+        LoaderService.instance.OnGetDatabase("config.json", (data) =>
         {
-            //GetBy Setting Editor
-            setup(Setting.instance.tsv.ConfigTsv);
-        }
-        else
-        {
-            //GetBy Internet
-            LoaderService.instance.OnLoadTsv(LoaderService.GoogleSpreadsheetsID.config, (data) =>
-            {
-                setup(data);
-            });
-        }
-        void setup(string data)
-        {
-            var table = GameDataTable.ReadData(data);
-            foreach (var d in table.GetTable())
-            {
-                Configs.Add(d.GetIndex(0), d.GetIndex(1));
-            }
-            Debug.Log("ContentDatas:" + Configs.Count);
+            Data = data.DeserializeObject<ConfigData>();
             Done = true;
             done();
-        }
+        });
     }
 }
+
+
+
+
+
+
 public class Language
 {
-
-
 
     public static bool Done = false;
     public static Dictionary<string, string[]> Languages = new Dictionary<string, string[]>();
@@ -55,21 +91,12 @@ public class Language
             done();
             return;
         }
-           
+        LoaderService.instance.OnGetDatabase("language.tsv", (data) =>
+        {
+            setup(data);
+        });
 
-        if (Setting.instance.tsv.getTsv == Setting.Tsv.GetTsv.bySetting)
-        {
-            //GetBy Setting Editor
-            setup(Setting.instance.tsv.Language);
-        }
-        else
-        {
-            //GetBy Internet
-            LoaderService.instance.OnLoadTsv(LoaderService.GoogleSpreadsheetsID.language, (data) =>
-            {
-                setup(data);
-            });
-        }
+
         void setup(string data) 
         {
             Debug.Log("data: " + data);
@@ -85,7 +112,6 @@ public class Language
             done();
         }
     }
-
 
     public enum LanguageType { En=0,Th=1 }
 

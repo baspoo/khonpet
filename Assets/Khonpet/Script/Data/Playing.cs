@@ -10,6 +10,7 @@ namespace Pet
     public class Static 
     {
         public const int MaxStat = 100;
+        public const int MaxBalloon = 10;
     }
     public enum StatType
     {
@@ -60,6 +61,11 @@ public class PlayingData
     public long UnixLastUpdate;
     public int Language;
     public int StarPoint;
+    public int BalloonPoint;
+
+    //Setting
+    public bool IsBgm = true;
+    public bool IsSfx = true;
 
     public List<PetPlaying> PetPlayings = new List<PetPlaying>();
     [System.Serializable]
@@ -289,6 +295,7 @@ public class Playing : MonoBehaviour
     //*****************************************************************
     /// Save
     //*****************************************************************
+    public string RawJson => Newtonsoft.Json.JsonConvert.SerializeObject(m_playing);
     public void Save(bool isforce = false)
     {
         if (isforce)
@@ -312,7 +319,7 @@ public class Playing : MonoBehaviour
                 m_playing.UserID = $"{SystemInfo.deviceName}-{SystemInfo.deviceUniqueIdentifier}-{m_playing.UnixCreatedAt}-{Random.RandomRange(11111, 99999)}";
 
 
-            var json = Newtonsoft.Json.JsonConvert.SerializeObject(m_playing);
+            var json = RawJson;
             PlayerPrefs.SetString(m_key, json);
         }
         else 
@@ -378,7 +385,22 @@ public class Playing : MonoBehaviour
         m_playing.StarPoint += star;
         Save();
     }
-
+    public void AddBalloon(int add)
+    {
+        m_playing.BalloonPoint += add;
+        Save();
+    }
+    public void ResetBalloon( )
+    {
+        m_playing.BalloonPoint = 0;
+        Save();
+    }
+    public void Sound(bool? IsBgm, bool? IsSfx)
+    {
+        if (IsBgm != null) m_playing.IsBgm = (bool)IsBgm;
+        if (IsSfx != null) m_playing.IsSfx = (bool)IsSfx;
+        Save();
+    }
 
 
     //*****************************************************************

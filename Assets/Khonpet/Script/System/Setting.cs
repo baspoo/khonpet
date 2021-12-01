@@ -43,12 +43,6 @@ public class Setting : MonoBehaviour
         public ResourcesHandle.LoadType LoadType;
     }
 
-    public Timing timing;
-    [System.Serializable]
-    public class Timing
-    {
-        public double BoringTime;
-    }
 
 
     public Link link;

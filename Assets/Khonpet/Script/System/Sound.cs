@@ -21,26 +21,31 @@ public class Sound : MonoBehaviour
         public AudioClip select;
         public AudioClip close;
     }
-   
-
-
-    
 
 
 
 
 
 
+
+
+    public static void Init( )
+    {
+        PlayBgm(playlist.bgm_main);
+    }
     public static void Play(AudioClip clip)
     {
-        if(clip!=null)
+        if(Playing.instance.playingData.IsSfx && clip != null)
             instance.audiosource.PlayOneShot(clip);
     }
     public static void PlayBgm(AudioClip clip)
     {
-        instance.audiosource.clip = clip;
         instance.audiosource.Stop();
-        instance.audiosource.Play();
+        if (Playing.instance.playingData.IsBgm) 
+        {
+            instance.audiosource.clip = clip;
+            instance.audiosource.Play();
+        }
     }
 
 

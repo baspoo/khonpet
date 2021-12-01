@@ -65,7 +65,7 @@ public static class PetActivity
         public long Star => (Setting.instance.debug.isStarDebug) ? Setting.instance.debug.StarCountDebug : FirebaseService.instance.Preset.Star;
         public Utility.Level Lv => new Utility.Level(Star);
         public bool Liked => m_petplaying.Liked;
-        public bool IsBoring => m_petplaying.UnixLastPetting.ToDateTime().AddMinutes( Setting.instance.timing.BoringTime )  < System.DateTime.Now;
+        public bool IsBoring => m_petplaying.UnixLastPetting.ToDateTime().AddMinutes( Config.Data.Time.BoringTime_Min )  < System.DateTime.Now;
 
         public List<PlayingData.PetPlaying.QuestPlaying> Quests => m_petplaying.Quests;
 
@@ -121,6 +121,7 @@ public static class PetActivity
         FirebaseService.instance.Preset.ClientStar += star;
         FirebaseService.instance.AddValue( FirebaseService.ValueKey.star , star );
         pet.AddActivity(Pet.Activity.GiveStar, star);
+        Playing.instance.AddStar(star);
         MainmenuPage.instance.starZone.OnAddStar(star);
     }
 
@@ -185,7 +186,7 @@ public static class PetActivity
     }
     public static void OnCleanComplete(this PetInspector pet )
     {
-        var star = pet.GetStat(Pet.StatType.Cleanliness) / 20;
+        var star = (Pet.Static.MaxStat-pet.GetStat(Pet.StatType.Cleanliness)) / 20;
         if (pet.OnGiveStarUnFullStat(Pet.StatType.Cleanliness, star))
             pet.AddActivity(Pet.Activity.Clean, star);
         pet.AddStat(Pet.StatType.Cleanliness, 100);
@@ -271,7 +272,7 @@ public static class StatUtility
     {
         public Pet.StatType stat;
         public string description => Language.Get($"{stat}");
-        public int reduceDuration;
+        public int reduceDuration => Config.Data.StatReduce.Find(x => x.Stat == $"{stat}" ).Reduce_Min;
     }
     public static void AddStat(this PetActivity.PetInspector inspector, Pet.StatType Stat, int Value)
     {

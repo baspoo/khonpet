@@ -53,6 +53,10 @@ public class Btn : MonoBehaviour
         this.isToggle = start;
         icon.enabled = this.isToggle;
     }
+    public void PickToggle()
+    {
+        OnToggle();
+    }
     public bool OnToggle()
     {
         this.isToggle = !this.isToggle;
@@ -60,7 +64,6 @@ public class Btn : MonoBehaviour
         onToggle?.Invoke(this.isToggle);
         return this.isToggle;
     }
-
 
 
 

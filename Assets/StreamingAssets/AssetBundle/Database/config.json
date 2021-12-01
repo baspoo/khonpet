@@ -1,0 +1,141 @@
+{
+    "Time": {
+        "BoringTime_Min": 30,
+        "BalloonTime_Sec": [
+            15.0,
+            80.0
+        ]
+    },
+    "PlayDatas": [
+        {
+            "PlayType": "Ball",
+            "Lv": 0,
+            "Energy": -20,
+            "Cleanliness": -10,
+            "Star": 3
+        },
+        {
+            "PlayType": "Memory",
+            "Lv": 4,
+            "Energy": -30,
+            "Cleanliness": -10,
+            "Star": 4
+        },
+        {
+            "PlayType": "Guess",
+            "Lv": 9,
+            "Energy": -8,
+            "Cleanliness": -10,
+            "Star": 1
+        },
+        {
+            "PlayType": "Dance",
+            "Lv": 15,
+            "Energy": -40,
+            "Cleanliness": -10,
+            "Star": 5
+        }
+    ],
+    "StatReduce": [
+        {
+            "Stat": "Relationship",
+            "Reduce_Min": 360
+        },
+        {
+            "Stat": "Hungry",
+            "Reduce_Min": 3
+        },
+        {
+            "Stat": "Energy",
+            "Reduce_Min": 3
+        },
+        {
+            "Stat": "Cleanliness",
+            "Reduce_Min": 1
+        }
+    ],
+    "Relationships": [
+        {
+            "Type": "Annoying",
+            "Value": 20
+        },
+        {
+            "Type": "Amiable",
+            "Value": 40
+        },
+        {
+            "Type": "Friend",
+            "Value": 60
+        },
+        {
+            "Type": "SoulMate",
+            "Value": 80
+        },
+        {
+            "Type": "Love",
+            "Value": 100
+        }
+    ],
+    "Quests": [
+        {
+            "QuestID": "quest_eatfood",
+            "Count": 5,
+            "QuestStarReward": 2
+        },
+        {
+            "QuestID": "quest_eathappyfood",
+            "Count": 3,
+            "QuestStarReward": 3
+        },
+        {
+            "QuestID": "quest_playball",
+            "Count": 4,
+            "QuestStarReward": 3
+        },
+        {
+            "QuestID": "quest_playmemory",
+            "Count": 4,
+            "QuestStarReward": 3
+        },
+        {
+            "QuestID": "quest_playguess",
+            "Count": 4,
+            "QuestStarReward": 3
+        },
+        {
+            "QuestID": "quest_dance",
+            "Count": 4,
+            "QuestStarReward": 3
+        },
+        {
+            "QuestID": "quest_clean",
+            "Count": 3,
+            "QuestStarReward": 3
+        },
+        {
+            "QuestID": "quest_sleep",
+            "Count": 3,
+            "QuestStarReward": 3
+        },
+        {
+            "QuestID": "quest_journey",
+            "Count": 3,
+            "QuestStarReward": 3
+        },
+        {
+            "QuestID": "quest_petting",
+            "Count": 4,
+            "QuestStarReward": 3
+        },
+        {
+            "QuestID": "quest_givestar",
+            "Count": 8,
+            "QuestStarReward": 3
+        },
+        {
+            "QuestID": "quest_balloon",
+            "Count": 3,
+            "QuestStarReward": 3
+        }
+    ]
+}

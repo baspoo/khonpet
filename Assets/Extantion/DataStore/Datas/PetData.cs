@@ -24,11 +24,12 @@ public class Feeling
 public class PetData
 {
 
-
+    
     public bool Enable;
     public string ID;
     public string Name;
     public string Description;
+    public string Air;
     public string Kind;
     public string Rarity;
     public string Url_Image;
@@ -68,6 +69,7 @@ public class PetData
         Name = raw.GetValue("Name");
         Description = raw.GetValue("Description");
         Kind = raw.GetValue("Kind");
+        Air = raw.GetValue("Air");
         Rarity = raw.GetValue("Rarity");
         Url_Image = raw.GetValue("Url_Image");
         Url_Bundle = raw.GetValue("Url_Bundle");
@@ -125,20 +127,29 @@ public class PetData
     public static List<PetData> PetDatas = new List<PetData>();
     public static void Init(System.Action done)
     {
-        if (Setting.instance.tsv.getTsv == Setting.Tsv.GetTsv.bySetting)
+        //if (Setting.instance.tsv.getTsv == Setting.Tsv.GetTsv.bySetting)
+        //{
+        //    //GetBy Setting Editor
+        //    CreatedData(Setting.instance.tsv.PetTsv);
+        //}
+        //else 
+        //{
+        //    //GetBy Internet
+        //    LoaderService.instance.OnGetDatabase("petdata.tsv", (data) =>
+        //    {
+        //        CreatedData(data);
+        //    });
+        //    //LoaderService.instance.OnLoadTsv(LoaderService.GoogleSpreadsheetsID.pet, (data) =>
+        //    //{
+        //    //    CreatedData(data);
+        //    //});
+        //}
+
+
+        LoaderService.instance.OnGetDatabase("petdata.tsv", (data) =>
         {
-            //GetBy Setting Editor
-            CreatedData(Setting.instance.tsv.PetTsv);
-        }
-        else 
-        {
-            //GetBy Internet
-            LoaderService.instance.OnLoadTsv(LoaderService.GoogleSpreadsheetsID.pet, (data) =>
-            {
-                CreatedData(data);
-            });
-        }
-       
+            CreatedData(data);
+        });
         void CreatedData(string data) 
         {
             var table = GameDataTable.ReadData(data);

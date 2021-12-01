@@ -27,6 +27,7 @@ public class World : MonoBehaviour
     public void Init()
     {
         Root.gameObject.SetActive(true);
+        Balloon.instance.Init();
     }
 
 

@@ -6,7 +6,7 @@ public class AirActivity
 {
     public enum AirType
     {
-         Sun , Hot , Cloud , Rain, Snow , Night
+         Sun  , Cloud , Rain, Snow , Night
     }
 
 

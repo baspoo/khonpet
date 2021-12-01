@@ -82,6 +82,13 @@ public static class VariableService
 	{
 		return PlayerPrefs.GetString(key);
 	}
+	public static void Copy(this string messge)
+	{
+		TextEditor tx = new TextEditor();
+		tx.text = messge;
+		tx.SelectAll();
+		tx.Copy();
+	}
 	#endregion
 
 

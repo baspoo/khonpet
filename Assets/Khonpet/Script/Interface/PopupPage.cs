@@ -55,11 +55,13 @@ public class PopupPage : MonoBehaviour
         root.gameObject.SetActive(false);
         petInfo.root.gameObject.SetActive(false);
         achievement.root.gameObject.SetActive(false);
+        settingPage.root.gameObject.SetActive(false);
         message.root.gameObject.SetActive(false);
         questPage.root.gameObject.SetActive(false);
         statusPage.root.gameObject.SetActive(false);
         displayName.root.gameObject.SetActive(false);
         airPage.root.gameObject.SetActive(false);
+        balloon.root.gameObject.SetActive(false);
     }
 
     System.Action<string> btns;
@@ -129,11 +131,12 @@ public class PopupPage : MonoBehaviour
             instance.Init(root, (state) => {
                 if (state == "enter")
                 {
-                    var diaplyName = input.text;
-                    if (!string.IsNullOrEmpty(diaplyName)) 
+                    var diaplayName = input.text;
+                    if (!string.IsNullOrEmpty(diaplayName)) 
                     {
+                        Playing.instance.UpdateDisplayName(diaplayName);
                         instance.OnClose();
-                        onDone?.Invoke(diaplyName);
+                        onDone?.Invoke(diaplayName);
                     }
                 }
             }, false);
@@ -283,6 +286,59 @@ public class PopupPage : MonoBehaviour
 
 
 
+
+
+    public SettingPage settingPage;
+    [System.Serializable]
+    public class SettingPage
+    {
+        public Transform root;
+        public Transform position;
+        public Text txt_name;
+        public Text txt_star;
+        public Text txt_user;
+
+        public Btn toggle_bgm;
+        public Btn toggle_sfx;
+
+        public void Open()
+        {
+            instance.Bg(BgStyle.center);
+
+
+            txt_name.text = Playing.instance.playingData.NickName;
+            txt_user.text = Playing.instance.playingData.UserID;
+            txt_star.text = $"Give {Playing.instance.playingData.StarPoint} Star";
+
+
+
+            toggle_bgm.InitToggle((t)=> {
+                Playing.instance.Sound(t,null);
+                Sound.Init();
+            }, Playing.instance.playingData.IsBgm);
+
+            toggle_sfx.InitToggle((t) => {
+                Playing.instance.Sound(null, t);
+            }, Playing.instance.playingData.IsSfx);
+
+
+            instance.Init(root, (state) => {
+                if (state == "rename") 
+                {
+                    instance.OnClose();
+                    instance.displayName.Open();
+                }
+                if (state == "copy")
+                {
+                    Playing.instance.RawJson.Copy();
+                }
+            }, true, position);
+        }
+    }
+
+
+
+
     public AirPage airPage;
     [System.Serializable]
     public class AirPage
@@ -328,6 +384,53 @@ public class PopupPage : MonoBehaviour
         }
     }
 
+    public BalloonPage balloon;
+    [System.Serializable]
+    public class BalloonPage
+    {
+        public Transform root;
+        public Transform position;
+        public RawImage image;
+        public Image bar;
+        public Text name;
+        public Text address;
+        public Button btn;
+        public Button btngoto;
+
+        public void Open(NFTService.CollectionData data)
+        {
+            Playing.instance.AddBalloon(1);
+
+
+            //var postions = Information.instance.IsMobile ? MobileRanges : PcRanges;
+            var pos =  position.position;
+            pos.x = Information.instance.IsMobile ? 0.0f : Balloon.instance.PositionBalloon.transform.position.x;
+            position.position = pos;
+
+            bar.fillAmount = (float)Playing.instance.playingData.BalloonPoint / (float)Pet.Static.MaxBalloon;
+            name.text = data.Name;
+            name.text = $"{data.ContractAddress.Substring(0, 20)}....";
+            btn.interactable = bar.fillAmount >= 1.0f;
+            LoaderService.instance.OnLoadImage(data.ImageUrl, (img) => { image.texture = img; });
+
+            instance.Bg(BgStyle.center);
+            instance.Init(root, (state) => {
+                if (state == "claim") 
+                {
+                    Playing.instance.ResetBalloon();
+                    PetData.PetInspector.AddStar(3);
+                    instance.OnClose();
+                }
+                if (state == "goto")
+                {
+                    var gotoUrl = $"{"https://"}opensea.io/assets/{data.ContractAddress}/{data.Token}";
+                    Debug.Log(gotoUrl);
+                    Utility.Web.GotoUrl(gotoUrl);
+
+                }
+            }, true, position);
+        }
+    }
 
 
 

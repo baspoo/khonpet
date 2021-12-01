@@ -11,12 +11,12 @@ public class Initialize : MonoBehaviour
         // PetData
         PetData.Init(()=> { });
         Language.Init(() => { });
-        ConfigData.Init(() => { });
+        Config.Init(() => { });
 
         // Information
         StartCoroutine(Information.instance.Init());
 
-        while (!PetData.Done || !Language.Done || !ConfigData.Done || !Information.instance.isDone) yield return new WaitForEndOfFrame();
+        while (!PetData.Done || !Language.Done || !Config.Done || !Information.instance.isDone) yield return new WaitForEndOfFrame();
 
 
 
@@ -47,6 +47,8 @@ public class Initialize : MonoBehaviour
 
         Playing.instance.Init();
         PetActivity.Init();
+        Sound.Init();
+
         while (!PetActivity.IsReady) yield return new WaitForEndOfFrame();
         World.instance.Init();
         AirActivity.Init();

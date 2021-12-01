@@ -27,7 +27,7 @@ public class InterfaceRoot : MonoBehaviour
         if (string.IsNullOrEmpty(Playing.instance.playingData.NickName)) 
         {
             popup.displayName.Open((displayName)=> {
-                Playing.instance.UpdateDisplayName(displayName);
+               
             });
         }
 

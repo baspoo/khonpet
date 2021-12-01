@@ -33,8 +33,8 @@ public static class QuestActivity
         public Group Group;
         public Sprite Icon;
         public int QuestLevel;
-        public int Count;
-        public int QuestStarReward;
+        public int Count => Config.Data.Quests.Find(x => x.QuestID == QuestID).Count;
+        public int QuestStarReward =>Config.Data.Quests.Find(x=>x.QuestID == QuestID).QuestStarReward;
         public bool IsUnlock(int lv) => lv >= QuestLevel;
     }
 
