@@ -66,6 +66,7 @@ public class PlayingData
     //Setting
     public bool IsBgm = true;
     public bool IsSfx = true;
+    public bool IsMessage = true;
 
     public List<PetPlaying> PetPlayings = new List<PetPlaying>();
     [System.Serializable]
@@ -104,6 +105,13 @@ public class PlayingData
             public long UnixLastActive;
         }
 
+        public AirData Air = new AirData();
+        [System.Serializable]
+        public class AirData
+        {
+            public string AirName;
+            public long UnixAir;
+        }
 
         public long UnixQuest;
         public List<QuestPlaying> Quests = new List<QuestPlaying>();
@@ -116,6 +124,17 @@ public class PlayingData
             public long Value;
             public long UnixCreatedAt;
             public bool IsClaimed;
+        }
+
+
+        public JourneyData Journey = new JourneyData();
+        [System.Serializable]
+        public class JourneyData
+        {
+            public long HighScore;
+            public long DailyScore;
+            public long DailyStar;
+            public long UnixLastUpdate;
         }
     }
 }
@@ -144,6 +163,12 @@ public static class PetPlayingTools
     public static void Petting(this PlayingData.PetPlaying pet)
     {
         pet.UnixLastPetting = Playing.instance.playingUnix;
+        Playing.instance.Save();
+    }
+    public static void UpdateAir(this PlayingData.PetPlaying pet , string airName)
+    {
+        pet.Air.AirName = airName;
+        pet.Air.UnixAir = Playing.instance.playingUnix;
         Playing.instance.Save();
     }
     //*****************************************************************
@@ -256,6 +281,38 @@ public static class PetPlayingTools
     {
         return pet.Quests.Find(x => x.QuestID == QuestID);
     }
+    //*****************************************************************
+    // Quest
+    //*****************************************************************
+    public static bool UpdateJourney(this PlayingData.PetPlaying pet, long score , int star) 
+    {
+        bool isHighScore = false;
+        if (score == 0)
+        {
+            if (pet.Journey.UnixLastUpdate.ToDateTime().IsNewDay()) 
+            {
+                //NewDay
+                pet.Journey.DailyScore = 0;
+                pet.Journey.DailyStar = 0;
+            }
+        }
+        else 
+        {
+            pet.Journey.DailyStar += star;
+            if (pet.Journey.DailyScore < score)
+            {
+                pet.Journey.DailyScore = score;
+                isHighScore = true;
+            }
+            if (pet.Journey.HighScore < score) 
+            {
+                pet.Journey.HighScore = score;
+                isHighScore = true;
+            }
+
+        }
+        return isHighScore;
+    }
 }
 
 
@@ -316,8 +373,9 @@ public class Playing : MonoBehaviour
 
 
             if (!m_playing.UserID.notnull())
-                m_playing.UserID = $"{SystemInfo.deviceName}-{SystemInfo.deviceUniqueIdentifier}-{m_playing.UnixCreatedAt}-{Random.RandomRange(11111, 99999)}";
-
+            {
+                m_playing.UserID = $"KP-{m_playing.UnixCreatedAt}-{Random.RandomRange(11111, 99999)}";
+            }
 
             var json = RawJson;
             PlayerPrefs.SetString(m_key, json);
@@ -401,8 +459,11 @@ public class Playing : MonoBehaviour
         if (IsSfx != null) m_playing.IsSfx = (bool)IsSfx;
         Save();
     }
-
-
+    public void Message(bool message)
+    {
+        m_playing.IsMessage = message;
+        Save();
+    }
     //*****************************************************************
     /// Find Pet
     //*****************************************************************

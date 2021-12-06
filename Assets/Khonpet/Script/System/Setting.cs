@@ -31,6 +31,11 @@ public class Setting : MonoBehaviour
         public bool isDebugBundle;
         public AssetBundle PetBundle;
 
+
+        public bool isDebugAir;
+        public AirActivity.AirType AirType;
+
+
         public bool isStarDebug;
         public int StarCountDebug;
 

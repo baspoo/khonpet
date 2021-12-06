@@ -60,8 +60,20 @@ public class Balloon : MonoBehaviour
     {
         m_data = m_balloons[m_balloons.Count.Random()];
         var postions = Information.instance.IsMobile ? MobileRanges : PcRanges;
-        var vec = RootBalloon.transform.localPosition;
-        vec.x = Random.RandomRange(postions[0], postions[1]);
+
+        Vector3 vec = RootBalloon.transform.localPosition;
+        if (Random.Range(0, 100) > 50)
+        {
+            vec.x = postions[0];
+        }
+        else 
+        {
+            vec.x = postions[1];
+        }
+        if (!Information.instance.IsMobile) 
+        {
+            vec.x += Random.RandomRange(-1.0f, 1.0f);
+        }
 
         LoaderService.instance.OnLoadImage(m_data.ImageUrl, (img) => { Image.texture = img; });
         RootBalloon.transform.localPosition = vec;
@@ -74,8 +86,9 @@ public class Balloon : MonoBehaviour
         runTime = 0.0f;
         nextTime = Random.RandomRange(Times[0], Times[1]);
     }
-    void Close() 
+    public void Close() 
     {
+        runTime = 0.0f;
         RootBalloon.gameObject.SetActive(false);
     }
     public void AnimDone( )
@@ -89,7 +102,7 @@ public class Balloon : MonoBehaviour
 
     void Update()
     {
-        if (isReady && !IsRuning) 
+        if (isReady && !IsRuning && !ConsoleActivity.IsActing) 
         {
             if (runTime < nextTime) runTime += Time.deltaTime;
             else 

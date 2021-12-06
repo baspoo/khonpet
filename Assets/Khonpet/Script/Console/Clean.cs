@@ -45,7 +45,7 @@ public class Clean : MonoBehaviour
             isAnimDone = true;
         });
 
-
+        Sound.Play(Sound.playlist.clean);
 
         //** wait
         while (!isAnimDone) yield return new WaitForEndOfFrame();

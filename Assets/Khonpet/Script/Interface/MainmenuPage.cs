@@ -195,7 +195,7 @@ public class MainmenuPage : MonoBehaviour
                 if (currentLv != level.CurrentLevel) 
                 {
                     // Level Up
-                    PetObj.Current.OnUpdatePetObj();
+                    PetData.PetInspector.LvUp();
                 }
             }
             current = width;
@@ -224,10 +224,13 @@ public class MainmenuPage : MonoBehaviour
                     w.curve = paths[paths.Length.Random()];
                     w.progress = 0.0f;
                     w.gameObject.SetActive(true);
+                    Sound.Play(Sound.playlist.move1);
+
                     w.ondone = (walk) => { 
                         effect.OnAwake();
-                        tStarIcon.gameObject.transform.localScale = Vector3.one;
-                        iTween.ShakeScale(tStarIcon.gameObject, Vector3.one * 0.65f, 0.35f);
+                        Sound.Play(Sound.playlist.stardone);
+                        //tStarIcon.gameObject.transform.localScale = Vector3.one;
+                        //iTween.ShakeScale(tStarIcon.gameObject, Vector3.one * 0.65f, 0.35f);
                     };
                     index++;
                     yield return new WaitForSeconds(0.15f);
@@ -359,7 +362,10 @@ public class MainmenuPage : MonoBehaviour
     {
         PopupPage.instance.statusPage.Open();
     }
-
+    public void OnJourney()
+    {
+        PopupPage.instance.journey.Open();
+    }
 
 
 

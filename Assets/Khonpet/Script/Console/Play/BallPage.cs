@@ -52,6 +52,7 @@ public class BallPage : MonoBehaviour
             isKick = true;
             anim.Stop();
             anim.Play("ball");
+
         });
         while (true) 
         {
@@ -100,12 +101,14 @@ public class BallPage : MonoBehaviour
         {
             point++;
             Debug.Log($"Wow [{runtime}]");
+            Sound.Play(Sound.playlist.match);
             Talking.instance.message.Show(Talking.Message.MessageType.goodjob);
             awake.OnAwake();
         }
         else
         {
             Debug.Log($"Fail [{runtime}]");
+            Sound.Play(Sound.playlist.fail);
             Talking.instance.message.Show(Talking.Message.MessageType.bad);
         }
         iTween.ShakePosition(gate, Vector3.one * ShackVolume , 0.25f);
@@ -118,7 +121,17 @@ public class BallPage : MonoBehaviour
         {
             yield return new WaitForSeconds(1.0f);
             Close();
-            m_done?.Invoke(point>=PassPoint);
+
+            var win = point >= PassPoint;
+
+            PetObj.Current.talking.bubble.OnEmo(win ? Talking.Bubble.EmoType.FeelingHappy : Talking.Bubble.EmoType.FeelingBad , 1.5f);
+            if (win)
+            {
+                PetObj.Current.anim.OnAnimForce(PetAnim.AnimState.GoodJob);
+                Sound.Play(Sound.playlist.yeahh);
+            }
+
+            m_done?.Invoke(win);
         }
     }
 

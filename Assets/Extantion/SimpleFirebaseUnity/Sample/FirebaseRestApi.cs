@@ -171,6 +171,10 @@ public class FirebaseRestApi : MonoBehaviour
 
     void Update()
     {
+
+#if UNITY_EDITOR
+
+
         if (Input.GetKeyDown(KeyCode.T))
         {
             Debug.Log("GetTime");
@@ -286,7 +290,7 @@ public class FirebaseRestApi : MonoBehaviour
             firebase.Child("userData",true).GetValue( );
         }
 
-
+#endif
 
 
     }

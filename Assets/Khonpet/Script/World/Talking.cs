@@ -52,6 +52,7 @@ public class Talking : MonoBehaviour
             public Transform Trans;
             public Sprite Sprite;
             public float Scale;
+            public AudioClip sound;
         }
 
         public Transform Talk;
@@ -108,6 +109,7 @@ public class Talking : MonoBehaviour
                 TalkIcon.transform.localScale = Vector3.one * data.Scale;
                 TalkIcon.sprite = data.Sprite;
             }
+            data.sound?.Play();
             if (duration != 0.0f)
                 Hide(duration);
         }
@@ -115,7 +117,26 @@ public class Talking : MonoBehaviour
 
 
 
-
+    public PetTalk petTalk;
+    [System.Serializable]
+    public class PetTalk
+    {
+        public Transform Talk;
+        public UnityEngine.UI.Text Message;
+        public void Show(string message)
+        {
+            Message.text = message;
+            Talk.gameObject.SetActive(true);
+            instance.StartWait(2.0f, () => {
+                Hide();
+            });
+        }
+        public void Hide()
+        {
+            instance.StopWait();
+            Talk.gameObject.SetActive(false);
+        }
+    }
 
 
 

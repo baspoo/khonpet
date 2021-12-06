@@ -51,6 +51,18 @@ public class Config
             public int Count;
             public int QuestStarReward;
         }
+        public JourneyData Journey;
+        [System.Serializable]
+        public class JourneyData
+        {
+            public int PointOfRange;
+            public int MaxCombo = 10;
+            public int StartLive=5; 
+            public int BaseScore=100;
+            public int LowScore=50;
+            public float SpeedStart = 1.0f;
+            public float SpeedPlus = 0.1f;
+        }
     }
 
 

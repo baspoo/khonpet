@@ -24,7 +24,7 @@ public class TestDebug : MonoBehaviour
         //if (Input.GetKeyDown(KeyCode.D))
             //InterfaceRoot.instance.mainmenu.starZone.OnUpdate();
         //if (Input.GetKeyDown(KeyCode.A))
-            //InterfaceRoot.instance.mainmenu.starZone.OnAddStar(6.Random());
+           // InterfaceRoot.instance.mainmenu.starZone.OnAddStar(6.Random());
 
         //if (Input.GetKeyDown(KeyCode.S))
             //Playing.instance.Save();
@@ -69,13 +69,19 @@ public class TestDebugUI : Editor
         {
 
 
-            Debug.Log(100/20);
-            Debug.Log(100 / 20);
-            Debug.Log(87 / 20);
-            Debug.Log(52 / 20);
-            Debug.Log(23 / 20);
-            Debug.Log(19 / 20);
-            Debug.Log(9 / 20);
+            FirebaseService.instance.TopScoreVerify(Random.RandomRange(0,1000));
+
+            //for (int d = 0; d < 100; d++)
+            //    Debug.Log(Random.RandomRange(1, 4));
+
+
+            //Debug.Log(100/20);
+            //Debug.Log(100 / 20);
+            //Debug.Log(87 / 20);
+            //Debug.Log(52 / 20);
+            //Debug.Log(23 / 20);
+            //Debug.Log(19 / 20);
+            //Debug.Log(9 / 20);
             //StatUtility.CalStat(0,0);
         }
     }

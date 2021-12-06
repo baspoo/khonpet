@@ -37,6 +37,21 @@ public class FirebaseService : MonoBehaviour
             public string message;
             public int code;
         }
+
+
+
+        public TopScore topscores = new TopScore();
+        [System.Serializable]
+        public class TopScore
+        {
+            public List<Score> journey = new List<Score>();
+            [System.Serializable]
+            public class Score
+            {
+                public string name;
+                public long score;
+            }
+        }
     }
 
 
@@ -54,7 +69,7 @@ public class FirebaseService : MonoBehaviour
 
         public Dictionary<string, Pet.Chat> chats => instance.pet.chats;
 
-
+        public Pet.TopScore TopScore => instance.pet.topscores;
 
     }
 
@@ -64,10 +79,11 @@ public class FirebaseService : MonoBehaviour
 
     public string petID;
     long time;
-    public string userID => SystemInfo.deviceUniqueIdentifier;
+    public string userID => Playing.instance.playingData.UserID;
     public bool IsDone { get; private set; }
     public System.Action<Dictionary<string, Pet.Chat>> onChatUpdate;
 
+    Firebase firebaseUser;
     Firebase firebase;
     FirebaseQueue firebaseQueue;
     Utility.TimeServer timeserver = new Utility.TimeServer();
@@ -87,7 +103,7 @@ public class FirebaseService : MonoBehaviour
         // Create a FirebaseQueue
         firebaseQueue = new FirebaseQueue(true, 3, 1f);
         firebase = Firebase.CreateNew($"{"https://"}{"khonpet-default-rtdb"}.firebaseio.com/{"pets"}/{petID}", "AIzaSyBbUqrPWBZ7PSNjqnbEViSENFMaBU6-uYs");
-
+        firebaseUser = Firebase.CreateNew($"{"https://"}{"khonpet-default-rtdb"}.firebaseio.com/{"users"}/{userID}", "AIzaSyBbUqrPWBZ7PSNjqnbEViSENFMaBU6-uYs");
 
 
         firebase.OnGetFailed = (sender, error) => {
@@ -114,6 +130,7 @@ public class FirebaseService : MonoBehaviour
         {
             Debug.Log($"[OBSERVER] Raw Json: " + snapshot.RawJson);
             pet.chats = JsonConvert.DeserializeObject<Dictionary<string, Pet.Chat>>(snapshot.RawJson);
+            ChatVerify(pet);
             onChatUpdate?.Invoke(pet.chats);
         };
         observer.Start();
@@ -131,9 +148,6 @@ public class FirebaseService : MonoBehaviour
         GetPet((pet) => { this.pet = pet; petDone = true; });
         while (!petDone) yield return new WaitForEndOfFrame();
 
-
-
-        ChatVerify(pet);
 
 
 
@@ -190,25 +204,6 @@ public class FirebaseService : MonoBehaviour
 
     }
 
-
-    void ChatVerify(Pet pet)
-    {
-        int max = 50;
-        Utility.TimeServer dif = new Utility.TimeServer();
-        foreach (var chat in new Dictionary<string, Pet.Chat>(pet.chats).OrderBy(x=>x.Value.date))
-        {
-            if (max >= 0)
-            {
-                max--;
-            }
-            else 
-            {
-                pet.chats.Remove(chat.Key);
-            }
-        }
-        Firebase updatechat = firebase.Child("chats", true);
-        updatechat.UpdateValue(pet.chats.SerializeToJson());
-    }
 
 
 
@@ -267,21 +262,17 @@ public class FirebaseService : MonoBehaviour
         add.GetValue();
     }
 
-    public enum ChatCode
-    {
-        none = 100,
-        message = 101,
-        star = 102,
-        like = 103,
-        lvup = 104,
-        food = 105,
-        play = 106,
-        clean = 107
-        
-    }
-    public void PushChat( string name , string message , ChatCode code )
-    {
 
+
+
+
+
+
+
+
+
+    public void PushChat( string name , string message , Chat.ChatCode code )
+    {
         Pet.Chat chat = new Pet.Chat();
         chat.date = timeserver.Unix;
         chat.code = (int)code;
@@ -292,10 +283,88 @@ public class FirebaseService : MonoBehaviour
         Firebase put = firebase.Child("chats", true);
         put.OnPushSuccess = (sender, snap) =>
         {
-            Debug.Log($"[OK-PushChat]");
+            Debug.Log($"[OK-PushChat] Raw Json: " + snap.RawJson);
         };
         put.Push(chat.SerializeToJson(), true);
     }
+
+
+    public void ChatVerify( )
+    {
+        ChatVerify(pet);
+    }
+
+    void ChatVerify(Pet pet)
+    {
+        int max = 10;
+        //Debug.Log($"ChatVerify {pet.chats.Count}");
+        //Utility.TimeServer dif = new Utility.TimeServer();
+        foreach (var chat in new Dictionary<string, Pet.Chat>(pet.chats).OrderByDescending(x => x.Value.date))
+        {
+            if (max >= 0)
+            {
+                max--;
+            }
+            else
+            {
+                Debug.Log($"delete chat {chat.Key}");
+                Firebase updatechat = firebase.Child($"chats/{chat.Key}", true);
+                updatechat.Delete();
+                pet.chats.Remove(chat.Key);
+            }
+        }
+
+        //Debug.Log($"ChatVerify {pet.chats.Count}");
+        //Firebase updatechat = firebase.Child("chats", true);
+        //updatechat.UpdateValue(pet.chats.SerializeToJson());
+    }
+
+
+    public void TopScoreVerify(long score)
+    {
+        Debug.Log($"TopScoreVerify score: {score}");
+        GetPet((pet) => {
+            int max = 20;
+            var journey = pet.topscores.journey.OrderByDescending(x => x.score).ToList();
+            bool istopscore = false;
+            if (journey.Count < max)
+            {
+                istopscore = true;
+            }
+            else
+            {
+                istopscore = journey.Find(x => x.score < score) != null;
+            }
+
+            Debug.Log($"TopScoreVerify topscore: {istopscore}");
+
+            if (istopscore)
+            {
+                journey.Add(new Pet.TopScore.Score()
+                {
+                    name = Playing.instance.playingData.NickName,
+                    score = score
+                });
+                foreach (Pet.TopScore.Score score in new ArrayList(journey.OrderByDescending(x => x.score).ToList()))
+                {
+                    if (max >= 0)
+                    {
+                        max--;
+                    }
+                    else
+                    {
+                        journey.Remove(score);
+                    }
+                }
+                pet.topscores.journey = journey.OrderByDescending(x=>x.score).ToList();
+                Firebase update = firebase.Child($"topscores", true);
+                var json = pet.topscores.SerializeToJson();
+                Debug.Log($"TopScoreVerify json: {json}");
+                update.UpdateValue(json);
+            }
+        });
+    }
+
 
 
 
@@ -304,6 +373,31 @@ public class FirebaseService : MonoBehaviour
         var json = ToJson(pet);
         firebase.UpdateValue(json);
     }
+
+
+
+
+    [System.Serializable]
+    public class UserHistory
+    {
+        public long star;
+        public long createdat;
+        public long lastupdate;
+    }
+    public void UpdateUserData()
+    {
+        //***
+       
+        UserHistory history = new UserHistory();
+        history.star = Playing.instance.playingData.StarPoint;
+        history.createdat = Playing.instance.playingData.UnixCreatedAt;
+        history.lastupdate = Playing.instance.playingUnix;
+        var json = history.SerializeToJson();
+        Debug.Log($"UpdateUserData : {json}");
+        firebaseUser.UpdateValue(json);
+    }
+
+
 
 
 
@@ -324,22 +418,6 @@ public class FirebaseService : MonoBehaviour
 
     void Update()
     {
-
-        if (Input.GetKeyDown(KeyCode.Z))
-        {
-            Debug.Log("AddValue");
-            AddValue(ValueKey.star, 1);
-        }
-
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            AddValue( ValueKey.star, 5);
-        }
-
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            AddValue(ValueKey.star, 20);
-        }
 
     }
 

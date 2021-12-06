@@ -1985,7 +1985,7 @@ Transform:
   - {fileID: 1489581349485986918}
   m_Father: {fileID: 5249522432057379571}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.40888757}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!111 &3209077995472640642
 Animation:
   m_ObjectHideFlags: 0
@@ -2029,6 +2029,10 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  SoundDatas:
+  - name: move
+    clip: {fileID: 8300000, guid: cf0f898e402e07e47a2e03b7bf49e030, type: 3}
+    clips: []
 --- !u!1 &6973394366702423330
 GameObject:
   m_ObjectHideFlags: 0

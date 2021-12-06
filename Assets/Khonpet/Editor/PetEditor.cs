@@ -33,6 +33,7 @@ public class PetEditor : Editor
 			EditorGUIService.BeginContents(false);
 			{
 				pet.info.ID = EditorGUILayout.TextField("ID", pet.info.ID);
+				pet.info.Thumbnail = (Texture) EditorGUILayout.ObjectField("Thumbnail", pet.info.Thumbnail , typeof (Texture));
 			}
 			EditorGUIService.EndContents();
 		}

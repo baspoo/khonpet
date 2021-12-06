@@ -21,6 +21,7 @@ public class DanceObj : MonoBehaviour
         m_page = page;
         Index = m_data.Index;
         Image.color = m_data.Color;
+        Arrow.color = m_data.ArrowColor;
         Arrow.transform.localRotation = Quaternion.Euler(m_data.Rotate);
         transform.localPosition = new Vector3(m_data.EndPoint.localPosition.x, m_page.Born.localPosition.y, m_page.Born.localPosition.z);
         gameObject.SetActive(true);
@@ -51,7 +52,7 @@ public class DanceObj : MonoBehaviour
         Talking.instance?.message.Show(Talking.Message.MessageType.bad);
         Dispose();
     }
-    public void OnCheck() 
+    public bool OnCheck() 
     {
 
 
@@ -70,12 +71,13 @@ public class DanceObj : MonoBehaviour
             m_data.Eff.OnAwake();
             m_page.OnMatched();
             Dispose();
+            return true;
         }
         else 
         {
 
             Debug.Log($"{transform.localPosition.y}  <  {m_data.EndPoint.localPosition.y + m_page.setting.MatchRanges[0]}  &&  >  {m_data.EndPoint.localPosition.y + m_page.setting.MatchRanges[1]}");
-        
+            return false;
         }
     }
 

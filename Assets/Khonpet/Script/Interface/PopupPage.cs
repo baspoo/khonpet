@@ -30,6 +30,8 @@ public class PopupPage : MonoBehaviour
     bool ismarkclose = true;
     void Init(Transform root , System.Action<string> btn,bool ismarkclose = true , Transform position = null)
     {
+        Sound.Play(Sound.playlist.openpage);
+        OnClose();
         this.ismarkclose = ismarkclose;
         this.btns = btn;
         this.root.gameObject.SetActive(true);
@@ -59,6 +61,7 @@ public class PopupPage : MonoBehaviour
         message.root.gameObject.SetActive(false);
         questPage.root.gameObject.SetActive(false);
         statusPage.root.gameObject.SetActive(false);
+        journey.root.gameObject.SetActive(false);
         displayName.root.gameObject.SetActive(false);
         airPage.root.gameObject.SetActive(false);
         balloon.root.gameObject.SetActive(false);
@@ -98,7 +101,7 @@ public class PopupPage : MonoBehaviour
         public Text txtHeader;
         public Text txtDescription;
         public Transform tClose;
-        public MessagePage Open(string header , string message , bool ismarkclose = true, System.Action onclose = null)
+        public MessagePage Open(string header , string message , bool ismarkclose = true, bool forcetoCenter = false,System.Action onclose = null)
         {
             instance.Bg( BgStyle.center );
             txtHeader.text = header;
@@ -110,7 +113,7 @@ public class PopupPage : MonoBehaviour
                     instance.OnClose(); 
                     onclose?.Invoke();
                 }
-            }, ismarkclose, position);
+            }, ismarkclose, (forcetoCenter) ? null : position);
             return this;
         }
         public void HideBtnClose( ) => tClose.gameObject.SetActive(false);
@@ -126,6 +129,26 @@ public class PopupPage : MonoBehaviour
         public InputField input;
         public void Open(System.Action<string> onDone = null)
         {
+
+            if (Information.instance.IsMobile) 
+            {
+                HtmlCallback.PopupInputMessage("Input Display Name", (name) => {
+                    if (!string.IsNullOrEmpty(name))
+                    {
+                        Playing.instance.UpdateDisplayName(name);
+                        instance.OnClose();
+                        onDone?.Invoke(name);
+                    }
+                    else 
+                    {
+                        Open(onDone);
+                    }
+                });
+                instance.OnClose();
+                return;
+            }
+
+
             instance.Bg(BgStyle.center);
             input.text = string.Empty;
             instance.Init(root, (state) => {
@@ -166,7 +189,8 @@ public class PopupPage : MonoBehaviour
         public void Open() 
         {
             instance.Bg(BgStyle.center);
-            LoaderService.instance.OnLoadImage(NFTService.instance.Preset.PetImageUrl, (img) => { imgProfile.texture = img; });
+            imgProfile.texture = PetObj.Current.info.Thumbnail;
+            //LoaderService.instance.OnLoadImage(NFTService.instance.Preset.PetImageUrl, (img) => { imgProfile.texture = img; });
             txtName.text = $"{PetData.Current.Name}";
             txtDescription.text = $"{PetData.Current.Description}";
             txtAddress.text = $"{NFTService.instance.Preset.ContractAddress.Substring(0, 20)}....";
@@ -307,7 +331,7 @@ public class PopupPage : MonoBehaviour
 
 
             txt_name.text = Playing.instance.playingData.NickName;
-            txt_user.text = Playing.instance.playingData.UserID;
+            txt_user.text = $"UserID : {Playing.instance.playingData.UserID}";
             txt_star.text = $"Give {Playing.instance.playingData.StarPoint} Star";
 
 
@@ -330,7 +354,7 @@ public class PopupPage : MonoBehaviour
                 }
                 if (state == "copy")
                 {
-                    Playing.instance.RawJson.Copy();
+                    Playing.instance.playingData.UserID.Copy();
                 }
             }, true, position);
         }
@@ -409,7 +433,7 @@ public class PopupPage : MonoBehaviour
 
             bar.fillAmount = (float)Playing.instance.playingData.BalloonPoint / (float)Pet.Static.MaxBalloon;
             name.text = data.Name;
-            name.text = $"{data.ContractAddress.Substring(0, 20)}....";
+            address.text = $"{data.ContractAddress.Substring(0, 20)}....";
             btn.interactable = bar.fillAmount >= 1.0f;
             LoaderService.instance.OnLoadImage(data.ImageUrl, (img) => { image.texture = img; });
 
@@ -541,5 +565,69 @@ public class PopupPage : MonoBehaviour
     }
 
 
+
+
+    public JourneyPopup journey;
+    [System.Serializable]
+    public class JourneyPopup
+    {
+        public Transform root;
+        public Transform position;
+        public List<Text> texts;
+        public Transform scoreTab;
+        public Transform descriptionTab;
+        public Text highscore;
+        public Text dailyscore;
+        public UnityEngine.UI.Text textDiscription;
+        public Scrollbar scrollbar;
+        public void Open()
+        {
+            instance.Bg(BgStyle.side);
+
+
+            highscore.text = $"High Score : {PetData.PetInspector.Journey.HighScore}";
+            dailyscore.text = $"Daily Score : {PetData.PetInspector.Journey.DailyScore}";
+
+            void main()
+            {
+                scoreTab.gameObject.SetActive(true);
+                descriptionTab.gameObject.SetActive(false);
+            }
+            void description( )
+            {
+                textDiscription.text = Language.Get("journey_discription");
+                scoreTab.gameObject.SetActive(false);
+                descriptionTab.gameObject.SetActive(true);
+            }
+            main();
+
+            instance.Init(root, (state) => {
+                if (state == "letgo")
+                {
+                    ConsoleActivity.OnBegin(ConsoleActivity.Activity.Journey);
+                    instance.OnClose();
+                }
+                if (state == "what")
+                {
+                    description();
+                }
+                if (state == "back")
+                {
+                    main();
+                }
+            }, true, position);
+
+
+            texts.ForEach(x => x.text = "------------");
+
+            int index = 0;
+            PetData.PetInspector.JourneyScore.OrderByDescending(x=>x.score).ToList().ForEach(x => {
+                texts[index].enabled = true;
+                texts[index].text = $"#{index+1} {x.name} {x.score.ToString("#,##0")}";
+                index++;
+            });
+
+        }
+    }
 
 }

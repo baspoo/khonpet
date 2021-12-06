@@ -6,7 +6,7 @@ public class ConsoleActivity
 {
     public enum Activity 
     {
-        Food,Play,Clean,Sleep
+        Food,Play,Clean,Sleep, Journey
     }
     public static bool IsActing = false;
     public static void Init() {
@@ -39,6 +39,16 @@ public class ConsoleActivity
         if (activity == Activity.Play) OnPlay();
         if (activity == Activity.Clean) OnClean();
         if (activity == Activity.Sleep) OnSleep();
+        if (activity == Activity.Journey) Journey();
+    }
+
+
+    public static void Action()
+    {
+        IsActing = true;
+        Balloon.instance.Close();
+        MainmenuPage.instance.main.OnActive(false);
+
     }
     public static void OnEnding( )
     {
@@ -51,8 +61,7 @@ public class ConsoleActivity
 
     static void OnFood( )
     {
-        IsActing = true;
-        MainmenuPage.instance.main.OnActive(false);
+        Action();
         MainmenuPage.instance.consoleZone.btnFood.StartCooldown();
         FoodPage.instance.OnPlay((food) => {
             PetData.PetInspector.OnFoodComplete(food);
@@ -61,8 +70,7 @@ public class ConsoleActivity
     }
     static void OnClean()
     {
-        IsActing = true;
-        MainmenuPage.instance.main.OnActive(false);
+        Action();
         MainmenuPage.instance.consoleZone.btnClean.StartCooldown();
         Clean.instance.OnPlay(() => {
             PetData.PetInspector.OnCleanComplete();
@@ -72,8 +80,7 @@ public class ConsoleActivity
 
     static void OnSleep()
     {
-        IsActing = true;
-        MainmenuPage.instance.main.OnActive(false);
+        Action();
         MainmenuPage.instance.consoleZone.btnSleep.StartCooldown();
 
         PetData.PetInspector.OnSleepStart();
@@ -88,7 +95,7 @@ public class ConsoleActivity
             }
             else if (action == Play.PlayAction.Playing) 
             {
-                MainmenuPage.instance.main.OnActive(false);
+                Action();
                 MainmenuPage.instance.consoleZone.btnPlay.StartCooldown();
             }
             else
@@ -96,6 +103,14 @@ public class ConsoleActivity
                 PetData.PetInspector.OnPlayComplete(playType,action == Play.PlayAction.Win);
                 OnEnding();
             }
+        });
+    }
+    static void Journey()
+    {
+        Action();
+        JourneyPage.instance.OnPlay((score) => {
+            PetData.PetInspector.OnJourneyComplete(score);
+            OnEnding();
         });
     }
 }

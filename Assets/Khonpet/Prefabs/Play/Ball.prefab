@@ -24617,7 +24617,7 @@ Transform:
   - {fileID: 5335793554990570713}
   m_Father: {fileID: 5335793553675163699}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 360}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0.3568743}
 --- !u!111 &5335793555427608953
 Animation:
   m_ObjectHideFlags: 0
@@ -24650,6 +24650,10 @@ MonoBehaviour:
   EventSimple:
     m_PersistentCalls:
       m_Calls: []
+  SoundDatas:
+  - name: bounce
+    clip: {fileID: 8300000, guid: 0f4dae2842be3734f95629d2af563e17, type: 3}
+    clips: []
 --- !u!1 &5335793555554624042
 GameObject:
   m_ObjectHideFlags: 0

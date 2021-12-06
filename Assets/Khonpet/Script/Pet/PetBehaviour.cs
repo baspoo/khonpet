@@ -58,7 +58,7 @@ public class PetBehaviour : MonoBehaviour
     }
     void UpdateBoring(  ) 
     {
-        if (m_inspector.IsBoring)
+        if (m_inspector.IsBoring && !m_inspector.IsActing)
         {
             if (!m_pet.talking.bubble.IsTalking || m_pet.anim.animState == PetAnim.AnimState.Idle)
             {

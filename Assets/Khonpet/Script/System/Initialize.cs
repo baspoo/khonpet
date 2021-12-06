@@ -9,6 +9,7 @@ public class Initialize : MonoBehaviour
     {
 
         // PetData
+        Playing.instance.Init();
         PetData.Init(()=> { });
         Language.Init(() => { });
         Config.Init(() => { });
@@ -45,14 +46,16 @@ public class Initialize : MonoBehaviour
         //----------------------------------------------------------------------------------------------------
 
 
-        Playing.instance.Init();
-        PetActivity.Init();
-        Sound.Init();
 
+      
+       
+
+        PetActivity.Init();
         while (!PetActivity.IsReady) yield return new WaitForEndOfFrame();
+        Sound.Init();
         World.instance.Init();
         AirActivity.Init();
-        ChatActivity.Init();
+        Chat.instance.Init();
         InterfaceRoot.instance.Init();
         ConsoleActivity.Init();
     }

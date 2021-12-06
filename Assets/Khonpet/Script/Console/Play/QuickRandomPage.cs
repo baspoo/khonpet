@@ -6,8 +6,9 @@ public class QuickRandomPage : MonoBehaviour
 {
     public Animation anim;
     public Transform coin;
+    public Awake coinEffect;
     public Transform canvas;
-    public Transform[] cups;
+    public SpriteRenderer[] cups;
     public AnimCallback animcallback;
     int m_choise;
     System.Action<bool> m_done;
@@ -28,9 +29,17 @@ public class QuickRandomPage : MonoBehaviour
         {
             OnDone();
         });
-        cups[0].gameObject.SetActive(true);
-        cups[1].gameObject.SetActive(true);
-        cups[2].gameObject.SetActive(true);
+        animcallback.AddAction("open", () =>
+        {
+            if(isMatch)
+                Sound.Play(Sound.playlist.yeahh);
+        });
+        foreach (var cup in cups)
+        {
+            cup.gameObject.SetActive(true);
+            cup.gameObject.transform.localScale = Vector3.one;
+            cup.color = Color.white;
+        }
     }
     public void Close()
     {
@@ -43,7 +52,7 @@ public class QuickRandomPage : MonoBehaviour
     IEnumerator IEOnDone()
     {
         m_choise = 3.Random();
-        coin.position = new Vector3(cups[m_choise].position.x, coin.position.y, coin.position.z);
+        coin.position = new Vector3(cups[m_choise].transform.position.x, coin.position.y, coin.position.z);
         yield return new WaitForSeconds(0.15f);
         canvas.gameObject.SetActive(true);
     }
@@ -53,21 +62,31 @@ public class QuickRandomPage : MonoBehaviour
     {
         StartCoroutine(IESelete(index));
     }
+    bool isMatch = false;
     IEnumerator IESelete(int index)
     {
-        coin.gameObject.SetActive(m_choise == index);
+        this.isMatch = m_choise == index;
+        coinEffect.gameObject.SetActive(isMatch);
+        coin.gameObject.SetActive(true);
         iTween.ShakePosition(cups[index].gameObject, Vector3.one * 0.15f , 0.25f);
         iTween.ShakePosition(coin.gameObject, Vector3.one * 0.15f, 0.25f);
 
-        cups[0].gameObject.SetActive(index == 0);
-        cups[1].gameObject.SetActive(index == 1);
-        cups[2].gameObject.SetActive(index == 2);
+
+        cups.Length.Loop(i => {
+            cups[i].gameObject.transform.localScale = Vector3.one * ((index == i) ? 1.15f : 1.0f);
+            cups[i].color =  ((index == i) ? Color.white : Color.gray);
+        });
 
         anim.Stop();
         anim.Play("quickopen");
-        yield return new WaitForSeconds(1.25f);
+        yield return new WaitForSeconds(1.65f);
+        PetObj.Current.talking.bubble.OnEmo(isMatch? Talking.Bubble.EmoType.FeelingHappy : Talking.Bubble.EmoType.FeelingBad, 1.5f);
+        if (isMatch)
+        {
+            PetObj.Current.anim.OnAnimForce(PetAnim.AnimState.GoodJob);
+        }
 
-        m_done?.Invoke(m_choise == index);
+        m_done?.Invoke(isMatch);
         Close();
 
     }

@@ -72,6 +72,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: c5b22bb659ab1924c9d56f743285e99f, type: 3}
   - {fileID: 21300000, guid: d42c4fc659157334aa37f46c20a55927, type: 3}
   - {fileID: 21300000, guid: 889376e6c5efd1c44ac1c2bc6e5c12a6, type: 3}
+  - {fileID: 21300000, guid: 93a3ecf65e137434ebbb8e5a3e366856, type: 3}
   - {fileID: 21300000, guid: 4f3914472181c664695b6b8eec1ec7e2, type: 3}
   - {fileID: 21300000, guid: d79bde871b2b4fe46b7113c27e328fbf, type: 3}
   - {fileID: 21300000, guid: 3ba9cea8beacf9e4ab4d5dcd1e09207f, type: 3}
@@ -79,11 +80,13 @@ SpriteAtlas:
   - {fileID: 21300000, guid: a76cfd5949df3aa4a9ffe5f48f453bc8, type: 3}
   - {fileID: 21300000, guid: f3d247b9df3f0dd4088143d2f0fe3659, type: 3}
   - {fileID: 21300000, guid: 0550ebf9ba59eb04684fa8aabc6ba234, type: 3}
+  - {fileID: 21300000, guid: bce29c2a8b5ef1a4494ff0aa8203cdc1, type: 3}
   - {fileID: 21300000, guid: 8496363a1fc2cbe48a6f6dcef77a0557, type: 3}
   - {fileID: 21300000, guid: 54c5535a7b5954f4194d0d32cf54d8e7, type: 3}
   - {fileID: 21300000, guid: 65cf9c5aebe2b484d8721cd552f45d34, type: 3}
   - {fileID: 21300000, guid: 5cdee2ca2f5f16e4e9cad4ec31947d1f, type: 3}
   - {fileID: 21300000, guid: 7bdb153b7956495429dd18f1a7024551, type: 3}
+  - {fileID: 21300000, guid: 4716534ba43fea546b1066d755185d7b, type: 3}
   - {fileID: 21300000, guid: e42e838b66b7df84186a2ffaa8b3f7bd, type: 3}
   - {fileID: 21300000, guid: 27ffba9bef16e0748b7e26518914f89c, type: 3}
   - {fileID: 21300000, guid: ff344ecb1f1b2c646b46b2d8619ab7f3, type: 3}
@@ -100,9 +103,11 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 3db3ea1e2f957724db74126d1a97ee09, type: 3}
   - {fileID: 21300000, guid: b425ef3e2688c4546bf26943f138eb2f, type: 3}
   - {fileID: 21300000, guid: 358c908e1a2235a448933ffd127fbb18, type: 3}
+  - {fileID: 21300000, guid: de16c6de3132a6d4883655cc6ac020cd, type: 3}
   - {fileID: 21300000, guid: 01ce4c0f3c71233409944c183a8a2d43, type: 3}
   - {fileID: 21300000, guid: 55f2e81f8be17634fbf8ddb7fef42ac7, type: 3}
   - {fileID: 21300000, guid: 75afad4f22f8b21418ba90b46b6d1c52, type: 3}
+  - {fileID: 21300000, guid: 97371f8f1854a3f4e8b28cb9b296b5dc, type: 3}
   m_PackedSpriteNamesToIndex:
   - icon_rain
   - icon_feeling_bad
@@ -126,6 +131,7 @@ SpriteAtlas:
   - icon_sun
   - icon_notif
   - icon_feeling_super
+  - icon_journey_zero
   - icon_copy
   - icon_stat
   - icon_play_mem
@@ -133,11 +139,13 @@ SpriteAtlas:
   - icon_message
   - icon_status_clean
   - icon_full
+  - icon_compass
   - icon_consolebtn_play
   - icon_fb
   - icon_status
   - icon_setting
   - icon_night
+  - icon_journey_b
   - icon_balloon
   - icon_3dot
   - icon_play_ball
@@ -154,9 +162,11 @@ SpriteAtlas:
   - icon_close
   - icon_stars
   - icon__
+  - icon_journey_a
   - icon_eatingfood_0
   - icon_consolebtn_clean
   - icon_air_termo
+  - icon_time
   m_RenderDataMap: {}
   m_Tag: icons
   m_IsVariant: 0

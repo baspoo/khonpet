@@ -2,6 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
+
+
+
 public class AnimCallback : MonoBehaviour
 {
     public Animator anim { get { if (m_anim == null) m_anim = GetComponent<Animator>(); return m_anim; } }
@@ -60,4 +67,61 @@ public class AnimCallback : MonoBehaviour
     {
         EventSimple?.Invoke();
     }
+
+
+
+
+
+
+
+
+
+
+    public List<SoundData> SoundDatas;
+    [System.Serializable]
+    public class SoundData {
+        public string name;
+        public AudioClip clip;
+        public List<AudioClip> clips;
+        public AudioClip GetClip()
+        {
+            if (clips.Count != 0)
+            {
+                return clips[clips.Count.Random()];
+            }
+            if (clip != null)
+            {
+                return clip;
+            }
+            return null;
+        }
+    }
+    public void Sound(string sound)
+    {
+        var s = SoundDatas.Find(x=>x.name == sound);
+        if (s != null)
+        {
+            var clip = s.GetClip();
+            if(clip!=null)
+                clip.Play();
+        }
+    }
+
+
+
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -21,6 +21,7 @@ public class AirActivity
         public int[] temperature;
         public Sprite icon;
         public GameObject prefab;
+        public Color colorBg;
         public int getTemperature => Random.RandomRange(temperature[0], temperature[1]);
     }
 
@@ -30,14 +31,29 @@ public class AirActivity
     static AirData m_AirData;
     public static void Init() 
     {
-        m_AirData = Store.instance.AirDatas[Store.instance.AirDatas.Count.Random()];
+
+
+        if (PetData.PetInspector.AirName != null && !PetData.PetInspector.AirTimeOut)
+            m_AirData = Store.instance.FindAirData(PetData.PetInspector.AirName);
+
         if (m_AirData == null)
-            Debug.LogError("m_AirData == null");
-        else
-            Debug.Log("Air:"+ m_AirData.airName);
+        {
+            m_AirData = Store.instance.AirDatas[Store.instance.AirDatas.Count.Random()];
+            PetData.PetInspector.UpdateAir(m_AirData.airName);
+        }
+
+
+        if (Setting.instance.debug.isDebugAir) 
+        {
+            m_AirData = Store.instance.FindAirData(Setting.instance.debug.AirType);
+        }
+
 
         if(m_AirData.prefab!=null)
             m_AirData.prefab.Create(World.instance.transform);
+
+        if(m_AirData.colorBg != Color.black)
+            World.instance.Camera.backgroundColor = m_AirData.colorBg;
 
     }
 

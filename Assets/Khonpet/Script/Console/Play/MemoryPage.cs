@@ -38,11 +38,14 @@ public class MemoryPage : MonoBehaviour
         if (value == indexs[enterIndex])
         {
             Debug.Log("Yes!");
+            Sound.Play(Sound.playlist.journey_bitz[enterIndex]);
+
             Btns[value - 1].interactable = false;
             enterIndex++;
             if (enterIndex >= indexs.Count)
             {
                 PetObj.Current.anim.OnAnimForce(PetAnim.AnimState.GoodJob);
+                Sound.Play(Sound.playlist.match);
                 Debug.Log("Done");
                 Talking.instance.message.Show(Talking.Message.MessageType.goodjob);
                 iTween.ShakePosition(gameObject, Vector3.one * 0.15f, 0.25f);
@@ -51,17 +54,22 @@ public class MemoryPage : MonoBehaviour
                 {
                     StartCoroutine(End(true));
                 }
-                else 
+                else
                 {
                     StartCoroutine(Wave());
                 }
 
+            }
+            else 
+            {
+            
             }
         }
         else 
         {
             Debug.Log("No!");
             PetObj.Current.anim.OnAnimForce(PetAnim.AnimState.Bad);
+            Sound.Play(Sound.playlist.fail);
 
             fail.gameObject.SetActive(true);
             fail.position = Btns[value - 1].transform.position;
@@ -132,6 +140,7 @@ public class MemoryPage : MonoBehaviour
             var i = indexs[index];
             var btn = Btns[i-1];
             btn.interactable = false;
+            Sound.Play(Sound.playlist.journey_bitz[index]);
             yield return new WaitForSeconds(0.5f);
             btn.interactable = true;
             yield return new WaitForSeconds(0.25f);
@@ -150,6 +159,14 @@ public class MemoryPage : MonoBehaviour
             b.interactable = true;
         yield return new WaitForSeconds(1.0f);
         OnDeactive();
+
+        if (win)
+        {
+            PetObj.Current.anim.OnAnimForce(PetAnim.AnimState.GoodJob);
+            Sound.Play(Sound.playlist.yeahh);
+        }
+        PetObj.Current.talking.bubble.OnEmo(win ? Talking.Bubble.EmoType.FeelingHappy : Talking.Bubble.EmoType.FeelingBad, 1.5f);
+
         m_done?.Invoke(win);
         Close();
 

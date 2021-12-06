@@ -88,8 +88,10 @@ SpriteAtlas:
   - {fileID: 21300000, guid: d8ced0e753f266146ae688c0805a4a84, type: 3}
   - {fileID: 21300000, guid: a2d66bb87bda5824693b2687e1005763, type: 3}
   - {fileID: 21300000, guid: 5527cae82bb14d4438459a0b9831ca4d, type: 3}
+  - {fileID: 21300000, guid: 519df10986cbc04409c98620d9aacb9a, type: 3}
   - {fileID: 21300000, guid: 48fda23937c4a6b47a7a8bef7a6321b1, type: 3}
   - {fileID: 21300000, guid: dbd55d495a20f5b41a9220b73f5d841c, type: 3}
+  - {fileID: 21300000, guid: 242daee97d32ea34097ad203004bf55f, type: 3}
   - {fileID: 21300000, guid: 4205df2a452d9274f97f5e6a9067b9e5, type: 3}
   - {fileID: 21300000, guid: 1c0d166ab00c6894e973da0112faac4d, type: 3}
   - {fileID: 21300000, guid: a7f0cf7af70d03a47abbb89dd1cf8e25, type: 3}
@@ -147,8 +149,10 @@ SpriteAtlas:
   - ui_bar_shadow
   - loading_rotate_1
   - ui_star_bar_run
+  - ui_bar_journeyrun
   - ui_dance_obj
   - ui_playball_bar
+  - ui_bar_journeyback
   - ui_dance_filed
   - ui_star_bg
   - ui_cir

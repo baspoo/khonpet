@@ -65,14 +65,16 @@ public static class PetActivity
         public long Star => (Setting.instance.debug.isStarDebug) ? Setting.instance.debug.StarCountDebug : FirebaseService.instance.Preset.Star;
         public Utility.Level Lv => new Utility.Level(Star);
         public bool Liked => m_petplaying.Liked;
-        public bool IsBoring => m_petplaying.UnixLastPetting.ToDateTime().AddMinutes( Config.Data.Time.BoringTime_Min )  < System.DateTime.Now;
-
+        public bool IsBoring => m_petplaying.UnixLastPetting.IsTimeout(Config.Data.Time.BoringTime_Min);
+        public bool IsLikeAir => PetData.Air == AirActivity.GetAirData().airName;
         public List<PlayingData.PetPlaying.QuestPlaying> Quests => m_petplaying.Quests;
 
         public bool IsNeedFood => this.GetStat(Pet.StatType.Hungry) < (Pet.Static.MaxStat * 0.9);
         public bool IsNeedEnergy => this.GetStat(Pet.StatType.Energy) < (Pet.Static.MaxStat * 0.2);
         public bool IsNeedClean => this.GetStat(Pet.StatType.Cleanliness) < (Pet.Static.MaxStat * 0.5);
 
+
+        public bool IsActing => ConsoleActivity.IsActing;
 
         public bool IsSleeping => this.GetActivity(Pet.Activity.StartSleep) != null;
 
@@ -99,6 +101,12 @@ public static class PetActivity
             }
         }
 
+        public string AirName => m_petplaying.Air.AirName;
+        public bool AirTimeOut => m_petplaying.Air.UnixAir.IsTimeout(60);
+
+
+        public List<FirebaseService.Pet.TopScore.Score> JourneyScore => FirebaseService.instance.Preset.TopScore.journey;
+        public PlayingData.PetPlaying.JourneyData Journey => m_petplaying.Journey;
     }
 
 
@@ -108,7 +116,9 @@ public static class PetActivity
         { 
             pet.AddStar(1);
             pet.AddActivity(Pet.Activity.Petting, 1);
+            pet.AddStat(Pet.StatType.Relationship, pet.IsLikeAir? Random.RandomRange(1,3) : 1 );
             pet.PetPlaying.Petting();
+            Chat.instance.Add(Chat.ChatCode.petting);
         }
     }
 
@@ -123,15 +133,29 @@ public static class PetActivity
         pet.AddActivity(Pet.Activity.GiveStar, star);
         Playing.instance.AddStar(star);
         MainmenuPage.instance.starZone.OnAddStar(star);
+        Chat.instance.Add(Chat.ChatCode.star);
+        FirebaseService.instance.UpdateUserData();
     }
+
+    public static void LvUp(this PetInspector pet)
+    {
+        PetObj.Current.OnUpdatePetObj();
+        Chat.instance.Add(Chat.ChatCode.lvup);
+    }
+
 
     public static void AddLike(this PetInspector pet)
     {
         FirebaseService.instance.Preset.ClientLike++;
         FirebaseService.instance.AddValue(FirebaseService.ValueKey.like, 1);
         pet.PetPlaying.Liked();
+        Chat.instance.Add(Chat.ChatCode.like);
     }
 
+    public static void UpdateAir(this PetInspector pet , string airName)
+    {
+        pet.PetPlaying.UpdateAir(airName);
+    }
 
 
     public static void AddRelationship(this PetInspector pet)
@@ -149,6 +173,7 @@ public static class PetActivity
         switch (feeling)
         {
             case Feeling.FeelingType.Super:
+                Chat.instance.Add(Chat.ChatCode.food);
                 pet.AddActivity(Pet.Activity.EatHappyFood);
                 star = 5;
                 break;
@@ -165,8 +190,15 @@ public static class PetActivity
                 break;
         }
 
-        if(pet.OnGiveStarUnFullStat(Pet.StatType.Hungry, star));
-            pet.AddStat(Pet.StatType.Hungry, star);
+        if (pet.OnGiveStarUnFullStat(Pet.StatType.Hungry, star))
+        {
+            pet.AddStat(Pet.StatType.Hungry, food);
+            if (feeling == Feeling.FeelingType.Super)
+            {
+                pet.AddStat(Pet.StatType.Relationship, 1);
+            }
+        }
+
         pet.AddActivity(Pet.Activity.EatFood);
     }
     public static void OnPlayComplete(this PetInspector pet , Play.PlayType play , bool win )
@@ -252,7 +284,36 @@ public static class PetActivity
         pet.RemoveActivity(Pet.Activity.StartSleep);
     }
 
-
+    public static void OnJourneyComplete(this PetInspector pet, int score)
+    {
+        int star = 0;
+        int max = Config.Data.Journey.PointOfRange;
+        //old 18000
+        //new 25000
+        // 25000-18000 = 7000
+        // 18000 % 5000 = 3000
+        // 7000+3000 = 2 star
+        var resume = score - pet.Journey.DailyScore;
+        var mod = pet.Journey.DailyScore % max;
+        resume += mod;
+        if (resume > 0) 
+        {
+            star = (int)resume / max;
+            star = star.Max(9);
+        }
+        FirebaseService.instance.TopScoreVerify(score);
+        pet.AddStar(star);
+        var high = pet.PetPlaying.UpdateJourney(score, star);
+        if (high)
+        {
+            //New High Score..
+            PetObj.Current.talking.petTalk.Show($"{Language.Get("journey_newhighscore")} {score}");
+        }
+        if (high || star!=0) 
+        {
+            PetObj.Current.anim.OnAnimForce(PetAnim.AnimState.LikeLove);
+        }
+    }
 
 
 }

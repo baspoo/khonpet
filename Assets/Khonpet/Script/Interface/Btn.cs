@@ -19,7 +19,7 @@ public class Btn : MonoBehaviour
     public bool isToggle;
     public enum SoundClick 
     {
-        none,click,select,close
+        none,click,select,close, claim
     }
 
 
@@ -35,6 +35,7 @@ public class Btn : MonoBehaviour
             if (soundClick == SoundClick.click) Sound.Play(Sound.playlist.click);
             if (soundClick == SoundClick.select) Sound.Play(Sound.playlist.select);
             if (soundClick == SoundClick.close) Sound.Play(Sound.playlist.close);
+            if (soundClick == SoundClick.claim) Sound.Play(Sound.playlist.claim);
         }
         if (m_animation != null)
         {

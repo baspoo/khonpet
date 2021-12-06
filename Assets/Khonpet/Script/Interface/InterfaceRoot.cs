@@ -17,21 +17,29 @@ public class InterfaceRoot : MonoBehaviour
 
 
 
-
-
     public void Init()
+    {
+        if (string.IsNullOrEmpty(Playing.instance.playingData.NickName))
+        {
+            World.instance.HideWorld(true);
+            popup.displayName.Open((displayName) =>
+            {
+                World.instance.HideWorld(false);
+                Active();
+            });
+        }
+        else 
+        {
+            Active();
+        }
+    }
+    void Active() 
     {
         mainmenu.Init();
         popup.Init();
-
-        if (string.IsNullOrEmpty(Playing.instance.playingData.NickName)) 
-        {
-            popup.displayName.Open((displayName)=> {
-               
-            });
-        }
-
     }
+
+
 
     public void Loading(bool active)
     {

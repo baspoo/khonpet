@@ -13,14 +13,21 @@ public class World : MonoBehaviour
 
 
     public Transform Root;
+    public Camera Camera;
     public Transform Background;
     public Transform PetPosition;
 
 
 
+    public void HideWorld(bool isHide) 
+    {
+        //World.instance.Camera.transform.localRotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+        Camera.transform.localRotation = Quaternion.Euler(0.0f, isHide? 180.0f : 0.0f , 0.0f);
+    }
 
 
-        public void Awake()
+
+    public void Awake()
     {
         Root.gameObject.SetActive(false);
     }
