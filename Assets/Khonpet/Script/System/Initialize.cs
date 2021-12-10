@@ -58,6 +58,11 @@ public class Initialize : MonoBehaviour
         Chat.instance.Init();
         InterfaceRoot.instance.Init();
         ConsoleActivity.Init();
+
+
+
+        yield return new WaitForSeconds(1.5f);
+        Conversation.Welcome();
     }
 
 

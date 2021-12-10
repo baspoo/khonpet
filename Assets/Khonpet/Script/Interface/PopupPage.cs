@@ -11,7 +11,6 @@ public class PopupPage : MonoBehaviour
     public Transform popup;
     [Header("Background")]
     public Transform bg_center;
-    public Transform bg_side;
     public Transform bg_hight;
     public static PopupPage instance { get { if (m_instance == null) m_instance = FindObjectOfType<PopupPage>(); return m_instance; } }
     static PopupPage m_instance;
@@ -44,7 +43,6 @@ public class PopupPage : MonoBehaviour
     void Bg(BgStyle style)
     {
         bg_center.gameObject.SetActive(style == BgStyle.center);
-        bg_side.gameObject.SetActive(style == BgStyle.side);
         bg_hight.gameObject.SetActive(style == BgStyle.hight);
     }
     public void OnMarkClose()
@@ -470,7 +468,7 @@ public class PopupPage : MonoBehaviour
         public List<BarObject> barObjects;
         public void Open()
         {
-            instance.Bg(BgStyle.side);
+            instance.Bg(BgStyle.center);
             instance.Init(root, (state) => { }, true, position);
 
            
@@ -533,7 +531,7 @@ public class PopupPage : MonoBehaviour
 
 
             main();
-            instance.Bg(BgStyle.side);
+            instance.Bg(BgStyle.center);
             instance.Init(root, (state) => {
                 if (state == "back") 
                 {
@@ -582,7 +580,7 @@ public class PopupPage : MonoBehaviour
         public Scrollbar scrollbar;
         public void Open()
         {
-            instance.Bg(BgStyle.side);
+            instance.Bg(BgStyle.hight);
 
 
             highscore.text = $"High Score : {PetData.PetInspector.Journey.HighScore}";
@@ -622,9 +620,14 @@ public class PopupPage : MonoBehaviour
 
             int index = 0;
             PetData.PetInspector.JourneyScore.OrderByDescending(x=>x.score).ToList().ForEach(x => {
-                texts[index].enabled = true;
-                texts[index].text = $"#{index+1} {x.name} {x.score.ToString("#,##0")}";
-                index++;
+
+                if (index < texts.Count)
+                {
+
+                    texts[index].enabled = true;
+                    texts[index].text = $"#{index + 1} {x.name} {x.score.ToString("#,##0")}";
+                    index++;
+                }
             });
 
         }

@@ -38,10 +38,12 @@ public class DanceObj : MonoBehaviour
         { 
             transform.Translate( Vector3.down* m_page.setting.Speed * Time.deltaTime );
             // (N == 95) < (100 -  20) = 80
-            if (transform.localPosition.y < (m_data.EndPoint.localPosition.y - m_page.setting.PaddingRange)) 
+            if (transform.localPosition.y < (m_page.setting.PaddingRange*-1)) 
             {
                 OnMissing();
             }
+            //if (transform.localPosition.y < 0)
+                //gameObject.transform.localScale = Vector3.zero;
         }
     }
 
@@ -49,7 +51,7 @@ public class DanceObj : MonoBehaviour
     {
         Debug.Log("OnMissing!");
         //PetObj.Current?.anim.OnAnimForce(PetAnim.AnimState.Bad);
-        Talking.instance?.message.Show(Talking.Message.MessageType.bad);
+        Talking.instance.petTalk.ShowHeader(Talking.PetTalk.HeaderType.bad);
         Dispose();
     }
     public bool OnCheck() 
@@ -59,15 +61,19 @@ public class DanceObj : MonoBehaviour
         // (N == 95) < (100 +  20) = 120
         // (N == 95) > (100 + -20) = 80
 
+        //var hight = transform.localPosition.y;
+        //var up = m_page.setting.MatchRanges[0];
+        //var down = m_page.setting.MatchRanges[1];
 
-        if (
-            transform.localPosition.y < (m_data.EndPoint.localPosition.y + m_page.setting.MatchRanges[0]) &&
-            transform.localPosition.y > (m_data.EndPoint.localPosition.y + m_page.setting.MatchRanges[1]))
+        var vec = transform.localPosition;
+        vec.y = 0.0f;
+        var dist = Vector3.Distance(transform.localPosition, vec);
+        if (dist< m_page.setting.PaddingRange)
         {
             Debug.Log("Match!");
 
             //PetObj.Current?.anim.OnAnimForce(PetAnim.AnimState.GoodJob);
-            Talking.instance?.message.Show(Talking.Message.MessageType.goodjob);
+            Talking.instance.petTalk.ShowHeader(Talking.PetTalk.HeaderType.goodjob);
             m_data.Eff.OnAwake();
             m_page.OnMatched();
             Dispose();
@@ -75,8 +81,8 @@ public class DanceObj : MonoBehaviour
         }
         else 
         {
-
-            Debug.Log($"{transform.localPosition.y}  <  {m_data.EndPoint.localPosition.y + m_page.setting.MatchRanges[0]}  &&  >  {m_data.EndPoint.localPosition.y + m_page.setting.MatchRanges[1]}");
+            Debug.Log($"{transform.localPosition} - {vec} - {dist}");
+           //Debug.Log($"{transform.localPosition.y}  <  {m_data.EndPoint.localPosition.y + m_page.setting.MatchRanges[0]}  &&  >  {m_data.EndPoint.localPosition.y + m_page.setting.MatchRanges[1]}");
             return false;
         }
     }

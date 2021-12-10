@@ -26,7 +26,8 @@ public class Balloon : MonoBehaviour
     public void Init()
     {
         Close();
-        Times = Config.Data.Time.BalloonTime_Sec;
+        gameObject.SetActive(Config.Data.Balloon.Active);
+        Times = Config.Data.Balloon.Duration_Sec;
         m_balloons = new List<NFTService.CollectionData>();
         foreach (var data in NFTService.instance.OtherOwner) 
         {

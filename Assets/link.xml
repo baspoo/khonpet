@@ -27,14 +27,12 @@
 		<type fullname="System.ComponentModel.UInt64Converter" preserve="all"/>
 	</assembly>
   <assembly fullname="UnityEngine">
-    
     <type fullname="UnityEngine.iOS.NotificationServices" preserve="all"/>
     <type fullname="UnityEngine.iOS.RemoteNotification" preserve="all"/>
     <type fullname="UnityEngine.AndroidJavaClass" preserve="all"/>
     <type fullname="UnityEngine.AndroidJavaObject" preserve="all"/>
     <type fullname="UnityEngine.Video" preserve="all"/>
     <type fullname="UnityEngine.VideoModule" preserve="all"/>
-    
     <type fullname="UnityEngine.MeshRenderer" preserve="all"/>
     <type fullname="UnityEngine.MeshFilter" preserve="all"/>
     <type fullname="UnityEngine.BoxCollider" preserve="all"/>
@@ -45,8 +43,10 @@
     <type fullname="UnityEngine.PhysicMaterial" preserve="all"/>
     <type fullname="UnityEditor.Animations.AnimatorController" preserve="all"/>
     <type fullname="UnityEngine.U2D.Animation" preserve="all"/>
-
-
+    <type fullname="Unity.2D.Animation" preserve="all"/>
+  </assembly>
+  <assembly fullname="Unity">
+    <type fullname="Unity.2D.Animation" preserve="all"/>
   </assembly>
   <assembly fullname="Parse.Unity">
     <namespace fullname="Parse" preserve="all"/>

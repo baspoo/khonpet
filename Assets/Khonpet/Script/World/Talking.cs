@@ -9,9 +9,12 @@ public class Talking : MonoBehaviour
 
 
 
-    void StartWait(float time, System.Action done) { coro=StartCoroutine(Wait(time,done)); }
-    void StopWait( ) { if (coro != null) StopCoroutine(coro); }
-    Coroutine coro;
+    Coroutine StartWait(float time, System.Action done) { return StartCoroutine(Wait(time,done)); }
+    void StopWait(Coroutine coro) 
+    {
+        if (coro != null)
+            StopCoroutine(coro);
+    }
     IEnumerator Wait(float time, System.Action done)
     {
         yield return new WaitForSeconds(time);
@@ -43,7 +46,7 @@ public class Talking : MonoBehaviour
         public EmoType emoType => m_emoType;
         EmoType m_emoType;
 
-
+        Coroutine coro;
         public enum EmoType { FeelingSuper, FeelingHappy, FeelingNormal, FeelingBad ,Eating, Sleep, Love, Full , Boring }
         [System.Serializable]
         public class EmoData
@@ -71,7 +74,8 @@ public class Talking : MonoBehaviour
         {
             void action() 
             {
-                instance.StopWait();
+
+                instance.StopWait(coro);
                 Talk.gameObject.SetActive(false);
                 TalkIcon.gameObject.SetActive(false);
                 EmoDatas.ForEach(x => {
@@ -86,7 +90,7 @@ public class Talking : MonoBehaviour
             }
             else 
             {
-                instance.StartWait(wait,()=> { action(); });
+                coro = instance.StartWait(wait,()=> { action(); });
             }
         }
         public void OnEmo(EmoType emo, float duration = 0.0f)
@@ -122,66 +126,121 @@ public class Talking : MonoBehaviour
     public class PetTalk
     {
         public Transform Talk;
+        public Animation anim_message;
+        public Animation anim_header;
         public UnityEngine.UI.Text Message;
-        public void Show(string message)
+        public UnityEngine.UI.Text Header;
+        public float Duration;
+        Coroutine coro;
+        public void ShowText(string message)
         {
+            anim_message.gameObject.SetActive(true);
+            anim_header.gameObject.SetActive(false);
+
             Message.text = message;
             Talk.gameObject.SetActive(true);
-            instance.StartWait(2.0f, () => {
+
+            anim_message.Stop();
+            anim_message.Play(anim_message.clip.name);
+
+            instance.StopWait(coro);
+            coro = instance.StartWait(Duration, () => {
+                Hide();
+            });
+        }
+
+        public enum HeaderType { goodjob, great, bad }
+        public void ShowHeader(HeaderType message) {
+            switch (message)
+            {
+                case HeaderType.goodjob:
+                    ShowHeader("goodjob!");
+                    break;
+                case HeaderType.great:
+                    ShowHeader("great!");
+                    break;
+                case HeaderType.bad:
+                    ShowHeader("bad!");
+                    break;
+                default:
+                    break;
+            }
+        }
+        public void ShowHeader(string message)
+        {
+            anim_message.gameObject.SetActive(false);
+            anim_header.gameObject.SetActive(true);
+
+            Header.text = message;
+            Talk.gameObject.SetActive(true);
+
+            anim_header.Stop();
+            anim_header.Play(anim_header.clip.name);
+
+            instance.StopWait(coro);
+            coro = instance.StartWait(2.0f, () => {
                 Hide();
             });
         }
         public void Hide()
         {
-            instance.StopWait();
+            instance.StopWait(coro);
             Talk.gameObject.SetActive(false);
         }
     }
-
-
-
-
-
-
-
-
-
-
-    public Message message;
-    [System.Serializable]
-    public class Message
+    public void ForceHidePetTalk() 
     {
-        public Transform Talk;
-        public SpriteRenderer TalkIcon;
-        public Animation anim;
-        public Sprite GoodJob;
-        public Sprite Great;
-        public Sprite Bad;
-        public enum MessageType { goodjob, great, bad}
-        public void Show(MessageType type)
-        {
-            switch (type)
-            {
-                case MessageType.goodjob:
-                    TalkIcon.sprite = GoodJob;
-                    break;
-                case MessageType.great:
-                    TalkIcon.sprite = Great;
-                    break;
-                case MessageType.bad:
-                    TalkIcon.sprite = Bad;
-                    break;
-            }
-            Talk.gameObject.SetActive(true);
-            anim.Stop();
-            anim.Play(anim.clip.name);
-        }
-        public void Hide()
-        {
-            instance.StopWait();
-            Talk.gameObject.SetActive(false);
-        }
+        petTalk.Hide();
     }
+
+
+
+
+
+
+
+
+
+    //public Message message;
+    //[System.Serializable]
+    //public class Message
+    //{
+    //    public Transform Talk;
+    //    public SpriteRenderer TalkIcon;
+    //    public Animation anim;
+    //    public Sprite GoodJob;
+    //    public Sprite Great;
+    //    public Sprite Bad;
+    //    public enum MessageType { goodjob, great, bad}
+    //    public void Show(MessageType type)
+    //    {
+    //        switch (type)
+    //        {
+    //            case MessageType.goodjob:
+    //                TalkIcon.sprite = GoodJob;
+    //                break;
+    //            case MessageType.great:
+    //                TalkIcon.sprite = Great;
+    //                break;
+    //            case MessageType.bad:
+    //                TalkIcon.sprite = Bad;
+    //                break;
+    //        }
+    //        Talk.gameObject.SetActive(true);
+    //        anim.Stop();
+    //        anim.Play(anim.clip.name);
+
+    //        instance.StopWait();
+    //        instance.StartWait(1.65f, () => {
+    //            Hide();
+    //        });
+    //    }
+    //    public void Hide()
+    //    {
+    //        instance.StopWait();
+    //        Talk.gameObject.SetActive(false);
+    //    }
+    //}
 
 
 

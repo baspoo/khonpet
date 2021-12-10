@@ -96,6 +96,16 @@ public class PlayingData
             public bool IsEquipped;
         }
 
+
+        public List<Conversation> Conversations = new List<Conversation>();
+        [System.Serializable]
+        public class Conversation
+        {
+            public string Key;
+            public int Value;
+            public long UnixLastActive;
+        }
+
         public List<Activity> Activities = new List<Activity>();
         [System.Serializable]
         public class Activity
@@ -225,6 +235,38 @@ public static class PetPlayingTools
         return pet.Equips.Find(x => x.Index == index);
     }
     //*****************************************************************
+    // Conversation
+    //*****************************************************************
+    public static PlayingData.PetPlaying.Conversation UpdateConversation(this PlayingData.PetPlaying pet, string Key, int Value = 0, Opt Opt = Opt.Set)
+    {
+        var act = pet.Conversations.Find(x => x.Key == Key);
+        if (act == null)
+        {
+            act = new PlayingData.PetPlaying.Conversation();
+            act.Key = Key;
+            act.Value = Value;
+            act.UnixLastActive = Playing.instance.playingUnix;
+            pet.Conversations.Add(act);
+        }
+        else
+        {
+            if (Opt == Opt.Add) act.Value += Value;
+            if (Opt == Opt.Set) act.Value = Value;
+            act.UnixLastActive = Playing.instance.playingUnix;
+        }
+        Playing.instance.Save();
+        return act;
+    }
+    public static void RemoveConversation(this PlayingData.PetPlaying pet, string Key)
+    {
+        pet.Conversations.RemoveAll(x => x.Key == Key);
+        Playing.instance.Save();
+    }
+    public static PlayingData.PetPlaying.Conversation FindConversation(this PlayingData.PetPlaying pet, string Key)
+    {
+        return pet.Conversations.Find(x => x.Key == Key);
+    }
+    //*****************************************************************
     // Activity
     //*****************************************************************
     public static PlayingData.PetPlaying.Activity UpdateActivity(this PlayingData.PetPlaying pet, string ActName, int Value = 0, Opt Opt = Opt.Set)
@@ -282,7 +324,7 @@ public static class PetPlayingTools
         return pet.Quests.Find(x => x.QuestID == QuestID);
     }
     //*****************************************************************
-    // Quest
+    // Journey
     //*****************************************************************
     public static bool UpdateJourney(this PlayingData.PetPlaying pet, long score , int star) 
     {
@@ -438,6 +480,11 @@ public class Playing : MonoBehaviour
         m_playing.NickName = displayName;
         Save();
     }
+    public void ChangeLanguage(Language.LanguageType language)
+    {
+        m_playing.Language = (int)language;
+        Save();
+    }
     public void AddStar(int star)
     {
         m_playing.StarPoint += star;
@@ -473,7 +520,15 @@ public class Playing : MonoBehaviour
         if (pet == null)
         {
             // new pet
-            pet = new PlayingData.PetPlaying() { PetID = petID };
+            pet = new PlayingData.PetPlaying() {
+                PetID = petID 
+            };
+
+            pet.Petting();
+            pet.AddStat(Pet.StatType.Energy, Pet.Static.MaxStat, PetPlayingTools.Opt.Set);
+            pet.AddStat(Pet.StatType.Hungry, Pet.Static.MaxStat / 2, PetPlayingTools.Opt.Set);
+            pet.AddStat(Pet.StatType.Cleanliness, Pet.Static.MaxStat / 2, PetPlayingTools.Opt.Set);
+
             m_playing.PetPlayings.Add(pet);
         }
         if (current)

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class MemoryPage : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class MemoryPage : MonoBehaviour
     public UnityEngine.UI.Button[] Btns;
     public Transform block;
     public Transform fail;
+    public Transform t_next;
     System.Action<bool> m_done;
 
 
@@ -47,7 +49,7 @@ public class MemoryPage : MonoBehaviour
                 PetObj.Current.anim.OnAnimForce(PetAnim.AnimState.GoodJob);
                 Sound.Play(Sound.playlist.match);
                 Debug.Log("Done");
-                Talking.instance.message.Show(Talking.Message.MessageType.goodjob);
+                Talking.instance.petTalk.ShowHeader(Talking.PetTalk.HeaderType.goodjob);
                 iTween.ShakePosition(gameObject, Vector3.one * 0.15f, 0.25f);
 
                 if (round == maxRound)
@@ -83,7 +85,9 @@ public class MemoryPage : MonoBehaviour
 
     IEnumerator StartWave( )
     {
+
         OnDeactive();
+        BtnActive(false);
         yield return new WaitForSeconds(0.75f);
         //foreach (var b in Btns)
         //{
@@ -93,16 +97,26 @@ public class MemoryPage : MonoBehaviour
         //}
 
 
-
+        BtnActive(true);
         StartCoroutine(Wave());
 
     }
 
-
-    void OnDeactive() 
+    void BtnActive(bool active)
     {
         foreach (var b in Btns)
+        {
+            b.gameObject.SetActive(active);
+        }
+    }
+    void OnDeactive() 
+    {
+        t_next.gameObject.SetActive(false);
+        fail.gameObject.SetActive(false);
+        foreach (var b in Btns)
+        {
             b.interactable = true;
+        }
         block.gameObject.SetActive(true);
         box.color = Color.gray;
         isready = false;
@@ -115,10 +129,16 @@ public class MemoryPage : MonoBehaviour
     List<int> indexs = new List<int>();
     IEnumerator Wave() 
     {
+        EventSystem.current.SetSelectedGameObject(null);
         block.gameObject.SetActive(true);
         box.color = Color.gray;
         enterIndex = 0;
         isready = false;
+        
+
+
+
+
         round++;
         int count = 1 + round;
         indexs = new List<int>();
@@ -129,9 +149,20 @@ public class MemoryPage : MonoBehaviour
             indexs.Add(c);
         });
         yield return new WaitForSeconds((round>1) ?1.5f:0.5f);
+
+        //Next
+        t_next.gameObject.SetActive(true);
+        while (!isready)
+        {
+            yield return new WaitForEndOfFrame();
+        }
+
+
         fail.gameObject.SetActive(false);
         foreach (var b in Btns)
             b.interactable = true;
+
+
         yield return new WaitForSeconds(0.5f);
 
         int index = 0;
@@ -146,19 +177,37 @@ public class MemoryPage : MonoBehaviour
             yield return new WaitForSeconds(0.25f);
             index++;
         }
+        EventSystem.current.SetSelectedGameObject(null);
 
-        isready = true;
         box.color = Color.white;
         block.gameObject.SetActive(false);
+
     }
+
+
+
+
+
+
+    public void Next() 
+    {
+        t_next.gameObject.SetActive(false);
+        isready = true;
+    }
+
+
 
     IEnumerator End(bool win)
     {
-        yield return new WaitForSeconds(0.5f);
-        foreach (var b in Btns)
-            b.interactable = true;
-        yield return new WaitForSeconds(1.0f);
+        //yield return new WaitForSeconds(0.5f);
+        //foreach (var b in Btns)
+        //    b.interactable = true;
+
+        block.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1.25f);
         OnDeactive();
+        BtnActive(false);
+      
 
         if (win)
         {

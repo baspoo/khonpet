@@ -102,7 +102,7 @@ public static class PetActivity
         }
 
         public string AirName => m_petplaying.Air.AirName;
-        public bool AirTimeOut => m_petplaying.Air.UnixAir.IsTimeout(60);
+        public bool AirTimeOut => m_petplaying.Air.UnixAir.IsTimeout(Config.Data.Air.SeasonChangeDuration_Min);
 
 
         public List<FirebaseService.Pet.TopScore.Score> JourneyScore => FirebaseService.instance.Preset.TopScore.journey;
@@ -112,11 +112,12 @@ public static class PetActivity
 
     public static void OnPetting(this PetInspector pet)
     {
+        Conversation.Petting(pet.IsBoring, pet.IsLikeAir);
         if (pet.IsBoring) 
         { 
             pet.AddStar(1);
             pet.AddActivity(Pet.Activity.Petting, 1);
-            pet.AddStat(Pet.StatType.Relationship, pet.IsLikeAir? Random.RandomRange(1,3) : 1 );
+            pet.AddRelationship(pet.IsLikeAir? Random.RandomRange(1,3) : 1 );
             pet.PetPlaying.Petting();
             Chat.instance.Add(Chat.ChatCode.petting);
         }
@@ -149,7 +150,9 @@ public static class PetActivity
         FirebaseService.instance.Preset.ClientLike++;
         FirebaseService.instance.AddValue(FirebaseService.ValueKey.like, 1);
         pet.PetPlaying.Liked();
+        pet.AddRelationship(10);
         Chat.instance.Add(Chat.ChatCode.like);
+        Conversation.Like( );
     }
 
     public static void UpdateAir(this PetInspector pet , string airName)
@@ -158,9 +161,9 @@ public static class PetActivity
     }
 
 
-    public static void AddRelationship(this PetInspector pet)
+    public static void AddRelationship(this PetInspector pet , int point = 1)
     {
-        pet.AddStat( Pet.StatType.Relationship , 1);
+        pet.AddStat( Pet.StatType.Relationship , point);
 
     }
 
@@ -169,7 +172,9 @@ public static class PetActivity
     {
         var feeling = pet.PetData.Foods[type];
         var star = 0;
-        var food = 20;
+        var foodpoint = Config.Data.Eat.Hungry;
+        var energy = Config.Data.Eat.Energy;
+
         switch (feeling)
         {
             case Feeling.FeelingType.Super:
@@ -190,15 +195,20 @@ public static class PetActivity
                 break;
         }
 
-        if (pet.OnGiveStarUnFullStat(Pet.StatType.Hungry, star))
+
+        var current = pet.GetStat(Pet.StatType.Hungry);
+        bool unfull = pet.OnGiveStarUnFullStat(Pet.StatType.Hungry, star);
+        if (unfull)
         {
-            pet.AddStat(Pet.StatType.Hungry, food);
+            pet.AddStat(Pet.StatType.Hungry, foodpoint);
+            pet.AddStat(Pet.StatType.Energy, energy);
             if (feeling == Feeling.FeelingType.Super)
             {
-                pet.AddStat(Pet.StatType.Relationship, 1);
+                pet.AddRelationship(1);
             }
         }
 
+        Conversation.EatFood(type, feeling, current , !unfull);
         pet.AddActivity(Pet.Activity.EatFood);
     }
     public static void OnPlayComplete(this PetInspector pet , Play.PlayType play , bool win )
@@ -215,13 +225,16 @@ public static class PetActivity
             case Play.PlayType.Guess: pet.AddActivity(Pet.Activity.PlayGuess); break;
             case Play.PlayType.Dance: pet.AddActivity(Pet.Activity.PlayDance); break;
         }
+        Conversation.Play(play, win);
     }
     public static void OnCleanComplete(this PetInspector pet )
     {
         var star = (Pet.Static.MaxStat-pet.GetStat(Pet.StatType.Cleanliness)) / 20;
-        if (pet.OnGiveStarUnFullStat(Pet.StatType.Cleanliness, star))
+        bool unfull = pet.OnGiveStarUnFullStat(Pet.StatType.Cleanliness, star);
+        if (unfull)
             pet.AddActivity(Pet.Activity.Clean, star);
         pet.AddStat(Pet.StatType.Cleanliness, 100);
+        Conversation.Clean(star,!unfull);
     }
     public static void OnSleepStart(this PetInspector pet)
     {
@@ -277,11 +290,12 @@ public static class PetActivity
         Debug.Log($"realEnergy : {realEnergy}");
         Debug.Log($"star : {star}");
 
-
-        if(pet.OnGiveStarUnFullStat(Pet.StatType.Energy, star ))
+        bool unfull = pet.OnGiveStarUnFullStat(Pet.StatType.Energy, star);
+        if (unfull)
             pet.AddActivity(Pet.Activity.Sleep, star);
         pet.AddStat(Pet.StatType.Energy, realEnergy );
         pet.RemoveActivity(Pet.Activity.StartSleep);
+        Conversation.Sleep(star, realEnergy, unfull);
     }
 
     public static void OnJourneyComplete(this PetInspector pet, int score)
@@ -303,12 +317,11 @@ public static class PetActivity
         }
         FirebaseService.instance.TopScoreVerify(score);
         pet.AddStar(star);
+
+
+        //New High Score..
         var high = pet.PetPlaying.UpdateJourney(score, star);
-        if (high)
-        {
-            //New High Score..
-            PetObj.Current.talking.petTalk.Show($"{Language.Get("journey_newhighscore")} {score}");
-        }
+        Conversation.JourneyTopScore(high, score);
         if (high || star!=0) 
         {
             PetObj.Current.anim.OnAnimForce(PetAnim.AnimState.LikeLove);

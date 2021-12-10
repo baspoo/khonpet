@@ -1,7 +1,7 @@
-using System.Collections;
+
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.Linq;
 
 
 
@@ -12,13 +12,33 @@ public class Config
     [System.Serializable]
     public class ConfigData
     {
+        public AirData Air;
+        [System.Serializable]
+        public class AirData
+        {
+            public long SeasonChangeDuration_Min;
+        }
+        public BalloonData Balloon;
+        [System.Serializable]
+        public class BalloonData
+        {
+            public bool Active;
+            public float[] Duration_Sec;
+        }
         public TimeData Time;
         [System.Serializable]
         public class TimeData
         {
             public int BoringTime_Min;
-            public float[] BalloonTime_Sec;
         }
+        public EatData Eat;
+        [System.Serializable]
+        public class EatData
+        {
+            public int Hungry;
+            public int Energy;
+        }
+
         public List<StatReduceData> StatReduce;
         [System.Serializable]
         public class StatReduceData
@@ -95,7 +115,16 @@ public class Language
 {
 
     public static bool Done = false;
-    public static Dictionary<string, string[]> Languages = new Dictionary<string, string[]>();
+
+
+    public class LanguageData {
+        public string key;
+        public string[] messages;
+        public string getmessage => messages[languageIndex];
+        public List<string> tag;
+    }
+
+    public static List<LanguageData> Languages = new List<LanguageData>();
     public static void Init(System.Action done)
     {
         if (Done) 
@@ -111,15 +140,16 @@ public class Language
 
         void setup(string data) 
         {
-            Debug.Log("data: " + data);
             var table = GameDataTable.ReadData(data);
-            Debug.Log("table: " + table.GetTable().Count);
             foreach (var d in table.GetTable())
             {
-                Debug.Log("d: " + d.DataLists.Count);
-                Languages.Add(d.GetIndex(0), new string[2] { d.GetIndex(1), d.GetIndex(2) });
+                Languages.Add(new LanguageData()
+                {
+                    key = d.GetIndex(0),
+                    tag = d.GetIndex(1).Split(',').ToList(),
+                    messages = new string[] { d.GetIndex(2) , d.GetIndex(3) }
+                }) ;
             }
-            Debug.Log("Languages: " + Languages.Count);
             Done = true;
             done();
         }
@@ -132,11 +162,33 @@ public class Language
 
     public static string Get(string key) 
     {
-        if (Languages.ContainsKey(key)) 
+        var language = Languages.Find(x=>x.key == key);
+        if (language!=null) 
         {
-            return Languages[key][languageIndex];
+            return language.messages[languageIndex];
         }
         else return key;
-    } 
+    }
+    public static List<LanguageData> GetTag( List<string> tag)
+    {
+
+        List<LanguageData> let = new List<LanguageData>();
+        foreach (var find in Languages) {
+
+
+            bool iscan = true;
+            foreach (var t in tag)
+            {
+                if(!find.tag.Contains(t))
+                    iscan = false;
+            }
+            if (iscan)
+                let.Add(find);
+        }
+        return let;
+    }
+
+
+
 
 }

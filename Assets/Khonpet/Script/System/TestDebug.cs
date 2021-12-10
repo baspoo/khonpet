@@ -67,9 +67,9 @@ public class TestDebugUI : Editor
         }
         if (GUILayout.Button("Test"))
         {
+            PetObj.Current.talking.petTalk.ShowText($"{Language.Get("journey_newhighscore")} {1000}");
 
-
-            FirebaseService.instance.TopScoreVerify(Random.RandomRange(0,1000));
+            //FirebaseService.instance.TopScoreVerify(Random.RandomRange(0,1000));
 
             //for (int d = 0; d < 100; d++)
             //    Debug.Log(Random.RandomRange(1, 4));

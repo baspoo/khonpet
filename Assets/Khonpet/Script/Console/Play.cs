@@ -46,7 +46,7 @@ public class Play : MonoBehaviour
                     btn.Count.text = $"{Mathf.Abs(data.Energy)}";
 
                     if(btn.Btn.interactable)
-                        btn.Btn.interactable = PetData.PetInspector.GetStat(Pet.StatType.Energy) >= data.Energy;
+                        btn.Btn.interactable = PetData.PetInspector.GetStat(Pet.StatType.Energy) >= (Mathf.Abs(data.Energy));
 
                 }
                 tPosition.position = MainmenuPage.instance.consoleZone.btnPlay.transform.position;

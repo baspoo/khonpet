@@ -1,4 +1,14 @@
 {
+    "Air": {
+        "SeasonChangeDuration_Min": 60
+    },
+    "Balloon": {
+        "Active": true,
+        "Duration_Sec": [
+            30,
+            80
+        ]
+    },
     "Time": {
         "BoringTime_Min": 30,
         "BalloonTime_Sec": [

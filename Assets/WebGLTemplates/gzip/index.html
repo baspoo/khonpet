@@ -211,6 +211,30 @@
 
 
 
+        function paramsVerify() {
+           
+
+            const params = new URLSearchParams(window.location.search)
+            var id = params.get('id');
+            console.log("id :" + id );
+
+            if(!params.has('id'))
+            {
+              //not have id! redirect to homepage
+              //window.location.replace("http://www.w3schools.com");
+              window.location.href = "home";
+            }
+
+    
+        }
+        paramsVerify();
+
+
+
+
+
+
+
         //Clear Memory Cache
         function clearCache() {
             var idb = window.indexedDB || window.mozIndexedDB ||

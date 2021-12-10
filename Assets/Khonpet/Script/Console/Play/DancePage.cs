@@ -26,7 +26,7 @@ public class DancePage : MonoBehaviour
     public class Setting
     {
         public float PaddingRange;
-        public float[] MatchRanges;
+        //public float[] MatchRanges;
         public float[] GenarationsTime;
         public float DiscountGenarationsTime;
         public int Count;
