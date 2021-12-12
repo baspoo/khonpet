@@ -158,7 +158,7 @@ public class PetData
             {
                 PetDatas.Add(new PetData(d));
             }
-            Debug.Log("ContentDatas:" + PetDatas.Count);
+            //Debug.Log("ContentDatas:" + PetDatas.Count);
             done();
         }
 

@@ -67,8 +67,10 @@ public class DancePage : MonoBehaviour
 
         var count = setting.Count;
         active = true;
-        Sound.PlayBgm(Sound.playlist.bgm_dance);
+
         yield return new WaitForSeconds(1.0f);
+
+        Sound.PlayBgm(Sound.playlist.bgm_dance);
         PetObj.Current?.anim.OnAnimForce(PetAnim.AnimState.Dance);
 
         while (count!=0) 

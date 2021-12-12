@@ -65,7 +65,17 @@ public class NFTService : MonoBehaviour
         Debug.Log($"KhonpetOwner : {KhonpetOwner.Count}");
         Debug.Log($"OtherOwner : {OtherOwner.Count}");
     }
-
+    public void SetupPresetUnkwon()
+    {
+        Preset = new PresetData();
+        Preset.ContractAddress = ContractAddress;
+        Preset.Token = Token;
+        Preset.OwnerName = "Unknown";
+        Preset.OwnerAddress = "Unknown";
+        Preset.OwnerProfileImgUrl = null;
+        Preset.PetImageUrl = null;
+        IsDone = true;
+    }
 
 
 
@@ -100,7 +110,8 @@ public class NFTService : MonoBehaviour
 
         if (uwr.error != null)
         {
-            Debug.Log(uwr.error);
+            Debug.LogError(uwr.error);
+            SetupPresetUnkwon();
         }
         else
         {

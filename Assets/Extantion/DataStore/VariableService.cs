@@ -109,10 +109,12 @@ public static class VariableService
 	public static float Max(this float i, float max) => (i > max) ? max : i;
 	public static System.DateTime ToDateTime(this long unix) => Utility.TimeServer.TimeStampToDateTime(unix);
 	public static bool IsTimeout(this System.DateTime dateTime , long nextMin ) => dateTime.AddMinutes(nextMin) < System.DateTime.Now;
+	public static bool IsTimeoutSec(this System.DateTime dateTime, long nextSec) => dateTime.AddSeconds(nextSec) < System.DateTime.Now;
 	public static bool IsTimeout(this long dateTime, long nextMin) => dateTime.ToDateTime().AddMinutes(nextMin) < System.DateTime.Now;
 	public static bool IsNewDay(this System.DateTime dateTime) => dateTime.Day != System.DateTime.Now.Day;
 
 	public static int Random(this int i) => UnityEngine.Random.RandomRange(0, i);
+	public static bool IsPercent(this int i) => UnityEngine.Random.RandomRange(0, 100) <= i;
 	public static float Random(this float i) => UnityEngine.Random.RandomRange(0, i);
 
 	public static string KiloFormat(this int num) => KiloFormat((long)num);

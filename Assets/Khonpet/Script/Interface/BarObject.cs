@@ -12,6 +12,7 @@ public class BarObject : MonoBehaviour
     public Image Icon;
     public Image Bar;
     public Image Img;
+    public RawImage Raw;
     public Button Btn;
     public Btn Other;
     public int Value;

@@ -44,7 +44,7 @@ public class MainmenuPage : MonoBehaviour
         {
             LoaderService.instance.OnLoadImage(NFTService.instance.Preset.OwnerProfileImgUrl, (img) => { imgProfile.texture = img; });
             txtName.text = $"OWNER : {NFTService.instance.Preset.OwnerName}";
-            txtAddress.text = $"{NFTService.instance.Preset.OwnerAddress.Substring(0,20)}....";
+            txtAddress.text = (NFTService.instance.Preset.OwnerAddress.Length>20)?$"{NFTService.instance.Preset.OwnerAddress.Substring(0,20)}....": NFTService.instance.Preset.OwnerAddress;
             btnGoto.name = $"https://opensea.io/{NFTService.instance.Preset.OwnerAddress}";
         }
     }
@@ -345,7 +345,7 @@ public class MainmenuPage : MonoBehaviour
     }
     public void OnHome()
     {
-
+        PopupPage.instance.map.Open();
     }
     public void OnMesaage()
     {

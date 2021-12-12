@@ -34,4 +34,8 @@ public class Manager : MonoBehaviour
         yield return StartCoroutine(init.Init());
         InterfaceRoot.instance.Loading(false);
     }
+
 }
+
+
+

@@ -14923,7 +14923,13 @@ MonoBehaviour:
   EventSimple:
     m_PersistentCalls:
       m_Calls: []
-  SoundDatas: []
+  SoundDatas:
+  - name: move1
+    clip: {fileID: 8300000, guid: 12132b96779126a43a771229918e8aa2, type: 3}
+    clips: []
+  - name: move2
+    clip: {fileID: 8300000, guid: cf0f898e402e07e47a2e03b7bf49e030, type: 3}
+    clips: []
 --- !u!1 &1615656317458473666
 GameObject:
   m_ObjectHideFlags: 0

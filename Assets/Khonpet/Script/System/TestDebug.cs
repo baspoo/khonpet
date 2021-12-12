@@ -37,7 +37,15 @@ public class TestDebug : MonoBehaviour
 
 
 
-
+public class Logger : MonoBehaviour
+{
+    public static void Log(object log)
+    {
+#if UNITY_EDITOR
+        Debug.Log(log);
+#endif
+    }
+}
 
 
 
@@ -45,7 +53,7 @@ public class TestDebug : MonoBehaviour
 
 
 #if UNITY_EDITOR
-[CanEditMultipleObjects]
+    [CanEditMultipleObjects]
 [CustomEditor(typeof(TestDebug))]
 [System.Serializable]
 public class TestDebugUI : Editor

@@ -43,15 +43,17 @@ public class PetEditor : Editor
 		{
 			EditorGUIService.BeginContents(false);
 			{
+
+				pet.body.direction = (Pet.Direction)EditorGUILayout.EnumPopup("direction", pet.body.direction);
 				pet.body.root = (Transform)EditorGUILayout.ObjectField("root", pet.body.root, typeof(Transform));
 				pet.body.head = (Transform)EditorGUILayout.ObjectField("head", pet.body.head, typeof(Transform));
 				pet.body.talk = (Transform)EditorGUILayout.ObjectField("talk", pet.body.talk, typeof(Transform));
-				pet.body.glasses = (Transform)EditorGUILayout.ObjectField("glasses", pet.body.glasses, typeof(Transform));
-				pet.body.eyes[0] = (Transform)EditorGUILayout.ObjectField("eyes 1", pet.body.eyes[0], typeof(Transform));
-				pet.body.eyes[1] = (Transform)EditorGUILayout.ObjectField("eyes 2", pet.body.eyes[1], typeof(Transform));
-				pet.body.mouth = (Transform)EditorGUILayout.ObjectField("mouth", pet.body.mouth, typeof(Transform));
+				//pet.body.glasses = (Transform)EditorGUILayout.ObjectField("glasses", pet.body.glasses, typeof(Transform));
+				//pet.body.eyes[0] = (Transform)EditorGUILayout.ObjectField("eyes 1", pet.body.eyes[0], typeof(Transform));
+				//pet.body.eyes[1] = (Transform)EditorGUILayout.ObjectField("eyes 2", pet.body.eyes[1], typeof(Transform));
+				//pet.body.mouth = (Transform)EditorGUILayout.ObjectField("mouth", pet.body.mouth, typeof(Transform));
 				pet.body.bodycenter = (Transform)EditorGUILayout.ObjectField("body center", pet.body.bodycenter, typeof(Transform));
-				pet.body.foot = (Transform)EditorGUILayout.ObjectField("foot", pet.body.foot, typeof(Transform));
+				//pet.body.foot = (Transform)EditorGUILayout.ObjectField("foot", pet.body.foot, typeof(Transform));
 			
 			}
 			EditorGUIService.EndContents();

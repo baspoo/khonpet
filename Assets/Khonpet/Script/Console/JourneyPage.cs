@@ -9,6 +9,7 @@ public class JourneyPage : MonoBehaviour
 
 
     public Transform root;
+    public Transform diraction;
     public List<BarObject> bars;
     public Transform t_Time;
     public Transform t_winlose;
@@ -68,7 +69,10 @@ public class JourneyPage : MonoBehaviour
         textcomboshort.text = "";
         textscore.text = "0";
         isready = false;
-       
+
+        //** Pet Face Diraction
+        PetObj.Current.ChangeDiraction(diraction);
+
         //wait mainmenu animation hide
         yield return new WaitForSeconds(1.0f);
         Sound.PlayBgm(Sound.playlist.bgm_journey);
@@ -239,7 +243,7 @@ public class JourneyPage : MonoBehaviour
 
         if (done)
         {
-            Debug.Log("WINNN!");
+            //Debug.Log("WINNN!");
             Sound.Play(Sound.playlist.journey_win);
             PetObj.Current.talking.bubble.OnEmo(lowScore? Talking.Bubble.EmoType.FeelingNormal : Talking.Bubble.EmoType.FeelingHappy, 1.5f);
             t_win.gameObject.SetActive(true);
@@ -265,7 +269,7 @@ public class JourneyPage : MonoBehaviour
         }
         else
         {
-            Debug.Log("FAIL!");
+            //Debug.Log("FAIL!");
             Sound.Play(Sound.playlist.journey_miss);
             PetObj.Current.talking.bubble.OnEmo(Talking.Bubble.EmoType.FeelingBad, 1.5f);
             t_lose.gameObject.SetActive(true);
@@ -303,7 +307,10 @@ public class JourneyPage : MonoBehaviour
         OnClose();
     }
 
-
+    public void OnExit()
+    {
+        StartCoroutine(EndGame());
+    }
 
 
 

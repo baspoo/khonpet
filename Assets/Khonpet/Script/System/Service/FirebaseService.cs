@@ -111,14 +111,14 @@ public class FirebaseService : MonoBehaviour
         };
         //Set
         firebase.OnSetSuccess = (sender, snapshot) => {
-            Debug.Log($"[OK-SetSuccess] {sender.FullKey} Raw Json: " + snapshot.RawJson);
+            Logger.Log($"[OK-SetSuccess] {sender.FullKey} Raw Json: " + snapshot.RawJson);
         };
         firebase.OnSetFailed = (sender, error) => {
             Debug.LogError("[ERR-SetFailed] Set from key: <" + sender.FullKey + ">, " + error.Message + " (" + (int)error.Status + ")");
         };
         //Update
         firebase.OnUpdateSuccess = (sender, snapshot) => {
-            Debug.Log($"[OK-UpdateSuccess] {sender.FullKey} Raw Json: " + snapshot.RawJson);
+            Logger.Log($"[OK-UpdateSuccess] {sender.FullKey} Raw Json: " + snapshot.RawJson);
         };
         firebase.OnUpdateFailed = (sender, error) => {
             Debug.LogError("[ERR-UpdateFailed] Set from key: <" + sender.FullKey + ">, " + error.Message + " (" + (int)error.Status + ")");
@@ -126,9 +126,9 @@ public class FirebaseService : MonoBehaviour
 
 
         FirebaseObserver observer = new FirebaseObserver(firebase.Child("chats", true), 1f);
-        observer.OnChange += (Firebase sender, DataSnapshot snapshot) =>
+        observer.OnChange = (Firebase sender, DataSnapshot snapshot) =>
         {
-            Debug.Log($"[OBSERVER] Raw Json: " + snapshot.RawJson);
+            //Debug.Log($"[OBSERVER] Raw Json: " + snapshot.RawJson);
             pet.chats = JsonConvert.DeserializeObject<Dictionary<string, Pet.Chat>>(snapshot.RawJson);
             ChatVerify(pet);
             onChatUpdate?.Invoke(pet.chats);
@@ -162,15 +162,15 @@ public class FirebaseService : MonoBehaviour
     public void GetTime(System.Action done)
     {
         //** GetTime **
-        Debug.Log("GetTime");
+        //Debug.Log("GetTime");
         Firebase lastUpdate = firebase.Child("time", true);
         lastUpdate.OnSetSuccess = (sender, snap) =>
         {
             long timeStamp = snap.Value<long>();
             var dateTime = Firebase.TimeStampToDateTime(timeStamp);
             time = timeStamp;
-            Debug.Log($"[OK-GetTime] Raw Json: {snap.RawJson}");
-            Debug.Log($"[OK-GetTime] Datetime: {dateTime}");
+            Logger.Log($"[OK-GetTime] Raw Json: {snap.RawJson}");
+            Logger.Log($"[OK-GetTime] Datetime: {dateTime}");
             timeserver.Init(dateTime);
             done?.Invoke();
         };
@@ -195,7 +195,7 @@ public class FirebaseService : MonoBehaviour
     {
         //** GetPet **
         firebase.OnGetSuccess = (sender, snapshot) => {
-            Debug.Log($"[OK-GetPet] Raw Json: " + snapshot.RawJson);
+            Logger.Log($"[OK-GetPet] Raw Json: " + snapshot.RawJson);
             pet = JsonConvert.DeserializeObject<Pet>(snapshot.RawJson);
             ChatVerify(pet);
             done?.Invoke(pet);
@@ -232,14 +232,13 @@ public class FirebaseService : MonoBehaviour
 
         if (stocks.Count == 0)
         {
-            Debug.Log("SendValue");
             SendValue(send);
         }
         else 
         {
            
             stocks.Add(send);
-            Debug.Log($"Stocks {stocks.Count}");
+            Logger.Log($"Stocks {stocks.Count}");
         }
     }
     void SendValue(stock send) {
@@ -283,7 +282,7 @@ public class FirebaseService : MonoBehaviour
         Firebase put = firebase.Child("chats", true);
         put.OnPushSuccess = (sender, snap) =>
         {
-            Debug.Log($"[OK-PushChat] Raw Json: " + snap.RawJson);
+            Logger.Log($"[OK-PushChat] Raw Json: " + snap.RawJson);
         };
         put.Push(chat.SerializeToJson(), true);
     }
@@ -307,7 +306,7 @@ public class FirebaseService : MonoBehaviour
             }
             else
             {
-                Debug.Log($"delete chat {chat.Key}");
+                Logger.Log($"delete chat {chat.Key}");
                 Firebase updatechat = firebase.Child($"chats/{chat.Key}", true);
                 updatechat.Delete();
                 pet.chats.Remove(chat.Key);
@@ -322,7 +321,7 @@ public class FirebaseService : MonoBehaviour
 
     public void TopScoreVerify(long score)
     {
-        Debug.Log($"TopScoreVerify score: {score}");
+        Logger.Log($"TopScoreVerify score: {score}");
         GetPet((pet) => {
             int max = 20;
             var journey = pet.topscores.journey.OrderByDescending(x => x.score).ToList();
@@ -336,7 +335,7 @@ public class FirebaseService : MonoBehaviour
                 istopscore = journey.Find(x => x.score < score) != null;
             }
 
-            Debug.Log($"TopScoreVerify topscore: {istopscore}");
+            Logger.Log($"TopScoreVerify topscore: {istopscore}");
 
             if (istopscore)
             {
@@ -359,7 +358,7 @@ public class FirebaseService : MonoBehaviour
                 pet.topscores.journey = journey.OrderByDescending(x=>x.score).ToList();
                 Firebase update = firebase.Child($"topscores", true);
                 var json = pet.topscores.SerializeToJson();
-                Debug.Log($"TopScoreVerify json: {json}");
+                Logger.Log($"TopScoreVerify json: {json}");
                 update.UpdateValue(json);
             }
         });
@@ -380,6 +379,8 @@ public class FirebaseService : MonoBehaviour
     [System.Serializable]
     public class UserHistory
     {
+        public string nickname;
+        public string pin;
         public long star;
         public long createdat;
         public long lastupdate;
@@ -389,11 +390,13 @@ public class FirebaseService : MonoBehaviour
         //***
        
         UserHistory history = new UserHistory();
+        history.nickname = Playing.instance.playingData.NickName;
+        history.pin = Playing.instance.playingData.PIN;
         history.star = Playing.instance.playingData.StarPoint;
         history.createdat = Playing.instance.playingData.UnixCreatedAt;
         history.lastupdate = Playing.instance.playingUnix;
         var json = history.SerializeToJson();
-        Debug.Log($"UpdateUserData : {json}");
+        Logger.Log($"UpdateUserData : {json}");
         firebaseUser.UpdateValue(json);
     }
 

@@ -31,14 +31,15 @@ public class PetObj : MonoBehaviour
     [System.Serializable]
     public class PetBody 
     {
+        public Pet.Direction direction;
         public Transform root;
         public Transform head;
         public Transform talk;
-        public Transform glasses;
-        public Transform[] eyes = new Transform[2];
-        public Transform mouth;
+        //public Transform glasses;
+        //public Transform[] eyes = new Transform[2];
+        //public Transform mouth;
         public Transform bodycenter;
-        public Transform foot;
+        //public Transform foot;
     }
 
 
@@ -82,6 +83,10 @@ public class PetObj : MonoBehaviour
         this.AdjuestCostume();
     }
 
-
+    public void ChangeDiraction(Transform diraction) {
+        var direct = Vector3.one;
+        direct.x = body.direction == Pet.Direction.Right ? 1.0f : -1.0f;
+        diraction.transform.localScale = direct;
+    }
 
 }

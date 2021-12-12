@@ -70,7 +70,7 @@ public class LoaderService : MonoBehaviour
 
 
 
-	#region Config.Sson
+	#region Config.Json
 	public void OnGetDatabase( string file ,System.Action<string> done) => StartCoroutine(GetDatabase(file,done));
 	IEnumerator GetDatabase(string file, System.Action<string> callback)
 	{
@@ -80,7 +80,7 @@ public class LoaderService : MonoBehaviour
 		yield return www;
 		if (www.error == null)
 		{
-			Debug.Log($"DownloadConfig done is > {  www.text }");
+			//Debug.Log($"DownloadConfig done is > {  www.text }");
 			callback?.Invoke(www.text);
 		}
 		else
@@ -92,15 +92,25 @@ public class LoaderService : MonoBehaviour
 	}
 	#endregion
 
-
+	#region MapImage
+	public void OnLoadMapImage(string file , System.Action<Texture> onfinish) {
+		StartCoroutine(LoadImage($"{Application.streamingAssetsPath}/AssetBundle/Map/{file}.png", onfinish));
+	}
+	#endregion
 
 
 
 	#region Image
 	Dictionary<string, Texture> m_imgstock = new Dictionary<string, Texture>();
+
 	public void OnLoadImage(string url, System.Action<Texture> onfinish) => StartCoroutine(LoadImage(url, onfinish));
 	IEnumerator LoadImage(string url, System.Action<Texture> onfinish = null)
 	{
+		if (string.IsNullOrEmpty(url))
+		{
+			onfinish(null);
+			yield break;
+		}
 		if (m_imgstock.ContainsKey(url))
 		{
 			onfinish(m_imgstock[url]);
@@ -112,19 +122,19 @@ public class LoaderService : MonoBehaviour
 		{
 			if (www.error == null)
 			{
-				Debug.Log("<color=green> Load Image Done => </color>" + www.text);
+				Logger.Log("<color=green> Load Image Done => </color>" + www.text);
 				if (!m_imgstock.ContainsKey(url)) 
 					m_imgstock.Add(url, www.texture); 
 				onfinish(www.texture);
 			}
 			else
 			{
-				Debug.Log("<color=red> Fail => </color>" + www.error);
+				Logger.Log("<color=red> Fail => </color>" + www.error);
 			}
 		}
 		else
 		{
-			Debug.Log("<color=red> Fail </color>");
+			Logger.Log("<color=red> Fail </color>");
 		}
 	}
 	#endregion

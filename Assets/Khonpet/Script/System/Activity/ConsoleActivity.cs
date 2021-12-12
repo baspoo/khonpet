@@ -46,7 +46,7 @@ public class ConsoleActivity
     public static void Action()
     {
         IsActing = true;
-        Balloon.instance.Close();
+        Balloon.instance?.Close();
         MainmenuPage.instance.main.OnActive(false);
 
     }

@@ -22,6 +22,7 @@ public class FoodPage : MonoBehaviour
     public Animation animSpin;
     public AnimCallback tFoodAnim;
     public SpriteRenderer sprFoodAnim;
+    public Transform[] tDiraction;
 
     void OnEnable()
     {
@@ -51,6 +52,11 @@ public class FoodPage : MonoBehaviour
     IEnumerator Play(System.Action<Food.FoodType> callback) 
     {
 
+        //** Pet Face Diraction
+        foreach (var t in tDiraction) 
+        {
+            PetObj.Current.ChangeDiraction(t);
+        }
 
         //**Clean
         FoodSpins.ForEach(x => { x.Icon.transform.localScale = Vector3.one; });

@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.Linq;
 public static class PetActivity 
 {
 
@@ -51,6 +51,7 @@ public static class PetActivity
         PetObj petObj => PetObj.Current;
         PetData m_pet;
         PlayingData.PetPlaying m_petplaying;
+
         public PetInspector(PetData pet) 
         {
             this.m_pet = pet;
@@ -73,7 +74,8 @@ public static class PetActivity
         public bool IsNeedEnergy => this.GetStat(Pet.StatType.Energy) < (Pet.Static.MaxStat * 0.2);
         public bool IsNeedClean => this.GetStat(Pet.StatType.Cleanliness) < (Pet.Static.MaxStat * 0.5);
 
-
+        public Food.FoodType FoodFav => m_pet.Foods.First(x => x.Value == Feeling.FeelingType.Super).Key;
+        public Food.FoodType FoodBad => m_pet.Foods.First(x => x.Value == Feeling.FeelingType.Bad).Key;
         public bool IsActing => ConsoleActivity.IsActing;
 
         public bool IsSleeping => this.GetActivity(Pet.Activity.StartSleep) != null;
@@ -100,7 +102,7 @@ public static class PetActivity
                 return Store.instance.Relationships[0];
             }
         }
-
+  
         public string AirName => m_petplaying.Air.AirName;
         public bool AirTimeOut => m_petplaying.Air.UnixAir.IsTimeout(Config.Data.Air.SeasonChangeDuration_Min);
 
@@ -283,23 +285,27 @@ public static class PetActivity
         var star = realEnergy / 20;
 
 
-        Debug.Log($"energy : {energy}");
-        Debug.Log($"nowEnergy : {nowEnergy}");
-        Debug.Log($"awsP : {awsP}");
-        Debug.Log($"des : {des}");
-        Debug.Log($"realEnergy : {realEnergy}");
-        Debug.Log($"star : {star}");
+        //Debug.Log($"energy : {energy}");
+        //Debug.Log($"nowEnergy : {nowEnergy}");
+        //Debug.Log($"awsP : {awsP}");
+        //Debug.Log($"des : {des}");
+        //Debug.Log($"realEnergy : {realEnergy}");
+        //Debug.Log($"star : {star}");
 
         bool unfull = pet.OnGiveStarUnFullStat(Pet.StatType.Energy, star);
         if (unfull)
             pet.AddActivity(Pet.Activity.Sleep, star);
         pet.AddStat(Pet.StatType.Energy, realEnergy );
         pet.RemoveActivity(Pet.Activity.StartSleep);
-        Conversation.Sleep(star, realEnergy, unfull);
+        Conversation.Sleep(star, energy , unfull);
     }
 
     public static void OnJourneyComplete(this PetInspector pet, int score)
     {
+
+        if (score == 0)
+            return;
+
         int star = 0;
         int max = Config.Data.Journey.PointOfRange;
         //old 18000
@@ -383,6 +389,15 @@ public static class StatUtility
         var statVal = inspector.GetStat(Stat);
         return (statVal > Pet.Static.MaxStat * 0.9);
     }
+    public static bool IsHighDemandData(this PetActivity.PetInspector inspector, Pet.StatType Stat)
+    {
+        var statVal = inspector.GetStat(Stat);
+        return (statVal <= Pet.Static.MaxStat * 0.3);
+    }
+
+
+    
+
     public static int CalStat(int currentValue ,long lastupdate, int reduce)
     {
         //currentValue = 100;

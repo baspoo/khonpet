@@ -14,8 +14,8 @@ public class InterfaceRoot : MonoBehaviour
 
 
 
-
-
+    public bool IsReady => m_Ready;
+    bool m_Ready;
 
     public void Init()
     {
@@ -35,6 +35,7 @@ public class InterfaceRoot : MonoBehaviour
     }
     void Active() 
     {
+        m_Ready = true;
         mainmenu.Init();
         popup.Init();
     }

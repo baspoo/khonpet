@@ -62,7 +62,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: aa2cf2221c24ff54ba9c39748853e669, type: 3}
   - {fileID: 21300000, guid: 6026b6329fdaae447a4985732a79e808, type: 3}
   - {fileID: 21300000, guid: 17516d327dc5b0c4bab3da25fc6a45f3, type: 3}
-  - {fileID: 21300000, guid: cef0fb420a717d14da67dbcacb6846d3, type: 3}
   - {fileID: 21300000, guid: d338a4927211a1e4886e5b7286879363, type: 3}
   - {fileID: 21300000, guid: e6cc8f926d0e3284bb191f7acd8e9955, type: 3}
   - {fileID: 21300000, guid: 42276be280e975246bb2a42a0add2333, type: 3}
@@ -82,7 +81,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: e95a7817310dc7045abd86d797ff7f5e, type: 3}
   - {fileID: 21300000, guid: 5820386767920ab4fade9f91931f1793, type: 3}
   - {fileID: 21300000, guid: 1bdafc8712988e04b9372e831a4744b8, type: 3}
-  - {fileID: 21300000, guid: 278249977807cb8409bc3bb0840f2272, type: 3}
   - {fileID: 21300000, guid: 1f7d46a7eab8da648a53e4fb8a5af842, type: 3}
   - {fileID: 21300000, guid: 88e737a78c9611b419c22bd8bdb20d86, type: 3}
   - {fileID: 21300000, guid: d8ced0e753f266146ae688c0805a4a84, type: 3}
@@ -108,7 +106,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: d3270b6d33f57f64da208593eab1f8f2, type: 3}
   - {fileID: 21300000, guid: 3a2651cd734e0184bb127a356a13f673, type: 3}
   - {fileID: 21300000, guid: c5546dcd2529078478f3d2f47b7c42d0, type: 3}
-  - {fileID: 21300000, guid: dd7838ee0e1371741b19adf719818594, type: 3}
   - {fileID: 21300000, guid: 5c4bbc7f1a96ba44d9f12bd1bc3b97c0, type: 3}
   - {fileID: 21300000, guid: 4ddb60ff9055b1747ade1097f5a4ddb7, type: 3}
   m_PackedSpriteNamesToIndex:
@@ -123,7 +120,6 @@ SpriteAtlas:
   - ui_playball_thum
   - ui_dot
   - ui_arrow3
-  - ui_text_bad
   - ui_shadow
   - ui_air bar
   - ui_line-1
@@ -143,7 +139,6 @@ SpriteAtlas:
   - ui_petmode_single
   - ui_base-cri
   - ui_bar
-  - ui_text_goodjob
   - ui_bar_side_shadow
   - ui_lighthelf
   - ui_bar_shadow
@@ -169,7 +164,6 @@ SpriteAtlas:
   - ui_sq_shadow
   - ui_dance_arrow
   - loading_icon
-  - ui_text_great
   - ui_dance_btn
   - ui_btn
   m_RenderDataMap: {}

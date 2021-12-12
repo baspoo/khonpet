@@ -10,7 +10,12 @@ public class Balloon : MonoBehaviour
     public static Balloon instance { get { if (m_instance == null) m_instance = FindObjectOfType<Balloon>(); return m_instance; } }
     static Balloon m_instance;
 
-
+    public static void OnAwake() {
+        if (Config.Data.Balloon.Active) 
+        {
+            Store.instance.World.balloon.Create(World.instance.gameObject.transform).GetComponent<Balloon>().Init();
+        }
+    }
 
 
 
@@ -26,7 +31,6 @@ public class Balloon : MonoBehaviour
     public void Init()
     {
         Close();
-        gameObject.SetActive(Config.Data.Balloon.Active);
         Times = Config.Data.Balloon.Duration_Sec;
         m_balloons = new List<NFTService.CollectionData>();
         foreach (var data in NFTService.instance.OtherOwner) 

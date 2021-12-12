@@ -65,7 +65,6 @@ SpriteAtlas:
   - {fileID: 21300000, guid: aaeefe94ab9da264f9d0f3a5278dd9d1, type: 3}
   - {fileID: 21300000, guid: 689d3115a6a420d4f824edfd9df3eb01, type: 3}
   - {fileID: 21300000, guid: 5a22f915a620ed54cb8a2e5786c46015, type: 3}
-  - {fileID: 21300000, guid: a912cfd5888ef6e4aabb1f1979f187d7, type: 3}
   - {fileID: 21300000, guid: c5a185061f70ec74c9c16f401eeb0b92, type: 3}
   - {fileID: 21300000, guid: e735be26c3afa5f4b891509c12fedcca, type: 3}
   - {fileID: 21300000, guid: dbb75b76805380a4998a01b7fb9c41d2, type: 3}
@@ -124,7 +123,6 @@ SpriteAtlas:
   - icon_consolebtn_z
   - icon_starbg
   - icon_cloud
-  - icon_nft
   - icon_snow
   - icon_feeling_normal
   - icon_consolebtn_food

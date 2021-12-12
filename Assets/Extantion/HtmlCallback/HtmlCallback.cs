@@ -93,6 +93,12 @@ public class HtmlCallback : MonoBehaviour
     }
 
 
+    //GotoPet
+    public static void GotoPet(string contect)
+    {
+        OnHtmlMessage(3, contect);
+    }
+
 
 
 

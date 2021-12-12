@@ -84,7 +84,7 @@ namespace Behaviour
                 time = 0.0f;
             }
         }
-        class PetEvent
+        public class PetEvent
         {
             public string EventName;
             public float Remaining;
@@ -104,6 +104,10 @@ namespace Behaviour
                 Action = Action,
                 isOnceTime = isOnceTime,
             });
+        }
+        public PetEvent GetEvent(string EventName)
+        {
+            return petEvents.Find(x=>x.EventName == EventName);
         }
         public void RemoveEvent(string EventName)
         {
@@ -190,14 +194,37 @@ namespace Behaviour
 
     public class StayBehaviour
     {
+       
         PetBehaviour m_behaviour;
+        PetBehaviourEngine.PetEvent m_stay = null;
         public StayBehaviour(PetBehaviour behaviour)
         {
             m_behaviour = behaviour;
         }
+
+        int m_Relation;
+        bool Next() 
+        {
+            m_Relation = PetData.PetInspector.Relationship.Relation;
+            var RateData = Config.Data.Behaviours[m_Relation];
+            m_stay.Duration = Random.RandomRange(RateData.TalkStayTime_Sec[0], RateData.TalkStayTime_Sec[1]);
+            return RateData.Percent.IsPercent();
+        }
         public void Update()
         {
-
+            if (m_stay == null)
+            {
+                m_stay = m_behaviour.engine.GetEvent("StayBehaviour");
+                Next();
+                return;
+            }
+            else 
+            {
+                if (Next()) 
+                {
+                    Conversation.PetBehaviour(m_Relation);
+                }
+            }
         }
     }
 

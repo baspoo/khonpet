@@ -147,7 +147,6 @@ public class Chat : MonoBehaviour
     void Refresh() 
     {
 
-
         if (m_ChatDatas.Count > max)
         {
             m_ChatDatas.RemoveAt(0);

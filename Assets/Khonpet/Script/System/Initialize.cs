@@ -58,9 +58,13 @@ public class Initialize : MonoBehaviour
         Chat.instance.Init();
         InterfaceRoot.instance.Init();
         ConsoleActivity.Init();
+        StartCoroutine(AfterInit());
+    }
 
 
-
+    IEnumerator AfterInit() 
+    {
+        while (!InterfaceRoot.instance.IsReady) yield return new WaitForEndOfFrame();
         yield return new WaitForSeconds(1.5f);
         Conversation.Welcome();
     }

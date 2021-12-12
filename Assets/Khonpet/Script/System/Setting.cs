@@ -31,6 +31,7 @@ public class Setting : MonoBehaviour
         public bool isDebugBundle;
         public AssetBundle PetBundle;
 
+        public bool isUnLimitPlay;
 
         public bool isDebugAir;
         public AirActivity.AirType AirType;
@@ -86,19 +87,21 @@ public class Setting : MonoBehaviour
         public string OwnerData;
     }
 
-    public Tsv tsv;
-    [System.Serializable]
-    public class Tsv
-    {
-        public enum GetTsv { Realtime,ConfigVersion,bySetting }
-        public GetTsv getTsv;
-        [TextArea]
-        public string ConfigTsv;
-        [TextArea]
-        public string PetTsv;
-        [TextArea]
-        public string Language;
-    }
+
+    public Config.ConfigData ConfigData;
+    //public Tsv tsv;
+    //[System.Serializable]
+    //public class Tsv
+    //{
+    //    //public enum GetTsv { Realtime,ConfigVersion,bySetting }
+    //    //public GetTsv getTsv;
+    //    //[TextArea]
+    //    //public string ConfigTsv;
+    //    //[TextArea]
+    //    //public string PetTsv;
+    //    //[TextArea]
+    //    //public string Language;
+    //}
 
 
 
@@ -128,15 +131,27 @@ public class SettingUI : Editor
     public override void OnInspectorGUI()
     {
         base.OnInspectorGUI();
-        if (GUILayout.Button("Adjuest Setting"))
+        if (GUILayout.Button("Adjuest Setting For Build"))
         {
             m_page.debug.isDebugBundle = false;
+            m_page.debug.isDebugAir = false;
+            m_page.debug.isStarDebug = false;
+            m_page.debug.isUnLimitPlay = false;
+            m_page.nft.IsDummy = false;
             m_page.bundle.LoadType = ResourcesHandle.LoadType.CloudFile;
             m_page.device.isForceMobile = false;
             m_page.device.screen = Setting.Device.ScreenType.auto;
-            m_page.tsv.getTsv = Setting.Tsv.GetTsv.Realtime;
-
-
+        }
+        if (GUILayout.Button("Adjuest Setting For Test"))
+        {
+            m_page.debug.isDebugBundle = true;
+            m_page.nft.IsDummy = true;
+            m_page.bundle.LoadType = ResourcesHandle.LoadType.Editor;
+            m_page.device.screen = Setting.Device.ScreenType.auto;
+        }
+        if (GUILayout.Button("View Config"))
+        {
+            m_page.ConfigData = Config.Data;
         }
     }
 }

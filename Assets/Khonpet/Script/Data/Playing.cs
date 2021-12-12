@@ -12,6 +12,10 @@ namespace Pet
         public const int MaxStat = 100;
         public const int MaxBalloon = 10;
     }
+    public enum Direction
+    {
+        Right,Left
+    }
     public enum StatType
     {
         Relationship, Hungry, Energy, Cleanliness
@@ -26,6 +30,8 @@ namespace Pet
     }
     public class Activity
     {
+        public const string Welcome = "Welcome";
+
         public const string EatFood = "EatFood";
         public const string EatHappyFood = "EatHappyFood";
 
@@ -57,6 +63,7 @@ public class PlayingData
 {
     public string NickName;
     public string UserID;
+    public string PIN;
     public long UnixCreatedAt;
     public long UnixLastUpdate;
     public int Language;
@@ -186,7 +193,7 @@ public static class PetPlayingTools
     //*****************************************************************
     public static void AddStat(this PlayingData.PetPlaying pet, Pet.StatType Stat , int Value , Opt Opt )
     {
-        Debug.Log($"AddStat {Opt} {Stat} {Value}");
+        Logger.Log($"AddStat {Opt} {Stat} {Value}");
         var stat = pet.FindStat(Stat);
         if (stat == null)
         {
@@ -389,6 +396,10 @@ public class Playing : MonoBehaviour
     {
         // load playing
         Load();
+
+        // re PIN
+        m_playing.PIN = Random.RandomRange(111111, 999999).ToString();
+        Save();
     }
 
     //*****************************************************************

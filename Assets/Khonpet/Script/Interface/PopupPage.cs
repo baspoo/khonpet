@@ -17,7 +17,7 @@ public class PopupPage : MonoBehaviour
 
 
 
-    enum BgStyle { center,side,hight }
+    enum BgStyle { none,center,hight }
 
     public void Init()
     {
@@ -63,6 +63,7 @@ public class PopupPage : MonoBehaviour
         displayName.root.gameObject.SetActive(false);
         airPage.root.gameObject.SetActive(false);
         balloon.root.gameObject.SetActive(false);
+        map.root.gameObject.SetActive(false);
     }
 
     System.Action<string> btns;
@@ -309,7 +310,6 @@ public class PopupPage : MonoBehaviour
 
 
 
-
     public SettingPage settingPage;
     [System.Serializable]
     public class SettingPage
@@ -319,9 +319,13 @@ public class PopupPage : MonoBehaviour
         public Text txt_name;
         public Text txt_star;
         public Text txt_user;
-
+        public Text txt_pin;
         public Btn toggle_bgm;
         public Btn toggle_sfx;
+
+        public UnityEngine.UI.Button btn_en;
+        public UnityEngine.UI.Button btn_th;
+
 
         public void Open()
         {
@@ -330,12 +334,19 @@ public class PopupPage : MonoBehaviour
 
             txt_name.text = Playing.instance.playingData.NickName;
             txt_user.text = $"UserID : {Playing.instance.playingData.UserID}";
+            txt_pin.text = $"PIN : {Playing.instance.playingData.PIN}";
             txt_star.text = $"Give {Playing.instance.playingData.StarPoint} Star";
 
+            void updatelanguage()
+            {
+                var language = Playing.instance.playingData.Language;
+                btn_en.interactable = language == 1;
+                btn_th.interactable = language == 0;
+            }
+            updatelanguage();
 
-
-            toggle_bgm.InitToggle((t)=> {
-                Playing.instance.Sound(t,null);
+            toggle_bgm.InitToggle((t) => {
+                Playing.instance.Sound(t, null);
                 Sound.Init();
             }, Playing.instance.playingData.IsBgm);
 
@@ -345,7 +356,7 @@ public class PopupPage : MonoBehaviour
 
 
             instance.Init(root, (state) => {
-                if (state == "rename") 
+                if (state == "rename")
                 {
                     instance.OnClose();
                     instance.displayName.Open();
@@ -354,10 +365,19 @@ public class PopupPage : MonoBehaviour
                 {
                     Playing.instance.playingData.UserID.Copy();
                 }
+                if (state == "en")
+                {
+                    Playing.instance.ChangeLanguage((Language.LanguageType)0);
+                    updatelanguage();
+                }
+                if (state == "th")
+                {
+                    Playing.instance.ChangeLanguage((Language.LanguageType)1);
+                    updatelanguage();
+                }
             }, true, position);
         }
     }
-
 
 
 
@@ -571,7 +591,7 @@ public class PopupPage : MonoBehaviour
     {
         public Transform root;
         public Transform position;
-        public List<Text> texts;
+        public List<BarObject> bars;
         public Transform scoreTab;
         public Transform descriptionTab;
         public Text highscore;
@@ -593,7 +613,7 @@ public class PopupPage : MonoBehaviour
             }
             void description( )
             {
-                textDiscription.text = Language.Get("journey_discription");
+                textDiscription.text = Language.Get("journey_description");
                 scoreTab.gameObject.SetActive(false);
                 descriptionTab.gameObject.SetActive(true);
             }
@@ -616,19 +636,112 @@ public class PopupPage : MonoBehaviour
             }, true, position);
 
 
-            texts.ForEach(x => x.text = "------------");
+            bars.ForEach(x => {
+                x.Name.text = "------------";
+                x.Count.text = "";
+            });
 
             int index = 0;
             PetData.PetInspector.JourneyScore.OrderByDescending(x=>x.score).ToList().ForEach(x => {
 
-                if (index < texts.Count)
+                if (index < bars.Count)
                 {
-
-                    texts[index].enabled = true;
-                    texts[index].text = $"#{index + 1} {x.name} {x.score.ToString("#,##0")}";
+                    bars[index].enabled = true;
+                    bars[index].Name.text = $"#{index + 1} {x.name}";
+                    bars[index].Count.text = x.score.ToString("#,##0");
                     index++;
                 }
             });
+
+        }
+    }
+
+
+
+    public Map map;
+    [System.Serializable]
+    public class Map
+    {
+        public Transform root;
+        public List<BarObject> barObjects;
+        public UnityEngine.UI.RawImage map;
+        System.DateTime datetime = System.DateTime.Now;
+        bool init = false;
+        public void Open()
+        {
+            instance.Bg(BgStyle.none);
+            instance.Init(root, (state) => {
+                if (state == "close")
+                {
+                    instance.OnClose();
+                }
+                if (state == "ethcoin")
+                {
+                    Utility.Web.GotoUrl(Setting.instance.link.opensea);
+                }
+            }, false, null);
+
+
+
+
+
+            if (!init || datetime.IsTimeout(5))
+            {
+
+                // Map
+                map.gameObject.SetActive(false);
+                LoaderService.instance.OnLoadMapImage("map", (texture) =>
+                {
+                    map.gameObject.SetActive(true);
+                    map.texture = texture;
+                });
+
+                // Pet
+                int count = Random.RandomRange(2, barObjects.Count);
+                count = count.Max(PetData.PetDatas.Count);
+                List<PetData> pets = new List<PetData>();
+                while (count != 0)
+                {
+                    var pet = PetData.PetDatas[Random.RandomRange(0, PetData.PetDatas.Count - 1)];
+                    if (!pets.Contains(pet))
+                    {
+                        pets.Add(pet);
+                        count--;
+                    }
+                }
+                foreach (var bar in barObjects)
+                {
+                    bar.Value = Random.RandomRange(0, 100);
+                    bar.gameObject.SetActive(false);
+                }
+                int index = 0;
+                foreach (var bar in barObjects.OrderBy(x => x.Value))
+                {
+                    if (index < pets.Count)
+                    {
+                        var pet = pets[index];
+                        LoaderService.instance.OnLoadMapImage(pet.ID, (texture) => { bar.Raw.texture = texture; });
+                        bar.gameObject.SetActive(true);
+                        bar.Text = pets[index].ID;
+                        bar.onselete = (str) =>
+                        {
+#if UNITY_EDITOR
+                            Information.instance.ContractAddress = pet.ContractAddress;
+                            Information.instance.TokenId = pet.TokenId;
+                            Application.LoadLevel(0);
+#else
+                        HtmlCallback.GotoPet($"{pet.ContractAddress}/{pet.TokenId}");
+#endif
+                        };
+                        index++;
+                    }
+                }
+                datetime = System.DateTime.Now;
+                init = true;
+            }
+
+
+
 
         }
     }

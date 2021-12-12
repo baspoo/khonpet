@@ -31,6 +31,14 @@ public class Config
         {
             public int BoringTime_Min;
         }
+        public List<BehaviourData> Behaviours;
+        [System.Serializable]
+        public class BehaviourData
+        {
+            public int Rate;
+            public int Percent;
+            public int[] TalkStayTime_Sec;
+        }
         public EatData Eat;
         [System.Serializable]
         public class EatData
@@ -121,10 +129,14 @@ public class Language
         public string key;
         public string[] messages;
         public string getmessage => messages[languageIndex];
-        public List<string> tag;
+        public string tag;
+        public int relation;
+        public int percent;
+        public string exclusive;
     }
 
     public static List<LanguageData> Languages = new List<LanguageData>();
+    static Dictionary<string, List<LanguageData>> Conversations = new Dictionary<string, List<LanguageData>>();
     public static void Init(System.Action done)
     {
         if (Done) 
@@ -143,12 +155,32 @@ public class Language
             var table = GameDataTable.ReadData(data);
             foreach (var d in table.GetTable())
             {
-                Languages.Add(new LanguageData()
+                var val = new LanguageData()
                 {
                     key = d.GetIndex(0),
-                    tag = d.GetIndex(1).Split(',').ToList(),
-                    messages = new string[] { d.GetIndex(2) , d.GetIndex(3) }
-                }) ;
+                    tag = d.GetIndex(1),
+                    relation = d.GetIndex(2).ToInt(),
+                    percent = d.GetIndex(3).ToInt(),
+                    messages = new string[] { d.GetIndex(4), d.GetIndex(5) },
+                    exclusive = d.GetIndex(6)
+                };
+
+
+                if (string.IsNullOrEmpty(val.tag))
+                {
+                    // Languages
+                    Languages.Add(val);
+                }
+                else 
+                {
+                    //Conversations
+                    if (!Conversations.ContainsKey(val.tag))
+                    {
+                        Conversations.Add(val.tag, new List<LanguageData>());
+                    }
+                    Conversations[val.tag].Add(val);
+                }
+
             }
             Done = true;
             done();
@@ -165,30 +197,40 @@ public class Language
         var language = Languages.Find(x=>x.key == key);
         if (language!=null) 
         {
-            return language.messages[languageIndex];
+            return language.getmessage;
         }
         else return key;
     }
-    public static List<LanguageData> GetTag( List<string> tag)
+    public static List<string> GetTag( string tag , string key , int relation)
     {
-
-        List<LanguageData> let = new List<LanguageData>();
-        foreach (var find in Languages) {
-
-
-            bool iscan = true;
-            foreach (var t in tag)
+        List<string> let = new List<string>();
+        if (Conversations.ContainsKey(tag))
+        {
+            var languages = Conversations[tag];
+            foreach (var find in languages)
             {
-                if(!find.tag.Contains(t))
-                    iscan = false;
+
+                if (find.key == key &&
+                    (find.relation == 0 || find.relation == relation) &&
+                    (find.percent == 0 || find.percent.IsPercent()) &&
+                    (string.IsNullOrEmpty(find.exclusive) || find.exclusive == PetData.Current.ID))
+
+
+                    let.Add(find.getmessage);
+
             }
-            if (iscan)
-                let.Add(find);
         }
         return let;
     }
 
-
+    public static string Override(string message)
+    {
+        message = message.Replace("{foodfav}", Get(PetData.PetInspector.FoodFav.ToString()));
+        message = message.Replace("{foodbad}", Get(PetData.PetInspector.FoodBad.ToString()));
+        message = message.Replace("{name}", Get(PetData.Current.Name));
+        message = message.Replace("{username}", Get(Playing.instance.playingData.NickName));
+        return message;
+    }
 
 
 }

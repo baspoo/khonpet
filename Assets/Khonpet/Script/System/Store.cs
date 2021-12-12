@@ -16,7 +16,12 @@ public class Store : MonoBehaviour
     {
         public RuntimeAnimatorController animatorController;
     }
-
+    public WorldData World;
+    [System.Serializable]
+    public class WorldData
+    {
+        public GameObject balloon;
+    }
 
     //AIR
     public List<AirActivity.AirData> AirDatas;
@@ -64,7 +69,7 @@ public class Store : MonoBehaviour
     public PlayAsset FindPlay(Play.PlayType type) => Plays.Find(x => x.Type == type);
 
 
-    //PLAY
+    //Relationship
     public List<Relationship> Relationships;
     [System.Serializable]
     public class Relationship
@@ -72,7 +77,26 @@ public class Store : MonoBehaviour
         public Pet.Relationship Type;
         public string Name => Language.Get($"{Type}");
         public Sprite Icon;
-        public int Value => Config.Data.Relationships.Find(x=>x.Type == Name).Value;
+        public int Value => Config.Data.Relationships.Find(x=>x.Type == Type.ToString()).Value;
+        public int Relation
+        {
+            get {
+                switch (Type)
+                {
+                    case global::Pet.Relationship.Annoying:
+                        return 1;
+                    case global::Pet.Relationship.Amiable:
+                        return (100.Random()<50?1:2);
+                    case global::Pet.Relationship.Friend:
+                        return 2;
+                    case global::Pet.Relationship.SoulMate:
+                        return (100.Random() < 50 ? 2 : 3); ;
+                    case global::Pet.Relationship.Love:
+                        return 3;
+                }
+                return 0;
+            }
+        }
     }
     public Relationship FindRelationship(Pet.Relationship type) => Relationships.Find(x => x.Type == type);
 

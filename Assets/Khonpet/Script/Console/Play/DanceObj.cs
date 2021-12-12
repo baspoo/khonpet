@@ -42,8 +42,8 @@ public class DanceObj : MonoBehaviour
             {
                 OnMissing();
             }
-            //if (transform.localPosition.y < 0)
-                //gameObject.transform.localScale = Vector3.zero;
+            if (transform.localPosition.y < 0)
+                gameObject.transform.localScale = Vector3.zero;
         }
     }
 
