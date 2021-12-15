@@ -35,14 +35,14 @@ public class NFTService : MonoBehaviour
     public List<CollectionData> KhonpetOwner;
     public List<CollectionData> OtherOwner;
 
-    public void SetupPreset()
+    public void SetupPreset(Model.OpenSeaAsset.UserData owner)
     {
         Preset = new PresetData();
         Preset.ContractAddress = ContractAddress;
         Preset.Token = Token;
-        Preset.OwnerName = MainAsset.owner.user.username;
-        Preset.OwnerAddress = MainAsset.owner.address;
-        Preset.OwnerProfileImgUrl = MainAsset.owner.profile_img_url;
+        Preset.OwnerName = owner.user.username;
+        Preset.OwnerAddress = owner.address;
+        Preset.OwnerProfileImgUrl = owner.profile_img_url;
         Preset.PetImageUrl = MainAsset.image_url;
 
         foreach (var assest in OwnerData.assets) 
@@ -87,6 +87,26 @@ public class NFTService : MonoBehaviour
     public Model.OpenSeaAsset MainAsset;
     public Model.OpenSeaOwner OwnerData;
 
+
+    public Model.OpenSeaAsset.UserData FindOwner(Model.OpenSeaAsset asset) {
+        if (asset.owner != null && asset.owner.address != "0x0000000000000000000000000000000000000000")
+        {
+                return asset.owner;
+        }
+        else 
+        {
+            if (asset.top_ownerships != null && asset.top_ownerships.Count > 0)
+            {
+                return asset.top_ownerships[0].owner;
+            }
+            else 
+            {
+                return null;
+            }
+        }
+        
+    }
+
     public IEnumerator Init(string contractAddress, string token)
     {
         IsDone = false;
@@ -99,7 +119,10 @@ public class NFTService : MonoBehaviour
             IsDone = true;
             MainAsset = "NFT-MainAsset".GetByLocal().DeserializeObject<Model.OpenSeaAsset>();
             OwnerData = "NFT-OwnerData".GetByLocal().DeserializeObject<Model.OpenSeaOwner>();
-            SetupPreset();
+
+            var userOwner = FindOwner(MainAsset);
+            if (userOwner != null) SetupPreset(userOwner);
+            else SetupPresetUnkwon();
             yield break;
         }
 
@@ -119,16 +142,21 @@ public class NFTService : MonoBehaviour
             MainAsset = json.DeserializeObject<Model.OpenSeaAsset>();
             #if UNITY_EDITOR
             json.SaveToLocal("NFT-MainAsset");
-            #endif
-            StartCoroutine(Owner(MainAsset.owner.address, ContractAddress));
+#endif
+
+            var userOwner = FindOwner(MainAsset);
+            if (userOwner != null) StartCoroutine(Owner(userOwner, ContractAddress));
+            else SetupPresetUnkwon();
+
+           
         }
 
     }
 
 
-    IEnumerator Owner(string owner , string contractaddress = null , int begin = 0, int end = 20)
+    IEnumerator Owner(Model.OpenSeaAsset.UserData owner , string contractaddress = null , int begin = 0, int end = 20)
     {
-        var url = $"https://api.opensea.io/api/v1/assets?owner={owner}"; 
+        var url = $"https://api.opensea.io/api/v1/assets?owner={owner.address}"; 
         if (!string.IsNullOrEmpty(contractaddress)) 
             url += $"&asset_contract_address={contractaddress}";
         url += $"&order_direction=desc&offset={begin}&limit={end}";
@@ -149,7 +177,7 @@ public class NFTService : MonoBehaviour
             json.SaveToLocal("NFT-OwnerData");
             #endif
         }
-        SetupPreset();
+        SetupPreset(owner);
         IsDone = true;
     }
 

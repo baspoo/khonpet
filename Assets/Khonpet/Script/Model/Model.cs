@@ -85,6 +85,13 @@ public class Model
             public string wiki_url;
         }
 
+
+        public List<Ownerships> top_ownerships;
+        [System.Serializable]
+        public class Ownerships
+        {
+            public UserData owner;
+        }
     }
 
 

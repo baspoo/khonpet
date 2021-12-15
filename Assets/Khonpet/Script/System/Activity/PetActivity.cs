@@ -325,6 +325,9 @@ public static class PetActivity
         pet.AddStar(star);
 
 
+        pet.AddActivity(Pet.Activity.Journey, 1);
+
+
         //New High Score..
         var high = pet.PetPlaying.UpdateJourney(score, star);
         Conversation.JourneyTopScore(high, score);

@@ -12,8 +12,7 @@ public static class QuestActivity
         PlayBall , PlayMemory, PlayGuess, PlayDance ,
         Clean,
         Sleeping,
-        Journey, // <--- not yet
-
+        Journey,
 
         //Other 
         Petting,
@@ -79,6 +78,7 @@ public static class QuestActivity
                     case QuestType.PlayBall:
                     case QuestType.Petting:
                     case QuestType.GiveStar:
+                    case QuestType.Journey:
                         quests.Add(quest);
                         break;
                     case QuestType.PlayMemory:
@@ -92,8 +92,6 @@ public static class QuestActivity
                     case QuestType.PlayDance:
                         if (Store.instance.FindPlay(Play.PlayType.Dance).IsActive(level.CurrentLevel))
                             quests.Add(quest);
-                        break;
-                    case QuestType.Journey:
                         break;
                     case QuestType.Balloon:
                         break;

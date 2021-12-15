@@ -12,11 +12,12 @@ public class Sleep : MonoBehaviour
 
     public Transform Root;
     public UnityEngine.UI.Text txtTime;
-    public void Init()
+    public void Init(System.Action onsleeping)
     {
         m_instance = this;
         if (PetData.PetInspector.IsSleeping)
         {
+            onsleeping?.Invoke();
             OnPlay();
         }
         else 

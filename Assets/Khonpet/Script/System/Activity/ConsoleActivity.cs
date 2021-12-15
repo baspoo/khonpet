@@ -9,11 +9,12 @@ public class ConsoleActivity
         Food,Play,Clean,Sleep, Journey
     }
     public static bool IsActing = false;
-    public static void Init() {
+    public static void Init() 
+    {
         IsActing = false;
         FoodPage.instance.Init();
         Clean.instance.Init();
-        Sleep.instance.Init();
+        Sleep.instance.Init(()=> { Action(); });
     }
 
 

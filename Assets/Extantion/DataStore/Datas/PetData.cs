@@ -122,6 +122,11 @@ public class PetData
         {
             //** Find By petID
             m_Current = FInd(ContractAddress);
+            if (m_Current != null) 
+            {
+                Information.instance.ContractAddress = m_Current.ContractAddress;
+                Information.instance.TokenId = m_Current.TokenId;
+            }
         }
 
        

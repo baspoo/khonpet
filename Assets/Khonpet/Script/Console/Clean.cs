@@ -23,16 +23,18 @@ public class Clean : MonoBehaviour
 
 
     List<Animation> pooActive = new List<Animation>();
+    int pooPoint => (Pet.Static.MaxStat- cleanstat) / 3;
     int cleanstat => PetData.PetInspector.GetStat(Pet.StatType.Cleanliness);
-    bool ishavePool => cleanstat < 30;
+    bool ishavePool => pooPoint >= 10;
+    bool iscleaned = false;
     IEnumerator PooActive( )
     {
-
-        foreach(var anim in AnimPoos)
+        iscleaned = false;
+        foreach (var anim in AnimPoos)
             anim.gameObject.SetActive(false);
 
 
-        var poo = (Pet.Static.MaxStat- cleanstat) / 3;
+        var poo = pooPoint;
         if (poo >= 10) 
         {
             AnimPoos[0].gameObject.SetActive(true);
@@ -52,7 +54,7 @@ public class Clean : MonoBehaviour
 
 
         yield return new WaitForSeconds(1.00f);
-        while (ishavePool) 
+        while (ishavePool && !iscleaned) 
         {
             pooActive[Random.RandomRange(0, pooActive.Count )].Play("poo_dance");
             yield return new WaitForSeconds(Random.RandomRange(3.0f,6.0f));
@@ -61,6 +63,7 @@ public class Clean : MonoBehaviour
 
     IEnumerator CleanPoo()
     {
+        iscleaned = true;
         foreach (var anim in pooActive)
             anim.Play("poo_clean");
         yield return new WaitForSeconds(2.00f);
@@ -77,6 +80,8 @@ public class Clean : MonoBehaviour
             StopCoroutine(corotine);
         corotine = StartCoroutine(Play(callback));
     }
+
+
     IEnumerator Play(System.Action callback)
     {
         bool isAnimDone = false;
