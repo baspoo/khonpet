@@ -75,6 +75,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 4f3914472181c664695b6b8eec1ec7e2, type: 3}
   - {fileID: 21300000, guid: d79bde871b2b4fe46b7113c27e328fbf, type: 3}
   - {fileID: 21300000, guid: 3ba9cea8beacf9e4ab4d5dcd1e09207f, type: 3}
+  - {fileID: 21300000, guid: c7810309291a42f4c8ecedb728c5e2a1, type: 3}
   - {fileID: 21300000, guid: d61fce19b85139e41ac8db3d03cc05a8, type: 3}
   - {fileID: 21300000, guid: a76cfd5949df3aa4a9ffe5f48f453bc8, type: 3}
   - {fileID: 21300000, guid: f3d247b9df3f0dd4088143d2f0fe3659, type: 3}
@@ -133,6 +134,7 @@ SpriteAtlas:
   - icon_copy
   - icon_stat
   - icon_play_mem
+  - icon_poo
   - icon_star
   - icon_message
   - icon_status_clean

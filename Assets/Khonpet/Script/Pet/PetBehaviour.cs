@@ -173,14 +173,20 @@ namespace Behaviour
         {
             m_behaviour = behaviour;
         }
+
+        bool haveNeed = false;
         public void UpdateBoring()
         {
+            haveNeed = false;
+
+
             if (m_behaviour.inspector.IsBoring && !m_behaviour.inspector.IsActing)
             {
                 if (!m_behaviour.pet.talking.bubble.IsTalking || m_behaviour.pet.anim.animState == PetAnim.AnimState.Idle)
                 {
                     m_behaviour.pet.talking.bubble.OnEmo(Talking.Bubble.EmoType.Boring);
                     m_behaviour.pet.anim.OnAnimForce(PetAnim.AnimState.Need);
+                    haveNeed = true;
                 }
             }
             else
@@ -191,6 +197,57 @@ namespace Behaviour
                     m_behaviour.pet.anim.OnReset();
                 }
             }
+
+
+            if (haveNeed)
+                return;
+
+            if (m_behaviour.inspector.IsHighDemandData(Pet.StatType.Hungry) && !m_behaviour.inspector.IsActing)
+            {
+                if (!m_behaviour.pet.talking.bubble.IsTalking || m_behaviour.pet.anim.animState == PetAnim.AnimState.Idle)
+                {
+                    m_behaviour.pet.talking.bubble.OnEmo(Talking.Bubble.EmoType.Food);
+                    m_behaviour.pet.anim.OnAnimForce(PetAnim.AnimState.Need);
+                    haveNeed = true;
+                }
+            }
+            else
+            {
+                if (m_behaviour.pet.talking.bubble.emoType == Talking.Bubble.EmoType.Food)
+                {
+                    m_behaviour.pet.talking.bubble.Hide();
+                    m_behaviour.pet.anim.OnReset();
+                }
+            }
+
+
+            if (haveNeed)
+                return;
+
+
+
+
+            if (m_behaviour.inspector.IsHighDemandData(Pet.StatType.Energy) && !m_behaviour.inspector.IsActing)
+            {
+                if (!m_behaviour.pet.talking.bubble.IsTalking || m_behaviour.pet.anim.animState == PetAnim.AnimState.Idle)
+                {
+                    m_behaviour.pet.talking.bubble.OnEmo(Talking.Bubble.EmoType.LowBattery);
+                    m_behaviour.pet.anim.OnAnimForce(PetAnim.AnimState.Need);
+                    haveNeed = true;
+                }
+            }
+            else
+            {
+                if (m_behaviour.pet.talking.bubble.emoType == Talking.Bubble.EmoType.LowBattery)
+                {
+                    m_behaviour.pet.talking.bubble.Hide();
+                    m_behaviour.pet.anim.OnReset();
+                }
+            }
+
+
+
+
         }
     }
 

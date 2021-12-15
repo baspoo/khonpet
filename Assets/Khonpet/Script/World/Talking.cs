@@ -47,7 +47,7 @@ public class Talking : MonoBehaviour
         EmoType m_emoType;
 
         Coroutine coro;
-        public enum EmoType { FeelingSuper, FeelingHappy, FeelingNormal, FeelingBad ,Eating, Sleep, Love, Full , Boring }
+        public enum EmoType { FeelingSuper, FeelingHappy, FeelingNormal, FeelingBad ,Eating, Sleep, Love, Full , Boring , Food, LowBattery}
         [System.Serializable]
         public class EmoData
         {
