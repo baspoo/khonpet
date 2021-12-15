@@ -3,7 +3,7 @@
         "SeasonChangeDuration_Min": 60
     },
     "Balloon": {
-        "Active": true,
+        "Active": false,
         "Duration_Sec": [
             30,
             80
@@ -15,6 +15,28 @@
             15,
             80
         ]
+    },
+    "Behaviours":[
+            {
+                "Rate":1,
+                "Percent":15,
+                "TalkStayTime_Sec":[40,120]
+            },
+            {
+                "Rate":2,
+                "Percent":35,
+                "TalkStayTime_Sec":[45,120]
+            },
+            {
+                "Rate":3,
+                "Percent":50,
+                "TalkStayTime_Sec":[35,60]
+            }
+
+    ],
+    "Eat": {
+        "Hungry": 20,
+        "Energy": 10
     },
     "PlayDatas": [
         {

@@ -17,7 +17,7 @@ public class BundleService : MonoBehaviour
     public IEnumerator Init( )
     {
         yield return new WaitForEndOfFrame();
-        ResourcesHandle.Init( PetData.Current.ID , (r) => {
+        ResourcesHandle.Init( PetData.Current , (r) => {
             IsDone = r;
         });
     }

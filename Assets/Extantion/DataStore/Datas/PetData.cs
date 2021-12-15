@@ -32,8 +32,7 @@ public class PetData
     public string Air;
     public string Kind;
     public string Rarity;
-    public string Url_Image;
-    public string Url_Bundle;
+    public int vBundle;
     public int[] LvUnlocks;
     public Dictionary<Food.FoodType, Feeling.FeelingType> Foods = new Dictionary<Food.FoodType, Feeling.FeelingType>();
     public Dictionary<string, object> Meta = new Dictionary<string, object>();
@@ -71,8 +70,7 @@ public class PetData
         Kind = raw.GetValue("Kind");
         Air = raw.GetValue("Air");
         Rarity = raw.GetValue("Rarity");
-        Url_Image = raw.GetValue("Url_Image");
-        Url_Bundle = raw.GetValue("Url_Bundle");
+        vBundle = raw.GetValue("vBundle").ToInt();
         ContractAddress = raw.GetValue("ContractAddress");
         TokenId = raw.GetValue("TokenId");
         Meta = raw.GetValue("Meta").DeserializeObject<Dictionary<string, object>>();
@@ -114,7 +112,21 @@ public class PetData
     static PetData m_Current;
     public static void SetCurrent(string ContractAddress, string TokenId) 
     {
-        m_Current = FInd(ContractAddress, TokenId);
+
+        if (ContractAddress.notnull() && TokenId.notnull())
+        {
+            //** Find By ContractAddress & TokenId
+            m_Current = FInd(ContractAddress, TokenId);
+        }
+        else 
+        {
+            //** Find By petID
+            m_Current = FInd(ContractAddress);
+        }
+
+       
+
+
         if(m_Current == null) 
         { 
             Debug.LogError($"SetCurrent Find Not Found {ContractAddress} {TokenId}");

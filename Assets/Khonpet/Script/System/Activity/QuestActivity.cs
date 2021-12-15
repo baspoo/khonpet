@@ -166,6 +166,7 @@ public static class QuestActivity
         {
             PetObj.Current.anim.OnAnimForce(PetAnim.AnimState.LikeLove);
             PetData.PetInspector.AddStar(quest.GetQuestData().QuestStarReward);
+            PetData.PetInspector.AddRelationship();
         }
     }
     public static bool IsHaveQuestCanClaim(this PetActivity.PetInspector pet)

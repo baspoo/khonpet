@@ -1,32 +1,74 @@
-Key	EN	Th
-Stats	Stat	Stat
-Relationship	-	-
-Hungry	-	-
-Energy	-	-
-Cleanliness	-	-
-Relationships	Relationship	Relationship
-Annoying	Annoying	น่ารำคาญ
-Amiable	Amiable	เป็นกันเอง
-Friend	Friend	เพื่อน
-SoulMate	SoulMate	โซลเมท
-Love	Love	ความรัก
-Quests	Quest	Quest
-quest_eatfood	ให้อาหารสัตว์เลี้ยง	ได้รับดาวจากการให้อาหารสัตว์เลี้ยง
-quest_eathappyfood	มอบอาหารที่สัตว์เลี้ยงชื่นชอบ	ได้รับดาวจากการมอบอาหารที่สัตว์เลี้ยงชื่นชอบ
-quest_playball	พาสัตว์เลี้ยงเล่นฟุตบอล	พาสัตว์เลี้ยงเล่นฟุตบอล
-quest_playmemory	พาสัตว์เลี้ยงเล่นท้าทายความจำ	พาสัตว์เลี้ยงเล่นท้าทายความจำ
-quest_playguess	พาสัตว์เลี้ยงเล่นทายแก้ว	พาสัตว์เลี้ยงเล่นทายแก้ว
-quest_dance	พาสัตว์เลี้ยงเต้นออกกำลังกาย	พาสัตว์เลี้ยงเต้นออกกำลังกาย
-quest_clean	รักษาความสะอาดให้สัตว์เลี้ยง	ได้รับดาวจากการรักษาความสะอาดให้สัตว์เลี้ยง
-quest_sleep	พาสัตว์เลี้ยงเข้านอน	ได้รับดาวจากการพาสัตว์เลี้ยงเข้านอน
-quest_journey	พาสัตว์เลี้ยงออกเดินทาง	พาสัตว์เลี้ยงออกเดินทาง
-quest_petting	ลูบหัวสัตว์เลี้ยง	ลูบหัวสัตว์เลี้ยง
-quest_givestar	ได้รับดาวจากสัตว์เลี้ยง	ได้รับดาวจากสัตว์เลี้ยง
-quest_balloon	เก็บลกโปร่งที่ล่องลอย	เก็บลูกโปร่งที่ล่องลอย
-Chats	Chats	Chats
-broadcast_msg_star	Give star point	Give star point
-broadcast_msg_like	Liked that	Liked that
-broadcast_msg_lvup	Pet level up!	Pet level up!
-broadcast_msg_food	Get a favor feed	Get a favor feed
-broadcast_msg_highscore	New high score	New high score
-broadcast_msg_petting	Petting him	Petting him
+Key	Tag	Relation	Percent	EN	Th	Exclusive
+Error						
+find_not_found_pet				Please Check ContractAddress Or TokenId Again.	Please Check ContractAddress Or TokenId Again.	
+feature_unavailable				This functionality is coming soon. You can send feedback to developer about this function for improvement.	This functionality is coming soon. You can send feedback to developer about this function for improvement.	
+Stats						
+Relationship				-	-	
+Hungry				-	-	
+Energy				-	-	
+Cleanliness				-	-	
+Food						
+Fish				Fish		
+Meat				Meat		
+Milk				Milk		
+Corn				Corn		
+Cookie				Cookie		
+Chocolate				Chocolate		
+Honey				Honey		
+Vegetable				Vegetable		
+Relationships						
+Annoying				Annoying	น่ารำคาญ	
+Amiable				Amiable	เป็นกันเอง	
+Friend				Friend	เพื่อน	
+SoulMate				SoulMate	โซลเมท	
+Love				Love	ความรัก	
+Quests						
+quest_eatfood				ให้อาหารสัตว์เลี้ยง	ได้รับดาวจากการให้อาหารสัตว์เลี้ยง	
+quest_eathappyfood				มอบอาหารที่สัตว์เลี้ยงชื่นชอบ	ได้รับดาวจากการมอบอาหารที่สัตว์เลี้ยงชื่นชอบ	
+quest_playball				พาสัตว์เลี้ยงเล่นฟุตบอล	พาสัตว์เลี้ยงเล่นฟุตบอล	
+quest_playmemory				พาสัตว์เลี้ยงเล่นท้าทายความจำ	พาสัตว์เลี้ยงเล่นท้าทายความจำ	
+quest_playguess				พาสัตว์เลี้ยงเล่นทายแก้ว	พาสัตว์เลี้ยงเล่นทายแก้ว	
+quest_dance				พาสัตว์เลี้ยงเต้นออกกำลังกาย	พาสัตว์เลี้ยงเต้นออกกำลังกาย	
+quest_clean				รักษาความสะอาดให้สัตว์เลี้ยง	ได้รับดาวจากการรักษาความสะอาดให้สัตว์เลี้ยง	
+quest_sleep				พาสัตว์เลี้ยงเข้านอน	ได้รับดาวจากการพาสัตว์เลี้ยงเข้านอน	
+quest_journey				พาสัตว์เลี้ยงออกเดินทาง	พาสัตว์เลี้ยงออกเดินทาง	
+quest_petting				ลูบหัวสัตว์เลี้ยง	ลูบหัวสัตว์เลี้ยง	
+quest_givestar				ได้รับดาวจากสัตว์เลี้ยง	ได้รับดาวจากสัตว์เลี้ยง	
+quest_balloon				เก็บลกโปร่งที่ล่องลอย	เก็บลูกโปร่งที่ล่องลอย	
+Chats						
+broadcast_msg_star				Give star point	Give star point	
+broadcast_msg_like				Liked that	Liked that	
+broadcast_msg_lvup				Pet level up!	Pet level up!	
+broadcast_msg_food				Get a favor feed	Get a favor feed	
+broadcast_msg_highscore				New high score	New high score	
+broadcast_msg_petting				Petting him	Petting him	
+Journey						
+journey_newhighscore				New High Score!	-	
+journey_description				-	-	
+Conversation						
+welcome_firsttime	welcome	1		welcome_firsttime	welcome_firsttime	
+welcome_30min	welcome	1		welcome_30min	welcome_30min	
+welcome_day	welcome	1		welcome_day	welcome_day	
+welcome_longtime	welcome	1		welcome_longtime	welcome_longtime	
+welcome_verylongtime	welcome	1		welcome_verylongtime	welcome_verylongtime	
+like_me	like	0		like_me	like_me	
+eat_full	eat			eat_full	eat_full	
+eat_bad	eat			eat_bad	eat_bad	
+eat_super	eat			eat_super	eat_super	
+eat_again	eat			eat_again	eat_again	
+eat_eatting	eat			eat_eatting	eat_eatting	
+play_win	play			play_win	play_win	
+play_lose	play			play_lose	play_lose	
+sleep_full	sleep			sleep_full	sleep_full	
+sleep_fastawake	sleep			sleep_fastawake	sleep_fastawake	
+sleep_awake	sleep			sleep_awake	sleep_awake	
+clean_full	clean			clean_full	clean_full	
+clean_cleanup	clean			clean_cleanup	clean_cleanup	
+petting_boring	petting			petting_boring	petting_boring	
+petting_needfood	petting			petting_needfood	petting_needfood	
+petting_needclean	petting			petting_needclean	petting_needclean	
+petting_needsleep	petting			petting_needsleep	petting_needsleep	
+petting_normal	petting			petting_normal	petting_normal	
+petting_likeair	petting			petting_likeair	petting_likeair	
+petting_spam	petting			petting_spam	petting_spam	
+behaviour_talking	behaviour			behaviour_talking	behaviour_talking	

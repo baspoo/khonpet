@@ -42,19 +42,22 @@ public class AssetsBundleHandle : MonoBehaviour
     #endif
 
 
-    public void OnStartDownloading(string bundle , string url , System.Action<bool> done )
+    public void OnStartDownloading( PetData pet  , System.Action<bool> done )
     {
-        StartCoroutine(StartDownloading(bundle , url, done)); ;
+        StartCoroutine(StartDownloading(pet, done)); ;
     }
-    IEnumerator StartDownloading(string bundle , string url , System.Action<bool> callback) 
+    IEnumerator StartDownloading(PetData pet  , System.Action<bool> callback) 
     {
+        string pathSeparator = "/";
+        var url = $"{Application.streamingAssetsPath}{pathSeparator}AssetBundle{pathSeparator}Pets{pathSeparator}{pet.ID}";
+
         var done = true;
         yield return new WaitForEndOfFrame();
-        yield return StartCoroutine(DownloadAssets( bundle , url , (r) => {
+        yield return StartCoroutine(DownloadAssets(pet.ID, url , pet.vBundle, (r) => {
             if (!r)
                 done = false;
         }));
-        Debug.Log("StartDownloading Done : " + done);
+        Logger.Log("StartDownloading Done : " + done);
         callback?.Invoke(done);
     }
 
@@ -68,16 +71,23 @@ public class AssetsBundleHandle : MonoBehaviour
     public float progress => current == null ? 0.0f : current.progress;
     [HideInInspector]
     public string bundleName;
-    public void OnDownloadAssets(string bundle , string url  , System.Action<bool> callback) => StartCoroutine(DownloadAssets(bundle,url, callback));
-    IEnumerator DownloadAssets(string bundle, string url , System.Action<bool> callback)
+    //public void OnDownloadAssets(string bundle , string url  , System.Action<bool> callback) => StartCoroutine(DownloadAssets(bundle,url, callback));
+    IEnumerator DownloadAssets(string bundle, string url , int version , System.Action<bool> callback)
     {
         bundleName = bundle;
-        Debug.Log($"DownloadAssets : {url}");
+        Logger.Log($"DownloadAssets : {url}");
         yield return new WaitForEndOfFrame();
         string path = url;
         if (!dictstore.ContainsKey(path))
         {
-            WWW www = new WWW(path);
+
+            bool iscache =  Caching.IsVersionCached(path, version);
+            if (!iscache) 
+            {
+                Caching.ClearCache();
+            }
+
+            WWW www = WWW.LoadFromCacheOrDownload(path, version);
             current = www;
              yield return www;
             if (www.error == null)
@@ -100,7 +110,7 @@ public class AssetsBundleHandle : MonoBehaviour
                     }
                 }
 
-                Debug.Log($"DownloadAssets done is > {  bundle }");
+                Logger.Log($"DownloadAssets done is > {  bundle }");
                 callback?.Invoke(true);
             }
             else 

@@ -104,7 +104,7 @@ public class NFTService : MonoBehaviour
         }
 
         var url = $"https://api.opensea.io/api/v1/asset/{ContractAddress}/{Token}/";
-        Debug.Log(url);
+        Logger.Log(url);
         UnityWebRequest uwr =  UnityWebRequest.Get(url);
         yield return uwr.Send();
 
@@ -132,7 +132,7 @@ public class NFTService : MonoBehaviour
         if (!string.IsNullOrEmpty(contractaddress)) 
             url += $"&asset_contract_address={contractaddress}";
         url += $"&order_direction=desc&offset={begin}&limit={end}";
-        Debug.Log(url);
+        Logger.Log(url);
         UnityWebRequest uwr = UnityWebRequest.Get(url);
         yield return uwr.Send();
 

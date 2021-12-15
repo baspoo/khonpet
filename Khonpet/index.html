@@ -174,6 +174,11 @@
                 // popupInput message
                 PopupMessage(str);
             }
+            if (code == 3)
+            {
+                // goto pet
+                window.location.replace("https://www.Khonpet.com?id="+str);
+            }
         }
 
         //Sent To Unity
@@ -222,7 +227,8 @@
             {
               //not have id! redirect to homepage
               //window.location.replace("http://www.w3schools.com");
-              window.location.href = "home";
+              if(mobile)window.location.replace("https://khonpet.carrd.co");
+              else window.location.href = "read.html";
             }
 
     

@@ -53,9 +53,17 @@ public class Information : MonoBehaviour
             var id = parameters.SearchParams.Get("id");
             if (id.notnull())
             {
-                var address = parameters.SearchParams.Get("id").Split('/');
-                ContractAddress = address[0];
-                TokenId = address[1];
+                if (id.Contains("/"))
+                {
+                    var address = id.Split('/');
+                    ContractAddress = address[0];
+                    TokenId = address[1];
+                }
+                else 
+                {
+                    ContractAddress = id;
+                    TokenId = "";
+                }
             }
             checking_url = true;
         });

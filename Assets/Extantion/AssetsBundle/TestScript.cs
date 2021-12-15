@@ -29,27 +29,27 @@ public class TestScript : MonoBehaviour
         url = $"http://junk.onemoby.com/thelastbug/assetsbundle/{bundle}";
 
 
-        assetsBundleHandle.OnClear();
-        assetsBundleHandle.OnDownloadAssets(bundle, url ,(done)=> {
+        //assetsBundleHandle.OnClear();
+        //assetsBundleHandle.OnDownloadAssets(bundle, url ,(done)=> {
 
-            var file = $"{AssetsBundlePath.pathInput}/imgs/1.png";
-
-
-
-            //assetsBundleHandle.OnLoadAssetAsync(bundle, file, (asset) =>
-            //{
-            //    GetComponent<Renderer>().material.mainTexture = (Texture)asset;
-            //});
+        //    var file = $"{AssetsBundlePath.pathInput}/imgs/1.png";
 
 
 
-            //var items = ResourcesHandle.LoadAllEditor( "imgs", "");
-            //GetComponent<Renderer>().material.mainTexture = (Texture)items[1];
+        //    //assetsBundleHandle.OnLoadAssetAsync(bundle, file, (asset) =>
+        //    //{
+        //    //    GetComponent<Renderer>().material.mainTexture = (Texture)asset;
+        //    //});
 
-            //GetComponent<Renderer>().material.mainTexture = (Texture)assetsBundleHandle.OnLoadAsset( bundle , file);
 
-            GetComponent<Renderer>().material.mainTexture = (Texture)ResourcesHandle.Load(bundle , "1", ResourcesHandle.FileType.png);
-        });
+
+        //    //var items = ResourcesHandle.LoadAllEditor( "imgs", "");
+        //    //GetComponent<Renderer>().material.mainTexture = (Texture)items[1];
+
+        //    //GetComponent<Renderer>().material.mainTexture = (Texture)assetsBundleHandle.OnLoadAsset( bundle , file);
+
+        //    GetComponent<Renderer>().material.mainTexture = (Texture)ResourcesHandle.Load(bundle , "1", ResourcesHandle.FileType.png);
+        //});
 
 
     }

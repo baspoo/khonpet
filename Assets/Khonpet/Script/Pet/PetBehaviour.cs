@@ -92,6 +92,12 @@ namespace Behaviour
             public System.Action Action;
             public bool isOnceTime;
             public bool isTimeout => Remaining <= 0.0f;
+
+
+            public void Reset() {
+                Remaining = Duration;
+            }
+
         }
         List<PetEvent> petEvents = new List<PetEvent>();
         public void AddEvent(string EventName, float Duration, System.Action Action, bool isOnceTime = true)
@@ -220,6 +226,12 @@ namespace Behaviour
             }
             else 
             {
+                if (Talking.instance.petTalk.IsTalking) 
+                {
+                    //reset
+                    m_stay.Reset();
+                }
+
                 if (Next()) 
                 {
                     Conversation.PetBehaviour(m_Relation);

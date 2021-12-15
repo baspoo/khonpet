@@ -56,13 +56,6 @@ public class PetObj : MonoBehaviour
 
 
 
-    public PetVoice voice;
-    [System.Serializable]
-    public class PetVoice
-    {
-
-    }
-
     public List<Achievement.AchievementData> achievements;
 
 

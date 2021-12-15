@@ -39,7 +39,7 @@ public class Initialize : MonoBehaviour
             !BundleService.instance.IsDone) yield return new WaitForEndOfFrame();
 
 
-        Debug.Log("Initialize Done.");
+       
 
         //----------------------------------------------------------------------------------------------------
         // [Instance Game Client]
@@ -58,6 +58,8 @@ public class Initialize : MonoBehaviour
         Chat.instance.Init();
         InterfaceRoot.instance.Init();
         ConsoleActivity.Init();
+
+        Debug.Log("Initialize Done.");
         StartCoroutine(AfterInit());
     }
 

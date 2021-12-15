@@ -125,6 +125,7 @@ public class Talking : MonoBehaviour
     [System.Serializable]
     public class PetTalk
     {
+        public bool IsTalking => Talk.gameObject.activeSelf;
         public Transform Talk;
         public Animation anim_message;
         public Animation anim_header;

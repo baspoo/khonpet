@@ -38,6 +38,9 @@ TextureImporter:
   - first:
       213: 8313039760880896445
     second: pet0_11
+  - first:
+      213: 6530179738444782934
+    second: pet0_12
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -760,6 +763,27 @@ TextureImporter:
       bones: []
       spriteID: db9010f3e99dd5370800000000000000
       internalID: 8313039760880896445
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: pet0_12
+      rect:
+        serializedVersion: 2
+        x: 270
+        y: 935
+        width: 43
+        height: 55
+      alignment: 9
+      pivot: {x: 0.5809546, y: 0.31013072}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65d547dafdbdf9a50800000000000000
+      internalID: 6530179738444782934
       vertices: []
       indices: 
       edges: []

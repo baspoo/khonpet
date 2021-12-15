@@ -20,12 +20,12 @@
             {
                 "Rate":1,
                 "Percent":15,
-                "TalkStayTime_Sec":[35,60]
+                "TalkStayTime_Sec":[40,120]
             },
             {
                 "Rate":2,
                 "Percent":35,
-                "TalkStayTime_Sec":[35,60]
+                "TalkStayTime_Sec":[45,120]
             },
             {
                 "Rate":3,

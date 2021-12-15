@@ -1,2 +1,2 @@
-Enable	ID	Name	Description	Air	Kind	Rarity	Fish	Meat	Milk	Corn	Cookie	Chocolate	Honey	Vegetable	LvUnlocks	Url_Image	Url_Bundle	ContractAddress	TokenId	Meta
-TRUE	p_0000	Little Chicky	Messages is a simple, helpful messaging app that keeps you connected with the people who matter most. Text anyone from anywhere across devices.	Sun	Animal	Commond	Happy	Normal	Bad	Super	Happy	Normal	Bad	Normal	[10,25,50,70,90]			0x18df6c571f6fe9283b87f910e41dc5c8b77b7da5	6395	{}
+Enable	ID	Name	Description	Air	Kind	Rarity	Fish	Meat	Milk	Corn	Cookie	Chocolate	Honey	Vegetable	LvUnlocks	vBundle	ContractAddress	TokenId	Meta
+TRUE	p_0000	Little Chicky	Messages is a simple, helpful messaging app that keeps you connected with the people who matter most. Text anyone from anywhere across devices.	Sun	Animal	Commond	Happy	Normal	Bad	Super	Happy	Normal	Bad	Normal	[10,25,50,70,90]	1	0x18df6c571f6fe9283b87f910e41dc5c8b77b7da5	6395	{}

@@ -37,7 +37,7 @@ public class ResourcesHandle
     }
 
 
-    public static void Init( string petID , System.Action<bool> done)
+    public static void Init( PetData pet , System.Action<bool> done)
     {
         if (GetLoadType == LoadType.Editor)
         {
@@ -45,10 +45,8 @@ public class ResourcesHandle
         }
         if (GetLoadType == LoadType.CloudFile)
         {
-            string pathSeparator = "/";
-            var url = $"{Application.streamingAssetsPath}{pathSeparator}AssetBundle{pathSeparator}Pets{pathSeparator}{petID}";
             var assetsbundle = AssetsBundleHandle.Init();
-            assetsbundle.OnStartDownloading(petID,url, done);
+            assetsbundle.OnStartDownloading(pet , done);
         }
     }
 

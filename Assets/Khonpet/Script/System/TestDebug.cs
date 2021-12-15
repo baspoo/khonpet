@@ -73,7 +73,11 @@ public class TestDebugUI : Editor
             m_page.objectsHide.ForEach(x => x.SetActive(false));
             m_page.objectsShow.ForEach(x => x.SetActive(true));
         }
-        if (GUILayout.Button("Test"))
+        if (GUILayout.Button($"ClearCache : { Caching.spaceUsed }")) 
+        {
+            Caching.ClearCache();
+        }
+            if (GUILayout.Button("Test"))
         {
             PetObj.Current.talking.petTalk.ShowText($"{Language.Get("journey_newhighscore")} {1000}");
 
