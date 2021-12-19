@@ -63,25 +63,22 @@ public class Conversation
     }
 
 
-    public static void PetBehaviour( int relation) 
+    public static void PetBehaviour( int relation ) 
     {
-
+       
         List<string> msg = new List<string>();
-        if (inspector.IsHighDemandData(Pet.StatType.Hungry))
+        if (msg.Count == 0 && inspector.IsHighDemandData(Pet.StatType.Hungry))
         {
             msg.AddRange(GetMessageList("petting", "petting_needfood", relation));
         }
-
-        if (inspector.IsHighDemandData(Pet.StatType.Cleanliness))
-        {
-            msg.AddRange(GetMessageList("petting", "petting_needclean", relation));
-        }
-
-        if (inspector.IsHighDemandData(Pet.StatType.Energy))
+        if (msg.Count == 0 && inspector.IsHighDemandData(Pet.StatType.Energy))
         {
             msg.AddRange(GetMessageList("petting", "petting_needsleep", relation));
         }
-
+        if (msg.Count == 0 && inspector.IsHighDemandData(Pet.StatType.Cleanliness))
+        {
+            msg.AddRange(GetMessageList("petting", "petting_needclean", relation));
+        }
         if (msg.Count == 0)
             msg.AddRange(GetMessageList("behaviour", "behaviour_talking", relation));
 
@@ -136,23 +133,25 @@ public class Conversation
             if (pettingStatic.lastpetting.IsTimeoutSec(3))
             {
 
+                Debug.Log($"Hungry {inspector.IsHighDemandData(Pet.StatType.Hungry)}  {msg.Count}");
 
-
-                if (inspector.IsHighDemandData(Pet.StatType.Hungry)) 
+                if (msg.Count == 0 && inspector.IsHighDemandData(Pet.StatType.Hungry)) 
                 {
                     msg.AddRange(GetMessageList("petting", "petting_needfood", relation));
                 }
 
-                if (inspector.IsHighDemandData(Pet.StatType.Cleanliness))
-                {
-                    msg.AddRange(GetMessageList("petting", "petting_needclean", relation));
-                }
+                Debug.Log($"Energy {inspector.IsHighDemandData(Pet.StatType.Energy)}  {msg.Count}");
 
-                if (inspector.IsHighDemandData(Pet.StatType.Energy))
+                if (msg.Count == 0 && inspector.IsHighDemandData(Pet.StatType.Energy))
                 {
                     msg.AddRange(GetMessageList("petting", "petting_needsleep", relation));
                 }
+                Debug.Log($"Cleanliness {inspector.IsHighDemandData(Pet.StatType.Cleanliness)}  {msg.Count}");
 
+                if (msg.Count == 0 && inspector.IsHighDemandData(Pet.StatType.Cleanliness))
+                {
+                    msg.AddRange(GetMessageList("petting", "petting_needclean", relation));
+                }
 
                 msg.AddRange(GetMessageList("petting", "petting_normal", relation));
                 if (likeair)
