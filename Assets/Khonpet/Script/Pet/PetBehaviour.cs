@@ -31,7 +31,7 @@ public class PetBehaviour : MonoBehaviour
     }
     void AwakeBehaviour()
     {
-        m_engine.AddEvent("StayBehaviour", 1.0f, new Behaviour.StayBehaviour(this).Update, false);
+        //m_engine.AddEvent("StayBehaviour", 1.0f, new Behaviour.StayBehaviour(this).Update, false);
         m_engine.AddEvent("UpdateBoring", 1.0f, new Behaviour.PetBoring(this).UpdateBoring, false);
     }
 }
@@ -255,47 +255,47 @@ namespace Behaviour
 
 
 
-    public class StayBehaviour
-    {
+    //public class StayBehaviour
+    //{
        
-        PetBehaviour m_behaviour;
-        PetBehaviourEngine.PetEvent m_stay = null;
-        public StayBehaviour(PetBehaviour behaviour)
-        {
-            m_behaviour = behaviour;
-        }
+    //    PetBehaviour m_behaviour;
+    //    PetBehaviourEngine.PetEvent m_stay = null;
+    //    public StayBehaviour(PetBehaviour behaviour)
+    //    {
+    //        m_behaviour = behaviour;
+    //    }
 
-        int m_Relation;
-        bool Next() 
-        {
-            m_Relation = PetData.PetInspector.Relationship.Relation;
-            var RateData = Config.Data.Behaviours[m_Relation];
-            m_stay.Duration = Random.RandomRange(RateData.TalkStayTime_Sec[0], RateData.TalkStayTime_Sec[1]);
-            return RateData.Percent.IsPercent();
-        }
-        public void Update()
-        {
-            if (m_stay == null)
-            {
-                m_stay = m_behaviour.engine.GetEvent("StayBehaviour");
-                Next();
-                return;
-            }
-            else 
-            {
-                if (Talking.instance.petTalk.IsTalking) 
-                {
-                    //reset
-                    m_stay.Reset();
-                }
+    //    int m_Relation;
+    //    bool Next() 
+    //    {
+    //        m_Relation = PetData.PetInspector.Relationship.Relation;
+    //        var RateData = Config.Data.Behaviours[m_Relation];
+    //        m_stay.Duration = Random.RandomRange(RateData.TalkStayTime_Sec[0], RateData.TalkStayTime_Sec[1]);
+    //        return RateData.Percent.IsPercent();
+    //    }
+    //    public void Update()
+    //    {
+    //        if (m_stay == null)
+    //        {
+    //            m_stay = m_behaviour.engine.GetEvent("StayBehaviour");
+    //            Next();
+    //            return;
+    //        }
+    //        else 
+    //        {
+    //            if (Talking.instance.petTalk.IsTalking) 
+    //            {
+    //                //reset
+    //                m_stay.Reset();
+    //            }
 
-                if (Next()) 
-                {
-                    Conversation.PetBehaviour(m_Relation);
-                }
-            }
-        }
-    }
+    //            if (Next()) 
+    //            {
+    //                Conversation.PetBehaviour(m_Relation);
+    //            }
+    //        }
+    //    }
+    //}
 
 
 

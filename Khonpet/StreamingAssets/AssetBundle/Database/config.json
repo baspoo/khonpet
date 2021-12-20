@@ -9,12 +9,12 @@
             80
         ]
     },
-    "Time": {
+    "Petting": {
         "BoringTime_Min": 30,
-        "BalloonTime_Sec": [
-            15,
-            80
-        ]
+        "PetTalkDuration_Sec":3.0,
+        "SkinHighDemandPercent":20,
+        "SpamDuration_Sec":[3,8],
+        "SpamCount":5
     },
     "Behaviours":[
             {

@@ -25,11 +25,15 @@ public class Config
             public bool Active;
             public float[] Duration_Sec;
         }
-        public TimeData Time;
+        public PettingData Petting;
         [System.Serializable]
-        public class TimeData
+        public class PettingData
         {
             public int BoringTime_Min;
+            public float PetTalkDuration_Sec;
+            public int SkinHighDemandPercent;
+            public int[] SpamDuration_Sec;
+            public int SpamCount;
         }
         public List<BehaviourData> Behaviours;
         [System.Serializable]
@@ -130,7 +134,7 @@ public class Language
         public string[] messages;
         public string getmessage => messages[languageIndex];
         public string tag;
-        public int relation;
+        public string relation;
         public int percent;
         public string exclusive;
     }
@@ -159,7 +163,7 @@ public class Language
                 {
                     key = d.GetIndex(0),
                     tag = d.GetIndex(1),
-                    relation = d.GetIndex(2).ToInt(),
+                    relation = d.GetIndex(2),
                     percent = d.GetIndex(3).ToInt(),
                     messages = new string[] { d.GetIndex(4), d.GetIndex(5) },
                     exclusive = d.GetIndex(6)
@@ -182,6 +186,10 @@ public class Language
                 }
 
             }
+
+            Logger.Log($"Languages:{Languages.Count}    Conversations:{Conversations.Count}");
+
+
             Done = true;
             done();
         }
@@ -203,6 +211,7 @@ public class Language
     }
     public static List<string> GetTag( string tag , string key , int relation)
     {
+        string str_relation = relation.ToString();
         List<string> let = new List<string>();
         if (Conversations.ContainsKey(tag))
         {
@@ -210,16 +219,24 @@ public class Language
             foreach (var find in languages)
             {
 
-                if (find.key == key &&
-                    (find.relation == 0 || find.relation == relation) &&
+                var msg = find.getmessage;
+
+
+                if (find.key == key && 
+                    !string.IsNullOrEmpty(msg) && msg != "-" &&
+                    (string.IsNullOrEmpty(find.relation) || find.relation == "0" || find.relation.Contains(str_relation)) &&
                     (find.percent == 0 || find.percent.IsPercent()) &&
-                    (string.IsNullOrEmpty(find.exclusive) || find.exclusive == PetData.Current.ID))
+                    (string.IsNullOrEmpty(find.exclusive) || find.exclusive == "-" || find.exclusive == PetData.Current.ID))
 
+                {
 
-                    let.Add(find.getmessage);
+                    let.Add(msg);
+                }
 
             }
+            Logger.Log($"tag.count = {languages.Count} / filter = {let.Count}");
         }
+
         return let;
     }
 

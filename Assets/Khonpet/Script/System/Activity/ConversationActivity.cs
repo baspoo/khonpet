@@ -49,9 +49,12 @@ public class Conversation
             {
                 message = "welcome_30min";
             }
+
+
+            Logger.Log($"{time} > {message}" );
         }
 
-       
+        
         inspector.AddActivity(Pet.Activity.Welcome);
         Talk("welcome", message);
     }
@@ -63,37 +66,38 @@ public class Conversation
     }
 
 
-    public static void PetBehaviour( int relation ) 
-    {
+    //public static void PetBehaviour( int relation ) 
+    //{
        
-        List<string> msg = new List<string>();
-        if (msg.Count == 0 && inspector.IsHighDemandData(Pet.StatType.Hungry))
-        {
-            msg.AddRange(GetMessageList("petting", "petting_needfood", relation));
-        }
-        if (msg.Count == 0 && inspector.IsHighDemandData(Pet.StatType.Energy))
-        {
-            msg.AddRange(GetMessageList("petting", "petting_needsleep", relation));
-        }
-        if (msg.Count == 0 && inspector.IsHighDemandData(Pet.StatType.Cleanliness))
-        {
-            msg.AddRange(GetMessageList("petting", "petting_needclean", relation));
-        }
-        if (msg.Count == 0)
-            msg.AddRange(GetMessageList("behaviour", "behaviour_talking", relation));
+    //    List<string> msg = new List<string>();
+    //    if (msg.Count == 0 && inspector.IsHighDemandData(Pet.StatType.Hungry))
+    //    {
+    //        msg.AddRange(GetMessageList("petting", "petting_needfood", relation));
+    //    }
+    //    if (msg.Count == 0 && inspector.IsHighDemandData(Pet.StatType.Energy))
+    //    {
+    //        msg.AddRange(GetMessageList("petting", "petting_needsleep", relation));
+    //    }
+    //    if (msg.Count == 0 && inspector.IsHighDemandData(Pet.StatType.Cleanliness))
+    //    {
+    //        msg.AddRange(GetMessageList("petting", "petting_needclean", relation));
+    //    }
+    //    if (msg.Count == 0)
+    //        msg.AddRange(GetMessageList("behaviour", "behaviour_talking", relation));
 
 
-        if (msg.Count > 0)
-        {
-            PushMessage(msg[Random.RandomRange(0, msg.Count)]);
-        }
-    }
+    //    if (msg.Count > 0)
+    //    {
+    //        PushMessage(msg[Random.RandomRange(0, msg.Count)]);
+    //    }
+    //}
 
 
     static PettingStatic pettingStatic;
     public class PettingStatic {
         public int count;
         public int rushcount;
+        public int duration;
         public System.DateTime lastpetting;
         public PlayingData.PetPlaying.Activity act;
     }
@@ -102,6 +106,7 @@ public class Conversation
         if (pettingStatic == null)
         {
             pettingStatic = new PettingStatic();
+            pettingStatic.duration = 3;
             var act = inspector.GetActivity(Pet.Activity.Petting);
 
             if (act != null)
@@ -130,38 +135,45 @@ public class Conversation
             pettingStatic.rushcount++;
             var relation = PetData.PetInspector.Relationship.Relation;
 
-            if (pettingStatic.lastpetting.IsTimeoutSec(3))
+            if (pettingStatic.lastpetting.IsTimeoutSec(pettingStatic.duration))
             {
 
-                Debug.Log($"Hungry {inspector.IsHighDemandData(Pet.StatType.Hungry)}  {msg.Count}");
+                //Debug.Log($"Hungry {inspector.IsHighDemandData(Pet.StatType.Hungry)}  {msg.Count}");
 
                 if (msg.Count == 0 && inspector.IsHighDemandData(Pet.StatType.Hungry)) 
                 {
                     msg.AddRange(GetMessageList("petting", "petting_needfood", relation));
                 }
 
-                Debug.Log($"Energy {inspector.IsHighDemandData(Pet.StatType.Energy)}  {msg.Count}");
+                //Debug.Log($"Energy {inspector.IsHighDemandData(Pet.StatType.Energy)}  {msg.Count}");
 
                 if (msg.Count == 0 && inspector.IsHighDemandData(Pet.StatType.Energy))
                 {
                     msg.AddRange(GetMessageList("petting", "petting_needsleep", relation));
                 }
-                Debug.Log($"Cleanliness {inspector.IsHighDemandData(Pet.StatType.Cleanliness)}  {msg.Count}");
+
+                //Debug.Log($"Cleanliness {inspector.IsHighDemandData(Pet.StatType.Cleanliness)}  {msg.Count}");
 
                 if (msg.Count == 0 && inspector.IsHighDemandData(Pet.StatType.Cleanliness))
                 {
                     msg.AddRange(GetMessageList("petting", "petting_needclean", relation));
                 }
 
-                msg.AddRange(GetMessageList("petting", "petting_normal", relation));
-                if (likeair)
-                    msg.AddRange(GetMessageList("petting", "petting_likeair", relation));
+
+
+                if (msg.Count == 0 || Config.Data.Petting.SkinHighDemandPercent.IsPercent()) 
+                {
+                    msg.AddRange(GetMessageList("petting", "petting_normal", relation));
+                    if (likeair)
+                        msg.AddRange(GetMessageList("petting", "petting_likeair", relation));
+                }
+                
 
 
             }
             else 
             {
-                if (pettingStatic.rushcount == 5) 
+                if (pettingStatic.rushcount == Config.Data.Petting.SpamCount) 
                 {
                     msg.AddRange(GetMessageList("petting", "petting_spam", relation));
                 }
@@ -178,6 +190,7 @@ public class Conversation
 
             if (msg.Count > 0)
             {
+                pettingStatic.duration = Config.Data.Petting.SpamDuration_Sec[Random.RandomRange(0,2)];
                 pettingStatic.rushcount = 0;
                 PushMessage(msg[Random.RandomRange(0, msg.Count)]);
             }

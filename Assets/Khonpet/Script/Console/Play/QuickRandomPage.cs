@@ -12,8 +12,10 @@ public class QuickRandomPage : MonoBehaviour
     public AnimCallback animcallback;
     int m_choise;
     System.Action<bool> m_done;
+    bool isReady = false;
     public void Init(System.Action<bool> done)
     {
+        isReady = false;
         m_done = done;
         gameObject.SetActive(true);
         coin.localPosition = new Vector3(0.0f, coin.localPosition.y, coin.localPosition.z);
@@ -55,16 +57,19 @@ public class QuickRandomPage : MonoBehaviour
         coin.position = new Vector3(cups[m_choise].transform.position.x, coin.position.y, coin.position.z);
         yield return new WaitForSeconds(0.15f);
         canvas.gameObject.SetActive(true);
+        isReady = true;
     }
 
 
     public void Selete(int index)
     {
-        StartCoroutine(IESelete(index));
+        if(isReady)
+            StartCoroutine(IESelete(index));
     }
     bool isMatch = false;
     IEnumerator IESelete(int index)
     {
+        isReady = false;
         this.isMatch = m_choise == index;
         coinEffect.gameObject.SetActive(isMatch);
         coin.gameObject.SetActive(true);

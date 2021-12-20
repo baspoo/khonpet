@@ -145,7 +145,7 @@ public class Talking : MonoBehaviour
             anim_message.Play(anim_message.clip.name);
 
             instance.StopWait(coro);
-            coro = instance.StartWait(Duration, () => {
+            coro = instance.StartWait( Config.Data.Petting.PetTalkDuration_Sec , () => {
                 Hide();
             });
         }

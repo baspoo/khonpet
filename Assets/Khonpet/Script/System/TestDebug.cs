@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Newtonsoft.Json;
@@ -42,7 +42,7 @@ public class Logger : MonoBehaviour
     public static void Log(object log)
     {
 #if UNITY_EDITOR
-        Debug.Log(log);
+        Debug.Log($"➤ { log }");
 #endif
     }
 }

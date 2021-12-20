@@ -66,7 +66,7 @@ public static class PetActivity
         public long Star => (Setting.instance.debug.isStarDebug) ? Setting.instance.debug.StarCountDebug : FirebaseService.instance.Preset.Star;
         public Utility.Level Lv => new Utility.Level(Star);
         public bool Liked => m_petplaying.Liked;
-        public bool IsBoring => m_petplaying.UnixLastPetting.IsTimeout(Config.Data.Time.BoringTime_Min);
+        public bool IsBoring => m_petplaying.UnixLastPetting.IsTimeout(Config.Data.Petting.BoringTime_Min);
         public bool IsLikeAir => PetData.Air == AirActivity.GetAirData().airName;
         public List<PlayingData.PetPlaying.QuestPlaying> Quests => m_petplaying.Quests;
 
@@ -297,7 +297,7 @@ public static class PetActivity
             pet.AddActivity(Pet.Activity.Sleep, star);
         pet.AddStat(Pet.StatType.Energy, realEnergy );
         pet.RemoveActivity(Pet.Activity.StartSleep);
-        Conversation.Sleep(star, energy , unfull);
+        Conversation.Sleep(star, energy , !unfull);
     }
 
     public static void OnJourneyComplete(this PetInspector pet, int score)
@@ -359,7 +359,8 @@ public static class StatUtility
     }
     public static void AddStat(this PetActivity.PetInspector inspector, Pet.StatType Stat, int Value)
     {
-        inspector.PetPlaying.AddStat(Stat, Value, PetPlayingTools.Opt.Add);
+        var current = inspector.GetStat(Stat);
+        inspector.PetPlaying.AddStat(Stat, (current + Value).Max(Pet.Static.MaxStat) , PetPlayingTools.Opt.Set);
     }
     public static void UpdateStat( this PetActivity.PetInspector inspector , Pet.StatType Stat , int Value ) 
     {
