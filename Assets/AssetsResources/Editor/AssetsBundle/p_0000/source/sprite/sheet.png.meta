@@ -41,6 +41,9 @@ TextureImporter:
   - first:
       213: 6530179738444782934
     second: pet0_12
+  - first:
+      213: 613435604629981061
+    second: icon
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -794,6 +797,27 @@ TextureImporter:
       bones: []
       spriteID: 65d547dafdbdf9a50800000000000000
       internalID: 6530179738444782934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon
+      rect:
+        serializedVersion: 2
+        x: 884
+        y: 20
+        width: 120
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5870c8aae6c538800800000000000000
+      internalID: 613435604629981061
       vertices: []
       indices: 
       edges: []

@@ -174,7 +174,7 @@ public class PopupPage : MonoBehaviour
     {
         public Transform root;
         public Transform position;
-        public RawImage imgProfile;
+        public Image imgProfile;
         public Text txtName;
         public Text txtAddress;
         public Text txtDescription;
@@ -188,11 +188,11 @@ public class PopupPage : MonoBehaviour
         public void Open() 
         {
             instance.Bg(BgStyle.center);
-            imgProfile.texture = PetObj.Current.info.Thumbnail;
+            imgProfile.sprite = PetObj.Current.info.Thumbnail;
             //LoaderService.instance.OnLoadImage(NFTService.instance.Preset.PetImageUrl, (img) => { imgProfile.texture = img; });
             txtName.text = $"{PetData.Current.Name}";
             txtDescription.text = $"{PetData.Current.Description}";
-            txtAddress.text = $"{NFTService.instance.Preset.ContractAddress.Substring(0, 20)}....";
+            txtAddress.text = $"{(NFTService.instance.Preset.ContractAddress.Length >= 20 ? NFTService.instance.Preset.ContractAddress.Substring(0, 20) : "x000000000000") }....";
             var gotoUrl = $"{"https://"}opensea.io/assets/{NFTService.instance.Preset.ContractAddress}/{NFTService.instance.Preset.Token}";
 
             //Food Feeling

@@ -111,7 +111,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   info:
     ID: p_0000
-    Thumbnail: {fileID: 2800000, guid: c9ae6f5b313966844bef1e4f0ee69779, type: 3}
+    Thumbnail: {fileID: 613435604629981061, guid: c8ce85f81b9028c44950e9dcd3897bab, type: 3}
   body:
     direction: 0
     root: {fileID: 5771398447563540626}

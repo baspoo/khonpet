@@ -23,7 +23,7 @@ public class PetObj : MonoBehaviour
     public class PetInfo
     {
         public string ID;
-        public Texture Thumbnail;
+        public Sprite Thumbnail;
     }
 
 
