@@ -348,10 +348,12 @@ public class PopupPage : MonoBehaviour
             toggle_bgm.InitToggle((t) => {
                 Playing.instance.Sound(t, null);
                 Sound.Init();
+                SoundHandle.RefreshAll();
             }, Playing.instance.playingData.IsBgm);
 
             toggle_sfx.InitToggle((t) => {
                 Playing.instance.Sound(null, t);
+                SoundHandle.RefreshAll();
             }, Playing.instance.playingData.IsSfx);
 
 
