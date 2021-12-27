@@ -10,14 +10,18 @@ public static class PetActivity
     public static void Init( )
     {
         ResourcesHandle.Load(PetData.Current.ID,"pet", ResourcesHandle.FileType.prefab, (obj) => {
-            if (obj != null) 
+            if (obj != null)
             {
-                m_petObj = GameObject.Instantiate((GameObject)obj,World.instance.PetPosition).GetComponent<PetObj>();
+                m_petObj = GameObject.Instantiate((GameObject)obj, World.instance.PetPosition).GetComponent<PetObj>();
                 m_petObj.transform.localPosition = Vector3.zero;
                 m_petObj.transform.localScale = Vector3.one;
                 m_petObj.Init(PetData.Current);
             }
-            else Debug.LogError($"petobj = null!");
+            else
+            {
+                Debug.LogError($"petobj = null!");
+                InterfaceRoot.instance.Error("Not Instantiate!", Language.Get("not_instantiate_assets"));
+            }
         });
 
     }

@@ -135,8 +135,7 @@ public class PetData
         if(m_Current == null) 
         { 
             Debug.LogError($"SetCurrent Find Not Found {ContractAddress} {TokenId}");
-            PopupPage.instance.message.Open("Find Not Found!", Language.Get("find_not_found_pet") ,false,true).HideBtnClose();
-            InterfaceRoot.instance.Loading(false);
+            InterfaceRoot.instance.Error("Find Not Found!", Language.Get("find_not_found_pet"));
         }
 
     }

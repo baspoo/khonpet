@@ -47,7 +47,11 @@ public class InterfaceRoot : MonoBehaviour
         loading.gameObject.SetActive(active);
     }
 
-
+    public void Error(string header, string message)
+    {
+        PopupPage.instance.message.Open(header, message, false, true).HideBtnClose();
+        instance.Loading(false);
+    }
 
 
 }

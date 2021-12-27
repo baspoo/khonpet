@@ -50,7 +50,7 @@ public class AssetsBundleHandle : MonoBehaviour
     {
         string pathSeparator = "/";
         var url = $"{Application.streamingAssetsPath}{pathSeparator}AssetBundle{pathSeparator}Pets{pathSeparator}{pet.ID}";
-
+        url += $"?unix={ Playing.instance.playingUnix }";
         var done = true;
         yield return new WaitForEndOfFrame();
         yield return StartCoroutine(DownloadAssets(pet.ID, url , pet.vBundle, (r) => {
@@ -116,6 +116,7 @@ public class AssetsBundleHandle : MonoBehaviour
             else 
             {
                 Debug.LogError($"{path} : {www.error}");
+                InterfaceRoot.instance.Error("Assets Not Found!", Language.Get("find_not_found_assets"));
                 callback?.Invoke(false);
                 yield break;
             }

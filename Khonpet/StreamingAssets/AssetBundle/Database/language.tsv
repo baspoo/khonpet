@@ -1,12 +1,14 @@
 Key	Tag	Relation	Percent	EN	Th	Exclusive	Note
 Error							
-find_not_found_pet				Please Check ContractAddress Or TokenId Again.	Please Check ContractAddress Or TokenId Again.		
+find_not_found_pet				Please Check the Contract Address Or Token Id and try again.	Please Check the Contract Address Or Token Id and try again.		
+find_not_found_assets				Please Check the Contract Address Or Token Id and try again.	Please Check the Contract Address Or Token Id and try again.		
+not_instantiate_assets				Please Check the Contract Address Or Token Id and try again.	Please Check the Contract Address Or Token Id and try again.		
 feature_unavailable				This functionality is coming soon. You can send feedback to developer about this function for improvement.	This functionality is coming soon. You can send feedback to developer about this function for improvement.		
 Stats							
-Relationship				Relationship Level A relationship between owner and pet will affect the pet's behavior.  To increase the relationship level with your pets, you can give a heart of love by touching them with a soft-hearted touch every 30 minutes and completing exciting events with them.	ค่าความสัมพันธ์ระหว่างผู้เล่นและสัตว์ เพิ่มขึ้นจากการเข้ามากดที่ตัวสัตว์เลี้ยงทุกๆ 30 นาที และการทำภาระกิจรายวัน ความสัมพันธ์ส่งผลต่อพฤติกรรมของสัตว์เลี้ยงในหลายๆด้าน		
-Hungry				Starvation Level Feed them a favourite food to increase the starvation and relationship level. Do not leave them with a hungriness	ค่่าความหิวของสัตว์เลี้ยง ป้อนอาหารที่สัตว์เลี้ยงชื่นชอบ อย่าปล่อยให้สัตว์เลี้ยงหิวจนนานเกินไปจะส่งผลเสียต่อความสัมพันธ์		
-Energy				Energy level Doing too much activities with your pet will affect to its energy and become fatigue. Bring them to have some rest for recovering your pet.	ค่าพลังงานของสัตว์เลี้ยง ใช้สำหรับเล่นของเล่น หากพลังงานหมดจะไม่มีแรงมากพอจะเล่นของเล่นได้ เติมเต็มด้วยการพาสัตว์เลี้ยงเข้านอน		
-Cleanliness				Hygiene level Keep observe your pet. If your pet seem like a bit smelly, rapidly bring them to take a bath otherwise it will be rude to you	ค่าความสะอาดของสัตว์เลี้ยง อย่าปล่อยให้สัตว์เลี้ยงสกปกเกินไป การทำความสะอาดอย่าสม่ำเสมอจะทำให้เกิดความสัมพันธ์ที่ดี		
+Relationship				Relationship Level A relationship between owner and pet will affect the pet's behavior.  To increase the relationship level with your pets, you can give a heart of love by touching them with a soft-hearted touch every 30 minutes and completing exciting events with them.	ค่าความสัมพันธ์ระหว่างผู้เล่นและสัตว์ เพิ่มขึ้นจากการเข้ามากดที่ตัวสัตว์เลี้ยงทุกๆ 30 นาที  และการทำภาระกิจรายวัน ความสัมพันธ์ส่งผลต่อพฤติกรรมของ สัตว์เลี้ยงในหลายๆด้าน		
+Hungry				Starvation Level Feed them a favourite food to increase the starvation and relationship level. Do not leave them with a hungriness	ค่่าความหิวของสัตว์เลี้ยง ป้อนอาหารที่สัตว์เลี้ยงชื่นชอบ  อย่าปล่อยให้สัตว์เลี้ยงหิวจนนานเกินไป จะส่งผลเสียต่อความสัมพันธ์		
+Energy				Energy level Doing too much activities with your pet will affect to its energy and become fatigue. Bring them to have some rest for recovering your pet.	ค่าพลังงานของสัตว์เลี้ยง ใช้สำหรับเล่นของเล่น หากพลังงานหมด  จะไม่มีแรงมากพอ เล่นของเล่นได้ เติมเต็มด้วยการพาสัตว์เลี้ยงเข้านอน		
+Cleanliness				Hygiene level Keep observing your pet. If your pet seems a bit smelly, rapidly bring them to take a bath otherwise it will be rude and fierce at you.	ค่าความสะอาดของสัตว์เลี้ยง อย่าปล่อยให้สัตว์เลี้ยงสกปกเกินไป  การทำความสะอาดอย่าสม่ำเสมอ จะทำให้เกิดความสัมพันธ์ที่ดี		
 Food							
 Fish				Fish	ปลา		
 Meat				Meat	เนื้อ		
@@ -44,15 +46,15 @@ broadcast_msg_highscore				New high score	New high score
 broadcast_msg_petting				Petting him	Petting him		
 Journey							
 journey_newhighscore				New High Score!	ทำคะแนนสูงสุด!		
-journey_description				 The Khonpet journey was designed as a Minigame for entertaining in your spare time. The Khonpet world was designed as a pet competition game with other owners and players to gain the top score rewards from raising a pet and journey of pet.	Journey เป็น Minigame เล็กๆให้คุณได้เล่นแก่เบื่อและทำ Top Score แข่งกันกับผู้เลี้ยงคนอื่นๆ รางวัลในการแข่งแต่ละครั้งขึ้นอยู่กับระยะทางที่ทำได้ และ ความสัมพันธ์ของพวกคุณ 		
+journey_description				 The Khonpet journey was designed as a Minigame for entertaining in your spare time. The Khonpet world was designed as a pet competition game with other owners and players to gain the top score rewards from raising a pet and journey of pet.	Journey เป็น Minigame เล็กๆให้คุณได้เล่นแก่เบื่อและทำ Top Score แข่งกันกับผู้เลี้ยงคนอื่นๆ รางวัลในการแข่งแต่ละครั้ง ขึ้นอยู่กับระยะทางที่ทำได้ และ ความสัมพันธ์ของพวกคุณ 		
 Conversation							
 welcome_firsttime	welcome	0		Holla! Hello! I am '{name}'	สวัสดี ~~~ เราชื่อ '{name}'		เข้ามาครั้งแรก
 welcome_30min	welcome	1		Bobbing up and down like a ghost huh?	ผลุบๆโผล่ๆ เป็นผีหรอ?		
-welcome_30min	welcome	1			มาทำไมให้อายบ้านนา.. ละนวลน้อง		
+welcome_30min	welcome	1		why did you come back , little bitch	มาทำไมให้อายบ้านนา.. ละนวลน้อง		
 welcome_30min	welcome	1		Again!? huh?	มาอีกละ		
 welcome_30min	welcome	1		Hey stupid, go away	โว๊ะ จะไปไหนก็ไป...		
 welcome_30min	welcome	2		Where ya been?	ไปไหนมา?		
-welcome_30min	welcome	2			ว่างสินะ เปิดเข้ามาอีกแล้ว		
+welcome_30min	welcome	2		Have a lot of time ? huh?	ว่างสินะ เปิดเข้ามาอีกแล้ว		
 welcome_30min	welcome	2		Yoo..Hoo..	ว่๊ววววว ฮู้ววว		
 welcome_30min	welcome	2		Nothing to do ?	งานการไม่ทำ		
 welcome_30min	welcome	3		Here it is!	กลับมาแล้วหรอ		
@@ -61,7 +63,7 @@ welcome_30min	welcome	3		Peek a BOO!!! 	จ๊ะ เอ๋ !
 welcome_30min	welcome	3		Holla!!	งั้ยจ๊ะ ตะเอง		
 welcome_30min	welcome	3		How it's going?	ทำอะไรกันดีน้าาา		
 welcome_day	welcome	1		Where the hell have you been? I can't take care of myself.	หายทั้งวัน.. ไม่คิดจะเข้ามาดูแลกุบ้าง?		เข้ามาครั้งแรกของวัน
-welcome_day	welcome	1			ติดเกมอื่นหรอเมิง? หายไปทั้งวัน		
+welcome_day	welcome	1		addicted to another game or back from hell huh? I thought you were already dead 	ติดเกมอื่นหรอเมิง? หายไปทั้งวัน		
 welcome_day	welcome	1		Aah! what brings you back ?	เออ...ดีออก กว่าจะกลับมา		
 welcome_day	welcome	2		{username}' Why were you have gone for so long?	หายไปทั้งวัยเลยน้าาา '{username}'		
 welcome_day	welcome	2		Any gift?	ไหนของฝาก?		
@@ -111,18 +113,18 @@ eat_super	eat	1		Awesome!	ของดี!!		กินอาหารที่�
 eat_super	eat	1		It's sensational!	โคตรฟินน		
 eat_super	eat	1		Holy shit! this is my favorite !	เจ๊ดเข้!!  '{foodfev}' ของชอบ		
 eat_super	eat	1		it is one hell of a food!	โอ๋โหวว เป็นบุญปาก		
-eat_super	eat	1			รู้ใจจริงๆนะ อิทาส		
-eat_super	eat	2			ขอแบบนี้อีกเยอะๆๆ		
-eat_super	eat	2			ของโปรดด		
+eat_super	eat	1		Hey, You read my mind	รู้ใจจริงๆนะ อิทาส		
+eat_super	eat	2		a lots of this , pleaseeeee	ขอแบบนี้อีกเยอะๆๆ		
+eat_super	eat	2		I like this .. it's my fav.	ของโปรดด		
 eat_super	eat	2		Yummy!!	อร่อย		
 eat_super	eat	2		Amazing taste	อันนี้เด็ดๆ		
 eat_super	eat	2		Amazing! this is the best one ever!	อร่อยสุดในย่านนี้		
 eat_super	eat	3		absolutely love this '{foodfev}'	ชอบ '{foodfev}' ที่สุดในโลกกเลย		
 eat_super	eat	3		oh.. I like this	รู้ใจเค้าจริงๆเลยนะ		
 eat_super	eat	3		tastes great! 	อร่อย ถูกใจ		
-eat_super	eat	3			หืมมม  อาโหร่ยยยย !!!!!		
+eat_super	eat	3		Wow!! great! Yummy!!	หืมมม  อาโหร่ยยยย !!!!!		
 eat_again	eat	1		Give me more .. lovely slave! 	อย่างกสิ อิทาส ขออีกชิ้น		ขอเติมอาหาร
-eat_again	eat	1			ยังไม่ครึ่งท้องเลย		
+eat_again	eat	1		My tummy is speaking to me	ยังไม่ครึ่งท้องเลย		
 eat_again	eat	1		Hey!! More! More! 	หิววๆๆ เอามาอีก		
 eat_again	eat	2		Give me more!! 	เอาอีกๆ		
 eat_again	eat	2		More and more 	เติมอีกๆ		
@@ -134,148 +136,148 @@ eat_again	eat	3		More please..	ขอเติมนะ
 eat_eatting	eat	0	25	yum yum! 	ง่ำๆๆ		กำลังกินอาหาร
 eat_eatting	eat	0	25	Ah..	อาาาห์		
 eat_eatting	eat	0	25	Yay Yeah	เย้ เย้		
-eat_eatting	eat	0	25		อาหารมาแล้วว		
-play_win	play	1			ชนะแค่นี้ทำคุย..		เล่นของเล่นชนะ
+eat_eatting	eat	0	25	Food arrived ~ Here we go~~	อาหารมาแล้วว		
+play_win	play	1		just a newb you are not the winner	ชนะแค่นี้ทำคุย..		เล่นของเล่นชนะ
 play_win	play	1		Born to be	เก่งจ้าาแม่		
-play_win	play	1			ฟลุ๊ค รึเปล่าาาา		
-play_win	play	1			เทพแท้ แม่เอ้ย		
-play_win	play	2			อีกสักรอบมั้ย		
-play_win	play	2			ว้าววว เก่งๆ		
-play_win	play	2			ร้ายกาจนะเรา		
-play_win	play	2			อั๊ยยะ ไม่เบา		
-play_win	play	3			ว้าววว เก่งๆ		
-play_win	play	3			เก่งขนาดนี้... ลงโอลิมปิคมั้ยปีหน้า		
-play_win	play	3			เล่นอีกๆ		
-play_win	play	3			สุดยอดไปเลยลูกพี่		
-play_lose	play	1		WTF.. 	ห่วย....		เล่นของเล่นแพ้
+play_win	play	1		Fu*king cool!!	ฟลุ๊ค รึเปล่าาาา		
+play_win	play	1		Brilliant! 	เทพแท้ แม่เอ้ย		
+play_win	play	2		one more round dude?	อีกสักรอบมั้ย		
+play_win	play	2		Super! Super!	ว้าววว เก่งๆ		
+play_win	play	2		So wicked!	ร้ายกาจนะเรา		
+play_win	play	2		Not bad haha	อั๊ยยะ ไม่เบา		
+play_win	play	3		Wow .. that's good!	ว้าววว เก่งๆ		
+play_win	play	3		Superb! You are the best. You are the champion	เก่งขนาดนี้... ลงโอลิมปิคมั้ยปีหน้า		
+play_win	play	3		one more round haha..	เล่นอีกๆ		
+play_win	play	3		That's the best ever!!	สุดยอดไปเลยลูกพี่		
+play_lose	play	1		Sucky!!	ห่วย....		เล่นของเล่นแพ้
 play_lose	play	1		What the hell ? loser!	บ้งมาก		
-play_lose	play	1		hahahahaha just a loser!	5555 กาก		
+play_lose	play	1		hahahahaha just a newb! so crappy	5555 กาก		
 play_lose	play	1		Hey! loser! you are so idiot	เห้ออ... กระจอกจริงๆ		
-play_lose	play	1		just a loser.. idiot!!	โหยย... อ่อน		
+play_lose	play	1		just a rookie.. idiot!!	โหยย... อ่อน		
 play_lose	play	2		Aah! ... Lose 	แพ้สินะ		
 play_lose	play	2		haha ..loser	ว้ายยย แพ้		
-play_lose	play	2		practice more	ไปหัดมาใหม่นะ		
+play_lose	play	2		practice more.. it's crappy	ไปหัดมาใหม่นะ		
 play_lose	play	2		not good at all	อ่อนซ่อมอะ		
 play_lose	play	3		Keep going	เอาใหม่นะ		
 play_lose	play	3		Keep going, Next time will be better	สู้ๆๆ ครั้งหน้าทำได้แน่		
 play_lose	play	3		I support you	เอาใจช่วยนะ		
 play_lose	play	3		Keep fighting	พยายามเข้า		
-sleep_full	sleep	1			จะให้นอนไรหนักหนาหืมม		หลับอิ่มแล้ว ไม่หลับต่อแล้ว
-sleep_full	sleep	1			กุไม่ได้ง่วงมั้ย		
-sleep_full	sleep	2			ไม่อยากนอนแล้ว		
-sleep_full	sleep	2			หลับจนเกินพอ		
-sleep_full	sleep	2			โอ้ยไม่นอนแล้ว		
-sleep_full	sleep	3			นอนพอแล้วนะวันนี้		
-sleep_full	sleep	3			นอนจนอิ่มแล้วจ้า		
+sleep_full	sleep	1		WTF, too much for sleeping	จะให้นอนไรหนักหนาหืมม		หลับอิ่มแล้ว ไม่หลับต่อแล้ว
+sleep_full	sleep	1		Hey bitch.. I am not sleepy 	กุไม่ได้ง่วงมั้ย		
+sleep_full	sleep	2		Hey I don't want to sleep	ไม่อยากนอนแล้ว		
+sleep_full	sleep	2		I want to do something else.. lets me get out of the bed	หลับจนเกินพอ		
+sleep_full	sleep	2		Oh! enough for sleeping	โอ้ยไม่นอนแล้ว		
+sleep_full	sleep	3		I've got a good night's sleep	นอนพอแล้วนะวันนี้		
+sleep_full	sleep	3		Happy with a good night's sleep	นอนจนอิ่มแล้วจ้า		
 sleep_fastawake	sleep	1		Holy shit .. I just blink	ดีออก... กุเพิ่งจะหลับตาได้ 1 วิ 		ปลุกเร็วเกินไป
-sleep_fastawake	sleep	1			จะรีบปลุกเพื่อ???		
+sleep_fastawake	sleep	1		Get lost! I want to sleep	จะรีบปลุกเพื่อ???		
 sleep_fastawake	sleep	1		Hey slave .. Shut up and go away	ปลุุกทำไมอิทาส		
-sleep_fastawake	sleep	2			เอาไงเนี้ย จะให้นอนมั้ย		
-sleep_fastawake	sleep	2			ขอนอนต่อได้มั้ย		
-sleep_fastawake	sleep	2			ปลุกขึ้นมาทำไมม		
-sleep_fastawake	sleep	3			แง่ๆ ทำไมรีบปลุกจัง		
-sleep_fastawake	sleep	3			ไม่ได้นอนสักหงีบ		
-sleep_awake	sleep	1			อาาาห์ พร้อมแรดเต็มที่		ตื่นจากการนอนหลับ ปกติ
-sleep_awake	sleep	1			ตื่นละ มีไรกินมั้ย		
-sleep_awake	sleep	1			นี้หลับไปกี่ชาติแล้วเนี้ยะ		
-sleep_awake	sleep	1			ฝันดีจัง น่าเอาไปแทงหวย		
+sleep_fastawake	sleep	2		lets me sleep.. so, what do you want?	เอาไงเนี้ย จะให้นอนมั้ย		
+sleep_fastawake	sleep	2		one more minute	ขอนอนต่อได้มั้ย		
+sleep_fastawake	sleep	2		Do not wake me up at this time	ปลุกขึ้นมาทำไมม		
+sleep_fastawake	sleep	3		why do you wake me up too early?	แง่ๆ ทำไมรีบปลุกจัง		
+sleep_fastawake	sleep	3		I'm still up	ไม่ได้นอนสักหงีบ		
+sleep_awake	sleep	1		ready for a naughty time lol	อาาาห์ พร้อมแรดเต็มที่		ตื่นจากการนอนหลับ ปกติ
+sleep_awake	sleep	1		Hey slave..I'm up.. do you know breakfast-in-bed ?	ตื่นละ มีไรกินมั้ย		
+sleep_awake	sleep	1		I slept like a log	นี้หลับไปกี่ชาติแล้วเนี้ยะ		
+sleep_awake	sleep	1		Last night I dreamed about the upcoming number for winning a lottery.	ฝันดีจัง น่าเอาไปแทงหวย		
 sleep_awake	sleep	2		fresh as a daisy	เช้าที่สดใส		
 sleep_awake	sleep	2		Full of energy	ชาร์ตพลังเต็มที่		
-sleep_awake	sleep	2			เอ๊ะ หลับไปตอนไหน		
-sleep_awake	sleep	2			ฟิตสุดๆ อยากเล่นแล้ว		
-sleep_awake	sleep	3			อาาาาห์ ตื่นแล้ว		
-sleep_awake	sleep	3			สดชื่นจังเลยย		
-sleep_awake	sleep	3			ตื่นแล้วจ้าา		
-clean_full	clean	1			พอละเมิง... ให้ขนกุแห้งบ้าง		อาบน้ำไม่ไหวแล้ว อาบบ่อยไป
-clean_full	clean	1			เปียกยันซอกตูด		
-clean_full	clean	1			ชอบมากก็อาบเองสิเมิงง		
-clean_full	clean	2			วันนี้ไม่อาบแล้ว		
-clean_full	clean	2			ล้างอะไรหนักหนาาา		
-clean_full	clean	2			เอ๊! จะอาบทำไมบ่อยๆ		
-clean_full	clean	3			สะอาดแล้ว พอก่อน		
-clean_full	clean	3			วันนี้อาบไปหลายรอบแล้วนะ		
+sleep_awake	sleep	2		Oops! I was dozing off to sleep.	เอ๊ะ หลับไปตอนไหน		
+sleep_awake	sleep	2		I am ready to play with you!	ฟิตสุดๆ อยากเล่นแล้ว		
+sleep_awake	sleep	3		Just woke up! 	อาาาาห์ ตื่นแล้ว		
+sleep_awake	sleep	3		Lovely day today 	สดชื่นจังเลยย		
+sleep_awake	sleep	3		I'm ready for today! 	ตื่นแล้วจ้าา		
+clean_full	clean	1		It's enough, my hair is already fu*kin soaked.	พอละเมิง... ให้ขนกุแห้งบ้าง		อาบน้ำไม่ไหวแล้ว อาบบ่อยไป
+clean_full	clean	1		my butt is still soaked.	เปียกยันซอกตูด		
+clean_full	clean	1		too much bath for today, I think you should clean your dirty face rather	ชอบมากก็อาบเองสิเมิงง		
+clean_full	clean	2		Enough for today. 	วันนี้ไม่อาบแล้ว		
+clean_full	clean	2		Get lost! no more bathing for today	ล้างอะไรหนักหนาาา		
+clean_full	clean	2		bathing too often ,eh?	เอ๊! จะอาบทำไมบ่อยๆ		
+clean_full	clean	3		Whoa Whoa .. I am clean	สะอาดแล้ว พอก่อน		
+clean_full	clean	3		too often for today, try to do something else	วันนี้อาบไปหลายรอบแล้วนะ		
 clean_cleanup	clean	1		Eww, disgusted smell like a stinky shit	เหม็นมาทั้งวัน		อาบน้ำเสร็จ ปกติ
 clean_cleanup	clean	1		I thought that I had to play with a scattering of shit 	นึกว่าจะ จมกองขี้ไปทั้งวัน		
 clean_cleanup	clean	1		Ahh..It is my first bath in the seven days after the last bath	อาาห์ ปกติ 7 วันอาบที		
-clean_cleanup	clean	2			สาดดด.. น้ำมาเลยจ้า		
-clean_cleanup	clean	2			บุ๋งๆๆ		
-clean_cleanup	clean	2			วู้ววว สบายตัว		
-clean_cleanup	clean	3			สะอาดหมดจด		
-clean_cleanup	clean	3			อาบน้ำ ป๋อมแป๋ม ๆ		
-clean_cleanup	clean	3			เย้เย้ หอมมม ฉุ๋ยย ^^		
+clean_cleanup	clean	2		oh come on!! splashhhhh!!!	สาดดด.. น้ำมาเลยจ้า		
+clean_cleanup	clean	2		Booo Boong Boong (Bubbles pop)	บุ๋งๆๆ		
+clean_cleanup	clean	2		feel relaxed and comfortable	วู้ววว สบายตัว		
+clean_cleanup	clean	3		well-groomed and clean ! yay!	สะอาดหมดจด		
+clean_cleanup	clean	3		a bath time .. la la la	อาบน้ำ ป๋อมแป๋ม ๆ		
+clean_cleanup	clean	3		Well-groomed and smell good like a baby powder ~~ lol	เย้เย้ หอมมม ฉุ๋ยย ^^		
 petting_boring	petting	0	15	Love Love '{username}'	รักกันๆ ~~~ '{username}'		กดทักทาย ตอนเบื่อ
 petting_boring	petting	0	15	Awwwwwww..	งืออออ		
-petting_boring	petting	0	15		กำลังเบื่อเลยยย มาเล่นกัน		
-petting_boring	petting	0	15		จุ๊บๆ		
+petting_boring	petting	0	15	I am so bored. let's play	กำลังเบื่อเลยยย มาเล่นกัน		
+petting_boring	petting	0	15	XO XO	จุ๊บๆ		
 petting_boring	petting	0	15	Awww.. Hug me	กอดกันๆ		
 petting_boring	petting	0	15	Yeah Yeah	เย้เย้ !		
 petting_boring	petting	0	15	Yoo Hoo	ยะฮู้วว		
-petting_needfood	petting	1,2		Hey slave.. Give me a food 	ป้อนข้าวกุสิ อิทาส!		ต้องการอาหาร
+petting_needfood	petting	1,2		Hey Slave.. Give me a food 	ป้อนข้าวกุสิ อิทาส!		ต้องการอาหาร
 petting_needfood	petting	1,2		My belly feels like my throat’s been cut!	หิวใส้จะขาด เล่นอยู่ได้		
 petting_needfood	petting	1,2		Hey idiot ! Where's the food?	ไหนข้าว ?		
 petting_needfood	petting	1,2		Food!	อาหาร!!!		
 petting_needfood	petting	1,2		Ouch! I'm hungry	โอ้ย หิวววว		
-petting_needfood	petting	1,2			ไม่คิดจะให้ข้าวให้น้ำหน่อยหรอ		
+petting_needfood	petting	1,2		I think you don't feed me enough ..hoomannn	ไม่คิดจะให้ข้าวให้น้ำหน่อยหรอ		
 petting_needfood	petting	1,2,3		Feed me!! 	จะกินข้าววว		
 petting_needfood	petting	1,2,3		I'm starving	หิวจัง		
-petting_needfood	petting	1,2,3			หาอะไรอร่อยๆให้กินหน่อยสิ		
+petting_needfood	petting	1,2,3		Feed me!! hooman	หาอะไรอร่อยๆให้กินหน่อยสิ		
 petting_needclean	petting	1,2		What da fu*king shit smell.	เหม็นปลาเค็ม		ต้องการอาบน้ำ
 petting_needclean	petting	1,2		playing with scattering of shit 	จมกองขี้ละกุ		
-petting_needclean	petting	1,2			เหนี้ยวไข่หมดแล้ววว		
-petting_needclean	petting	1,2,3			อาบน้ำหน่อยมั้ย		
-petting_needclean	petting	1,2,3			ล้างหน้าล้างตาให้หน่อย		
+petting_needclean	petting	1,2		Clean a shit on my ass..  dude	เหนี้ยวไข่หมดแล้ววว		
+petting_needclean	petting	1,2,3		Shower.. Shower hey hey	อาบน้ำหน่อยมั้ย		
+petting_needclean	petting	1,2,3		Bring me to a bath .. wash my face, brush my teeth	ล้างหน้าล้างตาให้หน่อย		
 petting_needclean	petting	1,2,3		Ewww dirty!	สกปรก		
-petting_needclean	petting	1,2,3			ไม่สดชื่นเลยย อยากอาบน้ำ		
-petting_needclean	petting	1,2,3		Bring me to a bath!!	ทำความสะอาดเดียวนี้!!		
-petting_needsleep	petting	1,2			ง่วง!! กดเล่นอยู่นั้น ดูอารมณ์ด้วย		ต้องการนอนหลับ
-petting_needsleep	petting	1,2			ง่่วงโว้ยย ง่วง ง่วงโว้ยย!!		
-petting_needsleep	petting	1,2			จะนอนมันตรงนี้ละนะ		
-petting_needsleep	petting	1,2			อีสัส ให้กุนอนเถอะ!		
-petting_needsleep	petting	2,3			ไม่เล่นอะ จะนอน		
-petting_needsleep	petting	2,3			ดูหน้าด้วย... จะหลับแล้ว		
-petting_needsleep	petting	2,3			การนอนหลับ นั้นคือการพักผ่อน		
-petting_needsleep	petting	3			พาไปนอนเถอะขอร้อง		
-petting_needsleep	petting	3			ตาจะปิดแล้ว		
-petting_likeair	petting	0		petting_likeair	จะว่าไปแล้วอากาศวันนี้ก็ดีเหมือนกันนะ		อากาศดี
-petting_likeair	petting	0			อากาศวันนี้เหมาะจะนอน		
-petting_likeair	petting	0			อากาศสดชื่นนนดีจริงๆ		
-petting_likeair	petting	0			ชอบอากาศวันนี้		
-petting_spam	petting	1,2		petting_spam	เมิงว่างสินะ กดใหญ่เลย		กดทักทายสแปมเกินไป
-petting_spam	petting	1,2			งานการไม่ทำ.. มานั่งกดกุอยู่นั้น		
-petting_spam	petting	1,2			จะกดรั่วๆ เพื่อๆ		
-petting_spam	petting	1,2			กดถี่ๆงี้ เมิงคิดว่ามันจะเกิดอะไรขึ้น?		
-petting_spam	petting	2			ว่าไง กดบ่อยจัง		
-petting_spam	petting	2			คือไม่มีไรทำ?		
-petting_spam	petting	2			เบาๆก็ได้ซอยจังเลย		
-petting_spam	petting	2			สแปมเพื่อ???		
+petting_needclean	petting	1,2,3		I am not feeling fresh. I need to relax in the bathtub	ไม่สดชื่นเลยย อยากอาบน้ำ		
+petting_needclean	petting	1,2,3		clean up my poops and take me to a bath right NOW!!	ทำความสะอาดเดียวนี้!!		
+petting_needsleep	petting	1,2		I'm so tired .. stop bother me	ง่วง!! กดเล่นอยู่นั้น ดูอารมณ์ด้วย		ต้องการนอนหลับ
+petting_needsleep	petting	1,2		Hey..  stop annoying me. I want to sleep	ง่่วงโว้ยย ง่วง ง่วงโว้ยย!!		
+petting_needsleep	petting	1,2		let me lie down here 	จะนอนมันตรงนี้ละนะ		
+petting_needsleep	petting	1,2		What the hell is it , stop annoying me. I want to rest	อีสัส ให้กุนอนเถอะ!		
+petting_needsleep	petting	2,3		I need time for a nap.	ไม่เล่นอะ จะนอน		
+petting_needsleep	petting	2,3		I am dead on my feet .. hooman	ดูหน้าด้วย... จะหลับแล้ว		
+petting_needsleep	petting	2,3		Aw Aww Sleeping is the best of relaxing	การนอนหลับ นั้นคือการพักผ่อน		
+petting_needsleep	petting	3		Hey hooman.. it's time to go to bed!	พาไปนอนเถอะขอร้อง		
+petting_needsleep	petting	3		I can't keep my eyes open.	ตาจะปิดแล้ว		
+petting_likeair	petting	0		What a beautiful day	จะว่าไปแล้วอากาศวันนี้ก็ดีเหมือนกันนะ		อากาศดี
+petting_likeair	petting	0		it's a nice day today .. time for relaxing	อากาศวันนี้เหมาะจะนอน		
+petting_likeair	petting	0		it's clearing up	อากาศสดชื่นนนดีจริงๆ		
+petting_likeair	petting	0		it's going to be a lovely day today	ชอบอากาศวันนี้		
+petting_spam	petting	1,2		Stop making this fu*king mouse click	เมิงว่างสินะ กดใหญ่เลย		กดทักทายสแปมเกินไป
+petting_spam	petting	1,2		Nothing to do huh? stop this freaking mouse click	งานการไม่ทำ.. มานั่งกดกุอยู่นั้น		
+petting_spam	petting	1,2		Hey stupid, stop clicking 	จะกดรั่วๆ เพื่อๆ		
+petting_spam	petting	1,2		Why you keep clicking until million times? don't mess with me!	กดถี่ๆงี้ เมิงคิดว่ามันจะเกิดอะไรขึ้น?		
+petting_spam	petting	2		What !? too much spamming at me	ว่าไง กดบ่อยจัง		
+petting_spam	petting	2		No any fu*king thing to do ?	คือไม่มีไรทำ?		
+petting_spam	petting	2		touch me or slap on my head?	เบาๆก็ได้ซอยจังเลย		
+petting_spam	petting	2		are you spamming me?	สแปมเพื่อ???		
 petting_spam	petting	3		too frequent	ถี่ไปจ้าาา		
-petting_spam	petting	3			กดบ่อยๆคิดถึงหรอ		
-petting_spam	petting	3			อืออ ว่าไงละ		
-petting_normal	petting	0	30		ไม่น่ารักตรงไหน เอาปากกามาวง 		ทักทายเล่นๆ & บ่นไปเรื่อย
+petting_spam	petting	3		You miss me huh? lol	กดบ่อยๆคิดถึงหรอ		
+petting_spam	petting	3		Hi there!	อืออ ว่าไงละ		
+petting_normal	petting	0	30	Felt cute. Might delete later.	ไม่น่ารักตรงไหน เอาปากกามาวง 		ทักทายเล่นๆ & บ่นไปเรื่อย
 petting_normal	petting	0	30	RIP	สุขิต		
-petting_normal	petting	0	30		ว่าซั่น		
-petting_normal	petting	0	30		อรุ่มเจ๊าะ 		
-petting_normal	petting	0	30		ดือ!!		
-petting_normal	petting	0	30		ได้กลิ่นสบู่นกแก้ว		
-petting_normal	petting	0	30		ปังปุรีเย่		
-petting_normal	petting	0	30		ความโป๊ะเป็นศูนย์		
-petting_normal	petting	1	30		ไม่สวย เหมียนหมา		
-petting_normal	petting	1	30		เมิงสิอีกระเทย!!		
-petting_normal	petting	1	30		เป็นอะไรกะกูมากปะ		
-petting_normal	petting	1	30		ปั๊วะ ปัง		
-petting_normal	petting	1	30		พูดได้มั้ยพี่จี้		
-petting_normal	petting	2	30		ใจบาง		
-petting_normal	petting	2	30		มีใบไหม		
-petting_normal	petting	2	30		ฟาด		
-petting_normal	petting	2	30		ไปพักก่อน		
-petting_normal	petting	3	30		ว่าไง ไอ้ต้าว		
-petting_normal	petting	3	30		อีหยังวะ		
+petting_normal	petting	0	30	Whatever you see fit	ว่าซั่น		
+petting_normal	petting	0	30	crack a smile 	อรุ่มเจ๊าะ 		
+petting_normal	petting	0	30	What a stunning.....	ดือ!!		
+petting_normal	petting	0	30	It smells like a handsome guys	ได้กลิ่นสบู่นกแก้ว		
+petting_normal	petting	0	30	to the moon....	ปังปุรีเย่		
+petting_normal	petting	0	30	I believe that.. 	ความโป๊ะเป็นศูนย์		
+petting_normal	petting	1	30	beautiful as a angry hyena	ไม่สวย เหมียนหมา		
+petting_normal	petting	1	30	The pot calls the kettle black	เมิงสิอีกระเทย!!		
+petting_normal	petting	1	30	what's all the freaking fuss about	เป็นอะไรกะกูมากปะ		
+petting_normal	petting	1	30	Stunning..	ปั๊วะ ปัง		
+petting_normal	petting	1	30	It's time to babble a secret	พูดได้มั้ยพี่จี้		
+petting_normal	petting	2	30	Feeling blue..	ใจบาง		
+petting_normal	petting	2	30	Privacy or security ?	มีใบไหม		
+petting_normal	petting	2	30	FAB..	ฟาด		
+petting_normal	petting	2	30	I am so fed up with you	ไปพักก่อน		
+petting_normal	petting	3	30	You are so adorable	ว่าไง ไอ้ต้าว		
+petting_normal	petting	3	30	My word!	อีหยังวะ		
 petting_normal	petting	3	30	I love you 3 mutiply by 10 power of 3	 I love you 3000		
 petting_normal	petting	0	15	behaviour_talking	behaviour_talking		
-petting_normal	petting	0	15		ไม่น่ารักตรงไหน เอาปากกามาวง 		
+petting_normal	petting	0	15	Felt cute. Might delete later.	ไม่น่ารักตรงไหน เอาปากกามาวง 		
 petting_normal	petting	0	15		ไม่พูดเยอะ…เจ็บคอ		
 petting_normal	petting	0	15		ได้หมดถ้าสดชื่น		
-petting_normal	petting	0	15		วันนี้น่าเบื่อจังเลย		
+petting_normal	petting	0	15	Friday feelings on Monday morning	วันนี้น่าเบื่อจังเลย		
 petting_normal	petting	0	15		เสียเหงื่อดื่มเกลือแร่ ถ้ารู้สึกแย่มาดื่มด้วยกันมั้ย?		
 petting_normal	petting	0	15		ผมไม่แห้งเลย เพราะในใจไม่เคยมีผู้ไดร์		
 petting_normal	petting	0	15		ถ้ากลัวเขาไม่เห็นค่า ก็ติดราคาไว้สิจ๊ะ		
@@ -286,16 +288,18 @@ petting_normal	petting	0	15		เห็นใบไม้ร่วงมั้ย
 petting_normal	petting	0	15		ไม่ไหวอย่าฝืน ถ้าไม่มีที่ยืนให้หาที่นั่ง		
 petting_normal	petting	0	15		Dog แปลว่า หมา ที่ปรึกษา ก็แปลว่า Dog		
 petting_normal	petting	0	15		ส่วนสูงจัดว่าเตี้ย ความเหี้ยจัดว่าสูง		
-petting_normal	petting	0	15		น้ำลดตอผุด เน็ตหลุดกูตาย		
-petting_normal	petting	0	15		ถามว่าเหงาไหม ตอบเลย เสือก		
+petting_normal	petting	0	15	NO pain NO gain but NO internet .. I am gonna die!!	น้ำลดตอผุด เน็ตหลุดกูตาย		
+petting_normal	petting	0	15	it's none of your freaking business	ถามว่าเหงาไหม ตอบเลย เสือก		
 petting_normal	petting	0	15		รอก่อนนะความฝัน เพราะอีกไม่นานเดี๋ยวก็จะนอนแล้ว		
-petting_normal	petting	0	15		นอกใจเราไม่ชอบ คะน้าหมูกรอบเราชอบมาก		
+petting_normal	petting	0	15	it looks yummy and  I’m gonna do it anyway.	นอกใจเราไม่ชอบ คะน้าหมูกรอบเราชอบมาก		
 petting_normal	petting	0	15		มึงจำไว้เลย คนจริง โอวัลตินต้องละลาย		
 petting_normal	petting	0	15		สายตาสั้นเท่าไหร่ไม่รู้ลองไปวัดดูเจอแต่พระ		
-petting_normal	petting	0	15		ไม่ใช่ "ของโปรด" แต่ "ประโยชน์" เราเยอะนะ		
-petting_normal	petting	0	15		ร่างกายต้องการเตียง พื้นที่ข้างเคียงต้องการเธอ		
+petting_normal	petting	0	15	I will eat everything twice	ไม่ใช่ "ของโปรด" แต่ "ประโยชน์" เราเยอะนะ		
+petting_normal	petting	0	15	When sleepy, I need a bed. When lonely, I need you.	ร่างกายต้องการเตียง พื้นที่ข้างเคียงต้องการเธอ		
 petting_normal	petting	0	15		ผมจะไม่ยุ่ง ถ้าคุณ​หวี		
 petting_normal	petting	0	15		การเงินไม่หมุนเวียน … ต้องใส่ชุดนักเรียนไปหาใคร		
-petting_normal	petting	0	15		นี่สมองหรือซองเลย์		
-petting_normal	petting	0	15		ถึงไม่ใช่นาฬิกา แต่ก็มีเวลาให้นะ		
+petting_normal	petting	0	15	Hey dumb shit!	นี่สมองหรือซองเลย์		
+petting_normal	petting	0	15	it's so hard to buy a Rolex but I can spend my time with you	ถึงไม่ใช่นาฬิกา แต่ก็มีเวลาให้นะ		
 petting_normal	petting	0	15		เมื่อก่อนก็เคย.. คบซ้อน พอแตกใบอ่อนเป็นมะลิลา		
+petting_normal	petting	0	15	Privacy or security ?			
+petting_normal	petting	0	15	Welcome everybody	โปรดมาเที่ยวที่เมืองของฉัน		
