@@ -95,23 +95,23 @@ eat_bad	eat	1		terrible tastes ,, Throw it into the bin	รสชาติไม
 eat_bad	eat	1		What da Fu*k .. it's terrible!	บ้งมาก		
 eat_bad	eat	1		disgusted! 	นี้เอาไรมาให้กุแดรก		
 eat_bad	eat	1		Ouch!!, so terrible 	โยนมาแต่ละอย่าง.. กุเพลีย		
-eat_bad	eat	1		hmmm... I need some {'foodfev}'	เห้ออ อยากกิน '{foodfev}'		
+eat_bad	eat	1		hmmm... I need some {'foodfav}'	เห้ออ อยากกิน '{foodfav}'		
 eat_bad	eat	1		UGH .. the food tastes fu*king terrible	อาหารรสจัด...  จัดว่าเหี้...!		
 eat_bad	eat	1		Ugh.. Yuck .. it's nasty!	ขมคอ		
 eat_bad	eat	2		Yuck!.. so bad	แหวะ... ไม่อร่อยเลย		
 eat_bad	eat	2		UGH! I hate this 	ไม่ชอบอันนี้		
-eat_bad	eat	2		I really want this '{foodfev}'	จะเอาาาา '{foodfev}'		
+eat_bad	eat	2		I really want this '{foodfav}'	จะเอาาาา '{foodfav}'		
 eat_bad	eat	2		The food tastes awful!	รสชาติแย่มาก		
 eat_bad	eat	2		Trash!	นี้ี้เรียกว่าอาหารหรอ?		
 eat_bad	eat	2		inedible !	กินแถบไม่ได้		
 eat_bad	eat	3		Umm.. not so good	แง๊ๆ ไม่อร่อยเลย		
-eat_bad	eat	3		Oh please give me some '{foodfev}'	ขอ '{foodfev}' ให้เค้าได้ไหม		
+eat_bad	eat	3		Oh please give me some '{foodfav}'	ขอ '{foodfav}' ให้เค้าได้ไหม		
 eat_bad	eat	3		Oops! I don't need this	กินไม่ลง		
 eat_bad	eat	3		Next time please give me the tasty food 	วันหลังขออย่างอื่นนะ		
 eat_bad	eat	3		I can't eat this one	อันนี้กินไม่ลงจริงๆ		
 eat_super	eat	1		Awesome!	ของดี!!		กินอาหารที่ชอบมาก
 eat_super	eat	1		It's sensational!	โคตรฟินน		
-eat_super	eat	1		Holy shit! this is my favorite !	เจ๊ดเข้!!  '{foodfev}' ของชอบ		
+eat_super	eat	1		Holy shit! this is my favorite !	เจ๊ดเข้!!  '{foodfav}' ของชอบ		
 eat_super	eat	1		it is one hell of a food!	โอ๋โหวว เป็นบุญปาก		
 eat_super	eat	1		Hey, You read my mind	รู้ใจจริงๆนะ อิทาส		
 eat_super	eat	2		a lots of this , pleaseeeee	ขอแบบนี้อีกเยอะๆๆ		
@@ -119,7 +119,7 @@ eat_super	eat	2		I like this .. it's my fav.	ของโปรดด
 eat_super	eat	2		Yummy!!	อร่อย		
 eat_super	eat	2		Amazing taste	อันนี้เด็ดๆ		
 eat_super	eat	2		Amazing! this is the best one ever!	อร่อยสุดในย่านนี้		
-eat_super	eat	3		absolutely love this '{foodfev}'	ชอบ '{foodfev}' ที่สุดในโลกกเลย		
+eat_super	eat	3		absolutely love this '{foodfav}'	ชอบ '{foodfav}' ที่สุดในโลกกเลย		
 eat_super	eat	3		oh.. I like this	รู้ใจเค้าจริงๆเลยนะ		
 eat_super	eat	3		tastes great! 	อร่อย ถูกใจ		
 eat_super	eat	3		Wow!! great! Yummy!!	หืมมม  อาโหร่ยยยย !!!!!		
