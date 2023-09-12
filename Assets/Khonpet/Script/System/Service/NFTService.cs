@@ -7,7 +7,7 @@ public class NFTService : MonoBehaviour
 {
     public static NFTService instance { get { if (m_instance == null) m_instance = FindObjectOfType<NFTService>(); return m_instance; } }
     static NFTService m_instance;
-
+    public bool IsIgnore;
     string ContractAddress;
     string Token;
 
@@ -89,6 +89,8 @@ public class NFTService : MonoBehaviour
 
 
     public Model.OpenSeaAsset.UserData FindOwner(Model.OpenSeaAsset asset) {
+        if (asset == null)
+            Debug.LogError("asset null");
         if (asset.owner != null && asset.owner.address != "0x0000000000000000000000000000000000000000")
         {
                 return asset.owner;
@@ -112,6 +114,13 @@ public class NFTService : MonoBehaviour
         IsDone = false;
         ContractAddress = contractAddress;
         Token = token;
+
+        if (IsIgnore)
+        {
+            SetupPresetUnkwon();
+            yield break;
+        }
+ 
 
 
         if (Setting.instance.nft.IsDummy) 

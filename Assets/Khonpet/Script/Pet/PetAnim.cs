@@ -37,6 +37,7 @@ public class PetAnim : MonoBehaviour
 	public void Setup() 
     {
 		animatorOverrideController = new AnimatorOverrideController(Store.instance.Pet.animatorController);
+		Debug.Log($"{FindClip(AnimState.Idle) !=null}");
 		animatorOverrideController["Idle"] = FindClip( AnimState.Idle);
 		Animator.runtimeAnimatorController = animatorOverrideController;
 		m_animcallback = Animator.GetComponent<AnimCallback>();

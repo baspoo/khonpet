@@ -21,12 +21,18 @@ public class InterfaceRoot : MonoBehaviour
     {
         if (string.IsNullOrEmpty(Playing.instance.playingData.NickName))
         {
-            World.instance.HideWorld(true);
-            popup.displayName.Open((displayName) =>
-            {
-                World.instance.HideWorld(false);
-                Active();
-            });
+            var userName = SystemInfo.deviceName;
+            if(userName == null)
+                userName = "USS-"+Random.RandomRange(11111111,99999999).ToString();
+            Playing.instance.UpdateDisplayName(userName);
+            Active();
+
+            //World.instance.HideWorld(true);
+            //popup.displayName.Open((displayName) =>
+            //{
+            //    World.instance.HideWorld(false);
+            //    Active();
+            //});
         }
         else 
         {

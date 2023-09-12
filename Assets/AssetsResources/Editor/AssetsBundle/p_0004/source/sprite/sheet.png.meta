@@ -63,7 +63,7 @@ TextureImporter:
       213: -2218698658706304759
     second: tail
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 12
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -84,6 +84,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -122,6 +123,7 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -161,6 +163,18 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -1108,7 +1122,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: ea16bb225881cd770800000000000000
-      internalID: 8636805145482191278
+      internalID: -209143576518600603
       vertices: []
       indices: 
       edges: []
@@ -1129,7 +1143,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 901dc2833599531e0800000000000000
-      internalID: -2218698658706304759
+      internalID: 9122101614235139493
       vertices: []
       indices: 
       edges: []
@@ -1144,6 +1158,27 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      body: 3038985000587531000
+      cos_bag: -1796502737815246115
+      cos_bell: -5581956015464806101
+      cos_collar_blue: 5893540339403691780
+      cos_collar_red: 3216594195550930655
+      cos_hat: -1254599994303000284
+      cos_toy_0: -96796154962138083
+      cos_toy_1: -2661919970533589962
+      cos_toy_2: -3701851516310602662
+      cos_toy_3: 1949730731670058941
+      cos_toy_4: -7054820123952135176
+      eye_0: 6530179738444782934
+      eye_1: 613435604629981061
+      hand: -1888837539432032468
+      icon: 9122101614235139493
+      mouth: 4530623484691778272
+      red_0: -3656531271222932061
+      red_1: 3930011312167392660
+      shadow: -209143576518600603
+      tail: -3627854407871609761
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
